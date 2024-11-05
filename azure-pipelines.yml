@@ -4,90 +4,16 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-parameters:
-- name: SUITE_FILE
-  type: string
-  default: 'MasterSuite_Regression_Application_SingleLogin.xml'  # Default value
-  values:
-    - MasterSuite_Regression_Application_SingleLogin.xml
-    - MasterSuite_Sanity_GuaranteedIssue_MulLogins.xml
-    - MasterSuite_Sanity_GuaranteedIssue_QuadRun.xml
-    - MasterSuite_Sanity_GuaranteedIssue_SingleLogin.xml
-    - MasterSuite_Sanity_MulLogins.xml
-    - MasterSuite_Sanity_QuadRun.xml
-    - MasterSuite_Sanity_SingleLogin.xml
-    - Regression_AccountBalanceHistory.xml
-    - Regression_AccountBalanceReport.xml
-    - Regression_ActivityReports.xml
-    - Regression_AllModules.xml
-    - Regression_ApplicationModule.xml
-    - Regression_ApplicationPaymentStatusReport.xml
-    - Regression_CheckReport.xml
-    - Regression_CheckReportHistory.xml
-    - Regression_GuaranteedIssue.xml
-    - Regression_OtherModules.xml
-    - Regression_PaymentRefusedReport.xml
-    - Regression_RenewalPremiumReports.xml
-    - Regression_ReportModules.xml
-    - Regression_StandardToGuaranteed.xml
-    - Regression_StatusReport.xml
-    - Sanity_ApplicationModule.xml
-    - Sanity_GuaranteedIssue.xml
-    - Sanity_StandardToGuaranteed.xml
+steps:
 
-stages:
-- stage: CleanWorkspace
-  displayName: 'Clean Workspace'
-  jobs:
-  - job: Clean
-    steps:
-    - script: |
-        echo "Cleaning workspace..."
-        rm -rf $(Pipeline.Workspace)/*  # Cleaning workspace
-
-- stage: Checkout
-  displayName: 'Git Checkout'
-  jobs:
-  - job: Checkout
-    steps:
-    - checkout: self  # Check out the source code
-    - script: |
-        echo "Fetching and checking out the citizens branch..."
-        git fetch origin citizens:citizens  # Fetch the citizens branch
-        git checkout citizens  # Check out the citizens branch
-      displayName: 'Checkout citizens branch'
-
-- stage: Test
-  displayName: 'Run Tests'
-  jobs:
-  - job: MavenTest
-    steps:
-    - task: JavaToolInstaller@0  # Install Java
-      inputs:
-        versionSpec: '17'  # Specify Java version
-        jdkArchitectureOption: 'x64'
-        jdkSourceOption: 'PreInstalled'
-
-    - task: MavenAuthenticate@0  # Optional: Authenticate if using private Maven repositories
-      inputs:
-        mavenAuthenticate: true
-        
-    - task: Maven@3
+    - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml'
-        goals: 'clean test'
-        options: '-DsuiteXmlFile=src/test/resources/suites/citizens/$(SUITE_FILE)'
         publishJUnitResults: true
-        testResultsFiles: '**/target/surefire-reports/*.xml'
-        codeCoverageToolOption: 'None'
-
-    - script: |
-        echo "Running additional scripts or commands..."
-        if [ -f ./your_script.sh ]; then
-          chmod +x ./your_script.sh
-          ./your_script.sh
-        else
-          echo "your_script.sh not found!"
-          exit 1
-        fi
-      displayName: 'Run Additional Shell Script'
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'Path'
+        jdkDirectory: 'C:\Program Files\Java\jdk-20'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
