@@ -51,11 +51,11 @@ stages:
   displayName: 'Git Checkout'
   jobs:
   - job: GitCheckout
-    displayName: 'Checkout Code from GitLab'
+    displayName: 'Checkout Code from GitHub'
     steps:
     - script: |
-        echo "Checking out branch: citizens"
-        git clone -b citizens http://git.codetru.org/codetru/citizens-automation.git $(Build.SourcesDirectory)
+        echo "Checking out branch: main"
+        git clone -b main https://github.com/CodetruAutomation/CitizensAgentPortal_Automation.git $(Build.SourcesDirectory)
       displayName: 'Checkout Git Repository'
 
 - stage: Test
