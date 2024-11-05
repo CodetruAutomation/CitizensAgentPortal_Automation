@@ -65,10 +65,14 @@ stages:
 
     - script: |
         echo "Selected Suite File: ${SUITE_FILE}"
-
-        # Define the suiteXmlFile property for Maven
         suiteXmlFile="${SUITE_FILE}"
 
-        # Run tests using the suite file selected
-        mvn test -DsuiteXmlFile="${suiteXmlFile}" -Dmaven.test.failure.ignore=true
+        # Check if the suite file exists
+        if [ -f "src/test/resources/suites/citizens/${suiteXmlFile}" ]; then
+            echo "Running tests with suite file: ${suiteXmlFile}"
+            mvn test -DsuiteXmlFile="src/test/resources/suites/citizens/${suiteXmlFile}" -Dmaven.test.failure.ignore=true
+        else
+            echo "Suite file does not exist: src/test/resources/suites/citizens/${suiteXmlFile}"
+            exit 1
+        fi
       displayName: 'Run Tests'
