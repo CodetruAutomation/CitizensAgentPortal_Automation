@@ -1,8 +1,8 @@
 trigger:
-- main  # Change this to your default branch name
+- main  # This is your default branch
 
 pool:
-  vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
+  vmImage: 'ubuntu-latest'
 
 parameters:
 - name: SUITE_FILE
@@ -43,9 +43,7 @@ stages:
     steps:
     - script: |
         echo "Cleaning workspace..."
-        # Clean workspace step (if needed, else Azure DevOps cleans the workspace automatically)
-        rm -rf $(Pipeline.Workspace)/*
-      displayName: 'Clean Workspace'
+        rm -rf $(Pipeline.Workspace)/*  # Cleaning workspace
 
 - stage: Checkout
   displayName: 'Git Checkout'
@@ -54,8 +52,9 @@ stages:
     steps:
     - checkout: self  # Check out the source code
     - script: |
-        echo "Checking out the specific branch..."
-        git checkout citizens  # Checkout the desired branch
+        echo "Fetching and checking out the citizens branch..."
+        git fetch origin citizens:citizens  # Fetch the citizens branch
+        git checkout citizens  # Check out the citizens branch
       displayName: 'Checkout citizens branch'
 
 - stage: Test
@@ -66,8 +65,8 @@ stages:
     - task: JavaToolInstaller@0  # Install Java
       inputs:
         versionSpec: '17'  # Specify Java version
-        jdkArchitectureOption: 'x64'  # Choose the architecture (x64 is common)
-        jdkSourceOption: 'PreInstalled'  # Choose PreInstalled or Install from a source
+        jdkArchitectureOption: 'x64'
+        jdkSourceOption: 'PreInstalled'
 
     - task: MavenAuthenticate@0  # Optional: Authenticate if using private Maven repositories
       inputs:
@@ -75,16 +74,20 @@ stages:
         
     - task: Maven@3
       inputs:
-        mavenPomFile: 'pom.xml'  # Path to your pom.xml
-        goals: 'clean test'  # Maven goals to execute
-        options: '-DsuiteXmlFile=src/test/resources/suites/citizens/$(SUITE_FILE)'  # Use the suite file parameter
-        publishJUnitResults: true  # Publish test results to Azure DevOps
-        testResultsFiles: '**/target/surefire-reports/*.xml'  # Path to the test results
-        codeCoverageToolOption: 'None'  # Specify code coverage tool if needed
+        mavenPomFile: 'pom.xml'
+        goals: 'clean test'
+        options: '-DsuiteXmlFile=src/test/resources/suites/citizens/$(SUITE_FILE)'
+        publishJUnitResults: true
+        testResultsFiles: '**/target/surefire-reports/*.xml'
+        codeCoverageToolOption: 'None'
 
     - script: |
         echo "Running additional scripts or commands..."
-        # Example: Running a shell script after Maven test
-        chmod +x ./your_script.sh  # Make sure your script is executable
-        ./your_script.sh  # Replace with your actual script
+        if [ -f ./your_script.sh ]; then
+          chmod +x ./your_script.sh
+          ./your_script.sh
+        else
+          echo "your_script.sh not found!"
+          exit 1
+        fi
       displayName: 'Run Additional Shell Script'
