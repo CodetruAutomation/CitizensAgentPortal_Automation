@@ -9,6 +9,7 @@
         <parameter name="BROWSER" value="chrome" />
         <parameter name="ROW_NUMBER" value="10" />
         <classes>
+			<class name="com.codetru.project.cica.testcases.loginModule.LoginModule" />
             <class name="com.codetru.project.cica.testcases.reportsModule.CheckReportHistory" />
         </classes>
     </test>
