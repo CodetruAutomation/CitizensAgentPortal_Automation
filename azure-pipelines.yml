@@ -1,5 +1,5 @@
 trigger:
-- main  # Change this to your default branch name
+- main  # Adjust according to your branch name
 
 pool:
   vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
@@ -48,12 +48,13 @@ stages:
       displayName: 'Clean Workspace'
 
 - stage: Checkout
-  displayName: 'Git Checkout'
+  displayName: 'Checkout GitLab Repository'
   jobs:
   - job: GitCheckout
     displayName: 'Checkout Code from GitLab'
     steps:
     - script: |
+        echo "Cloning the GitLab repository..."
         git clone https://$(GITLAB_PAT):x-oauth-basic@git.codetru.org/codetru/citizens-automation.git
       displayName: 'Checkout Code'
 
