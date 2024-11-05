@@ -448,6 +448,7 @@ public class PaymentRefusedReport extends CommonPageCICA {
 					lastBtnCurrentPage=Integer.parseInt(matcher.group());
 					System.out.println(lastBtnCurrentPage);
 				}
+			//	WebUI.Verify
 				WebUI.verifyEquals(lastBtnCurrentPage, totalPages);
 				WebUI.clickElement(firstPagePlayIcon);
 				String firstPagePagenationText=	WebUI.getTextElement(pagenation);

@@ -171,14 +171,14 @@ public class Dashboard extends CommonPageCICA {
 			verifyElementClickable(agencyIssuedCard);
 			verifyElementClickable(individualPremiumCard);
 			verifyElementClickable(agencyPremiumCard);
-			sleep(1.5);
-			mouseHoverwithaxes(165, 520);
-			sleep(1.5);
-			mouseHoverwithaxes(410, 520);
-			sleep(1.5);
-			mouseHoverwithaxes(650, 520);
-			sleep(1.5);
-			mouseHoverwithaxes(900, 520);
+//			sleep(1.5);
+//			mouseHoverwithaxes(165, 520);
+//			sleep(1.5);
+//			mouseHoverwithaxes(410, 520);
+//			sleep(1.5);
+//			mouseHoverwithaxes(650, 520);
+//			sleep(1.5);
+//			mouseHoverwithaxes(900, 520);
 			sleep(1.5);
 			try {
 				if(DriverManager.getDriver().findElement(agentsDropdown).isDisplayed()) {
