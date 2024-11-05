@@ -24,9 +24,6 @@ import java.util.Map;
 
 import static java.lang.Boolean.TRUE;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
 public enum BrowserFactory {
 
     CHROME {
@@ -56,12 +53,7 @@ public enum BrowserFactory {
 
             if (Boolean.valueOf(FrameworkConstants.HEADLESS) == true) {
                 options.addArguments("--headless=new");
-             // Get screen dimensions for dynamic window size
-                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                int width = (int) screenSize.getWidth();
-                int height = (int) screenSize.getHeight();
-                // Set the window size to match the screen size
-                options.addArguments("window-size=" + width + "," + height);
+                //options.addArguments("window-size=1800,900");
             }
 
             return options;
