@@ -67,7 +67,9 @@ stages:
               sudo apt-get update
               sudo apt-get install -y openjdk-17-jdk
               echo "JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))" | tee -a /etc/environment
-              source /etc/environment
+              echo "JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))" >> $(Agent.TempDirectory)/mavenrc
+              export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
+              export PATH=$JAVA_HOME/bin:$PATH
               java -version
             displayName: 'Install and Set up JDK 17'
 
