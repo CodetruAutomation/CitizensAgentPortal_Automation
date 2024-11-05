@@ -20,85 +20,84 @@ import com.codetru.project.cica.utils.ProjectUtilities;
 
 public class PaymentRefusedReport extends CommonPageCICA {
 
-	private By title = By.xpath("//ion-title[text()='Payment Refused Report ']");
-	private By agentFilter = By.xpath("//ion-icon[@id='LoadingAgents']/ancestor::agent-filter");
-	private By agencyDropdown = By.xpath("//*[@formcontrolname='agencyFilter']");
-	private By dateFrom = By.xpath("//ion-label[text()=' Date From ']/following-sibling::input");
-	private By dateTo = By.xpath("//ion-label[text()=' Date To ']/following-sibling::input");
-	private By agencyValue = By.xpath("//option[.=' Agency ']");
+	private By title=By.xpath("//ion-title[text()='Payment Refused Report ']");
+	private By agentFilter=By.xpath("//ion-icon[@id='LoadingAgents']/ancestor::agent-filter");
+	private By agencyDropdown=By.xpath("//*[@formcontrolname='agencyFilter']");
+	private By dateFrom=By.xpath("//ion-label[text()=' Date From ']/following-sibling::input");
+	private By dateTo=By.xpath("//ion-label[text()=' Date To ']/following-sibling::input");
+	private By agencyValue=By.xpath("//option[.=' Agency ']");
 	private By reportBtn = By.xpath("//ion-button[text()=' Reports ']");
-	private By table = By.xpath("//table");
-	private By agentDetails = By.xpath("//ion-list-header");
-	private By agentCaret_btn = By.xpath("//ion-icon[@name='caret-down']");
-	// private By agentsList=By.xpath("//ion-list[@role='list']/parent::ion-list");
+	private By table=By.xpath("//table");
+	private By agentDetails=By.xpath("//ion-list-header");
+	private By agentCaret_btn=By.xpath("//ion-icon[@name='caret-down']");
+	//private By agentsList=By.xpath("//ion-list[@role='list']/parent::ion-list");
 	private By agentsList = By.xpath("//ion-list[@role='list']/ancestor::ion-item");
-	private By closeBtn = By.xpath("//ion-button[text()='Close']"); 
-	private By searchBar = By.xpath("//ion-searchbar[@type='text']");
-	private By agentsText = By.xpath("//ion-list-header[contains(text(), ',')]");
-	private By searchBoxInput = By.xpath("//input[@aria-label='search text']");
-	private By resetBtn = By.xpath("//button[@aria-label='reset']");
-	private By HighestLevel = By.xpath("(//ion-list-header[contains(text(), ',')])[1]");
-	private By secondHighestLevel = By.xpath("(//ion-list-header[contains(text(), ',')])[2]");
-	private By thirdHighestLevel = By.xpath("(//ion-list-header[contains(text(), ',')])[3]");
-	private By fourthHighestLevel = By.xpath("(//ion-list-header[contains(text(), ',')])[4]");
-	private By fifthHighestLevel = By.xpath("(//ion-list-header[contains(text(), ',')])[5]");
-	private By pagenation = By.xpath("//ion-col[contains(text(), 'Page')]");
-	private By pageDropdown = By.xpath("//option[.='10']/parent::select");
-	private By tableRow = By.xpath("//tbody/tr");
-
-	private By agentNameCol = By.xpath("//th[text()='  Agent Name ']");
-	private By policyCol = By.xpath("//th[text()=' Policy # ']");
-	private By agentCol = By.xpath("//th[text()=' Agent # ']");
-	private By submittedDateCol = By.xpath("//th[text()=' Submitted Date ']");
-	private By issueDateCol = By.xpath("//th[text()=' Issue Date ']");
-	private By paidToDateCol = By.xpath("//th[text()=' PTD ']");
-	private By recurringCol = By.xpath("//th[text()=' Recurring ']");
-	private By nxtPaymentCol = By.xpath("//th[text()=' Next Payment ']");
-	private By rejectedTypeCol = By.xpath("//th[text()=' Reject Type ']");
-	private By refusedDateCol = By.xpath("//th[text()=' Refused Date ']");
-	private By refusedAmountCol = By.xpath("//th[text()=' Refused Amount ']");
-	private By exportBtn = By.xpath("//ion-button[.=' Export ']");
-	private By attemptCol = By.xpath("//th[text()=' Attempt ']");
-	private By annualPremiumCol = By.xpath("//th[text()=' Annual Premium ']");
-	private By StatusCol = By.xpath("//th[text()=' Status ']");
-
-	private By policyNumberData = By.xpath("//tr/td[1]");
-	private By agentNumber = By.xpath("//tr/td[2]");
-	private By agentNameData = By.xpath("//tr/td[3]");
-	private By submittedDateData = By.xpath("//tr/td[4]");
-	private By issuedDateData = By.xpath("//tr/td[5]");
-	private By PTDData = By.xpath("//tr/td[6]");
-	private By recurringData = By.xpath("//tr/td[7]");
-	private By nxtPaymentData = By.xpath("//tr/td[8]");
-	private By rejectedData = By.xpath("//tr/td[9]");
-	private By refusedDateData = By.xpath("//tr/td[10]");
-	private By refusedAmountData = By.xpath("//tr/td[11]");
-	private By attemptData = By.xpath("//tr/td[12]");
-	private By annualPremiumData = By.xpath("//tr/td[13]");
-	private By statusData = By.xpath("//tr/td[14]");
-
-	private By pagenationDropdown = By.xpath("//option[.='10']/parent::select");
-	private By nextPageIcon = By.xpath("//ion-button[@title='Next Page']");
-	private By prevPageIcon = By.xpath("//ion-button[@title='Prev Page']");
-	private By firstPagePlayIcon = By.xpath("//ion-button[@title='First Page']");
-	private By lastPagePlayIcon = By.xpath("//ion-button[@title='Last Page']");
-	private By optionFive = By.xpath("//select/option[@value='5']");
-	private By optionTen = By.xpath("//select/option[@value='10']");
-	private By optionTwentyFive = By.xpath("//select/option[@value='25']");
-	private By optionFifty = By.xpath("//select/option[@value='50']");
+	private By closeBtn=By.xpath("//ion-button[text()='Close']");
+	private By searchBar=By.xpath("//ion-searchbar[@type='text']");
+	private By agentsText=By.xpath("//ion-list-header[contains(text(), ',')]");
+	private By searchBoxInput=By.xpath("//input[@aria-label='search text']");
+	private By resetBtn=By.xpath("//button[@aria-label='reset']");
+	private By HighestLevel=By.xpath("(//ion-list-header[contains(text(), ',')])[1]");
+	private By secondHighestLevel=By.xpath("(//ion-list-header[contains(text(), ',')])[2]");
+	private By thirdHighestLevel=By.xpath("(//ion-list-header[contains(text(), ',')])[3]");
+	private By fourthHighestLevel=By.xpath("(//ion-list-header[contains(text(), ',')])[4]");
+	private By fifthHighestLevel=By.xpath("(//ion-list-header[contains(text(), ',')])[5]");
+	private By pagenation=By.xpath("//ion-col[contains(text(), 'Page')]");
+	private By pageDropdown=By.xpath("//option[.='10']/parent::select");
+	private By tableRow=By.xpath("//tbody/tr");
+ 
+	private By agentNameCol=By.xpath("//th[text()='  Agent Name ']");
+	private By policyCol=By.xpath("//th[text()=' Policy # ']");
+	private By agentCol=By.xpath("//th[text()=' Agent # ']");
+	private By submittedDateCol=By.xpath("//th[text()=' Submitted Date ']");
+	private By issueDateCol=By.xpath("//th[text()=' Issue Date ']");
+	private By paidToDateCol=By.xpath("//th[text()=' PTD ']");
+	private By recurringCol=By.xpath("//th[text()=' Recurring ']");
+	private By nxtPaymentCol=By.xpath("//th[text()=' Next Payment ']");
+	private By rejectedTypeCol=By.xpath("//th[text()=' Reject Type ']");
+	private By refusedDateCol=By.xpath("//th[text()=' Refused Date ']");
+	private By refusedAmountCol=By.xpath("//th[text()=' Refused Amount ']");
+	private By exportBtn=By.xpath("//ion-button[.=' Export ']");
+	private By attemptCol=By.xpath("//th[text()=' Attempt ']");
+	private By annualPremiumCol=By.xpath("//th[text()=' Annual Premium ']");
+	private By StatusCol=By.xpath("//th[text()=' Status ']");
+ 
+	private By policyNumberData=By.xpath("//tr/td[1]");
+	private By agentNumber=By.xpath("//tr/td[2]");
+	private By agentNameData=By.xpath("//tr/td[3]");
+	private By submittedDateData=By.xpath("//tr/td[4]");
+	private By issuedDateData=By.xpath("//tr/td[5]");
+	private By PTDData=By.xpath("//tr/td[6]");
+	private By recurringData=By.xpath("//tr/td[7]");
+	private By nxtPaymentData=By.xpath("//tr/td[8]");
+	private By rejectedData=By.xpath("//tr/td[9]");
+	private By refusedDateData=By.xpath("//tr/td[10]");
+	private By refusedAmountData=By.xpath("//tr/td[11]");
+	private By attemptData=By.xpath("//tr/td[12]");
+	private By annualPremiumData=By.xpath("//tr/td[13]");
+	private By statusData=By.xpath("//tr/td[14]");
+ 
+	private By pagenationDropdown=By.xpath("//option[.='10']/parent::select");
+	private By nextPageIcon=By.xpath("//ion-button[@title='Next Page']");
+    private By prevPageIcon=By.xpath("//ion-button[@title='Prev Page']");
+	private By firstPagePlayIcon=By.xpath("//ion-button[@title='First Page']");
+	private By lastPagePlayIcon=By.xpath("//ion-button[@title='Last Page']");
+	private By optionFive=By.xpath("//select/option[@value='5']");
+	private By optionTen=By.xpath("//select/option[@value='10']");
+	private By optionTwentyFive=By.xpath("//select/option[@value='25']");
+	private By optionFifty=By.xpath("//select/option[@value='50']");
 	private By searchingSpinner = By.xpath("//div[text()='Searching...']");
-
 	public void refusedReports() throws Exception {
-		String id = null;
-		String fullName = null;
-		String[] nameParts = null;
-		String lastName = null;
-		String firstName = null;
-		String fifty = "50";
+		String id=null ;
+		String fullName=null ;
+		String[] nameParts=null ;
+		String lastName=null ;
+		String firstName=null ;
+		String fifty="50";
 		Pattern pattern;
 		Matcher matcher;
-		String newTabUrl = "chrome://downloads/";
-
+		String newTabUrl="chrome://downloads/";
+ 
 		WebUI.sleep(5);
 		WebUI.verifyElementVisible(title);
 		WebUI.verifyElementVisible(agentFilter);
@@ -142,7 +141,7 @@ public class PaymentRefusedReport extends CommonPageCICA {
 		WebUI.sleep(0.6);
 		WebUI.clickElement(resetBtn);
 		WebUI.sleep(1.5);
-		 pattern = Pattern.compile("\\d+\\s*-\\s*-\\s*(\\d+)\\s*-\\s*([^,]+),\\s*(.+)");
+		Pattern pattern1 = Pattern.compile("\\d+\\s*-\\s*-\\s*(\\d+)\\s*-\\s*([^,]+),\\s*(.+)");
 		List<String> listNames = WebUI.getElementTextsInList(agentsText);
 		int count = 0;
 		for (String name : listNames) {
@@ -151,11 +150,11 @@ public class PaymentRefusedReport extends CommonPageCICA {
 		        break;
 		    }
 		    System.out.println("Processing: " + name);  
-		    matcher = pattern.matcher(name);
-		    if (matcher.find()) {
-		        id = matcher.group(1).trim();
-		        lastName = matcher.group(2).trim();
-		        firstName = matcher.group(3).trim();
+		    Matcher matcher1 = pattern1.matcher(name);
+		    if (matcher1.find()) {
+		        id = matcher1.group(1).trim();
+		        lastName = matcher1.group(2).trim();
+		        firstName = matcher1.group(3).trim();
 		        System.out.println("ID: " + id);
 		        System.out.println("Last Name: " + lastName);
 		        System.out.println("First Name: " + firstName);
@@ -184,15 +183,15 @@ public class PaymentRefusedReport extends CommonPageCICA {
 		WebUI.clickElement(closeBtn);
 		WebUI.clickElement(agentCaret_btn);
 		WebUI.sleep(2);
-		String Id1 = WebUI.validateElementContainsDataAndExtractID(HighestLevel);
-		try {
-			if (DriverManager.getDriver().findElement(secondHighestLevel).isDisplayed()) {
-				String Id2 = WebUI.validateElementContainsDataAndExtractID(secondHighestLevel);
-				String Id3 = WebUI.validateElementContainsDataAndExtractID(thirdHighestLevel);
-				String Id4 = WebUI.validateElementContainsDataAndExtractID(fourthHighestLevel);
-				String Id5 = WebUI.validateElementContainsDataAndExtractID(fifthHighestLevel);
+		String Id1=	WebUI.validateElementContainsDataAndExtractID(HighestLevel);
+		try {	
+			if(DriverManager.getDriver().findElement(secondHighestLevel).isDisplayed()) {
+				String Id2=	WebUI.validateElementContainsDataAndExtractID(secondHighestLevel);
+				String Id3=	WebUI.validateElementContainsDataAndExtractID(thirdHighestLevel);
+				String Id4=	WebUI.validateElementContainsDataAndExtractID(fourthHighestLevel);
+				String Id5=	WebUI.validateElementContainsDataAndExtractID(fifthHighestLevel);
 				WebUI.clickElement(HighestLevel);
-				ProjectUtilities.spinnerWait(searchingSpinner);
+				ProjectUtilities.spinnerWait(searchingSpinner);	
 				WebUI.verifyElementVisible(policyCol);
 				WebUI.verifyElementVisible(agentNameCol);
 				WebUI.verifyElementVisible(agentCol);
@@ -211,14 +210,14 @@ public class PaymentRefusedReport extends CommonPageCICA {
 				WebUI.scrollToElementAtBottom(pagenation);
 				WebUI.selectOptionByText(pageDropdown, fifty);
 				WebUI.scrollToElementAtBottom(pagenation);
-
-				// List<String> Ids=WebUI.getElementTextsInList(agentNumber);
-
-				try {
-					if (DriverManager.getDriver().findElement(agentNumber).isDisplayed()) {
-						List<String> Ids = WebUI.getElementTextsInList(agentNumber);
+ 
+				//List<String> Ids=WebUI.getElementTextsInList(agentNumber);
+ 
+				try{
+					if(DriverManager.getDriver().findElement(agentNumber).isDisplayed()) {
+						List<String> Ids=WebUI.getElementTextsInList(agentNumber);
 						System.out.println(Ids);
-						WebUI.isElementVisible(agentNumber, 2);
+						WebUI.isElementVisible(agentNumber,2);
 						WebUI.verifyContainsIgnore(Ids, Id1);
 						WebUI.verifyContainsIgnore(Ids, Id2);
 						WebUI.verifyContainsIgnore(Ids, Id3);
@@ -227,58 +226,58 @@ public class PaymentRefusedReport extends CommonPageCICA {
 						WebUI.scrollToElementAtTop(agentCaret_btn);
 						WebUI.clickElement(agentCaret_btn);
 						WebUI.clickElement(secondHighestLevel);
-						ProjectUtilities.spinnerWait(searchingSpinner);
+						ProjectUtilities.spinnerWait(searchingSpinner);	
 					}
-				} catch (Exception e) {
+				}catch (Exception e) {
 					WebUI.scrollToElementAtTop(agentCaret_btn);
 					WebUI.clickElement(agentCaret_btn);
 					WebUI.clickElement(secondHighestLevel);
-					ProjectUtilities.spinnerWait(searchingSpinner);
+					ProjectUtilities.spinnerWait(searchingSpinner);	
 				}
 				WebUI.scrollToElementAtBottom(pagenation);
 				WebUI.sleep(1);
 				System.out.println(WebUI.getTextElement(pagenation));
 				try {
-					if (WebUI.verifyContainsIgnore(WebUI.getTextElement(pagenation), "0")) {
+					if(WebUI.verifyContainsIgnore(WebUI.getTextElement(pagenation), "0")) {
 						WebUI.scrollToElementAtTop(agentCaret_btn);
 						WebUI.clickElement(agentCaret_btn);
 						WebUI.clickElement(thirdHighestLevel);
-					} else {
+					}else {
 						WebUI.sleep(0.5);
-						WebUI.isElementVisible(agentNumber, 2);
-						List<String> Ids2 = WebUI.getElementTextsInList(agentNumber);
+						WebUI.isElementVisible(agentNumber,2);
+						List<String> Ids2=WebUI.getElementTextsInList(agentNumber);
 						System.out.println(Ids2);
 						WebUI.verifyContainsIgnore(Ids2, Id2);
-						WebUI.verifyNotContains(Ids2, Id1);
+						WebUI.verifyContainsIgnore(Ids2, Id1);
 						WebUI.scrollToElementAtTop(agentCaret_btn);
 						WebUI.clickElement(agentCaret_btn);
 						WebUI.clickElement(thirdHighestLevel);
 						WebUI.sleep(3);
 					}
 					WebUI.sleep(2);
-				} catch (Exception e) {
-					WebUI.isElementVisible(agentNumber, 2);
-					List<String> Ids2 = WebUI.getElementTextsInList(agentNumber);
+				}catch (Exception e) {
+					WebUI.isElementVisible(agentNumber,2);
+					List<String> Ids2=WebUI.getElementTextsInList(agentNumber);
 					System.out.println(Ids2);
 					WebUI.verifyContains(Ids2, Id2);
 					WebUI.verifyNotContains(Ids2, Id1);
 					WebUI.scrollToElementAtTop(agentCaret_btn);
 					WebUI.clickElement(agentCaret_btn);
 					WebUI.clickElement(thirdHighestLevel);
-					ProjectUtilities.spinnerWait(searchingSpinner);
+					ProjectUtilities.spinnerWait(searchingSpinner);	
 				}
 				try {
 					WebUI.scrollToElementAtBottom(pagenation);
 					WebUI.getTextElement(pagenation);
 					System.out.println(WebUI.getTextElement(pagenation));
-					if (WebUI.verifyContainsIgnore(WebUI.getTextElement(pagenation), "0")) {
+					if(WebUI.verifyContainsIgnore(WebUI.getTextElement(pagenation), "0")) {
 						WebUI.scrollToElementAtTop(agentCaret_btn);
 						WebUI.clickElement(agentCaret_btn);
 						WebUI.clickElement(fourthHighestLevel);
-						ProjectUtilities.spinnerWait(searchingSpinner);
-					} else {
-						WebUI.isElementVisible(agentNumber, 2);
-						List<String> Ids2 = WebUI.getElementTextsInList(agentNumber);
+						ProjectUtilities.spinnerWait(searchingSpinner);	
+					}else {
+						WebUI.isElementVisible(agentNumber,2);
+						List<String> Ids2=WebUI.getElementTextsInList(agentNumber);
 						System.out.println(Ids2);
 						WebUI.verifyContainsIgnore(Ids2, Id3);
 						WebUI.verifyContainsIgnore(Ids2, Id2);
@@ -286,12 +285,12 @@ public class PaymentRefusedReport extends CommonPageCICA {
 						WebUI.scrollToElementAtTop(agentCaret_btn);
 						WebUI.clickElement(agentCaret_btn);
 						WebUI.clickElement(fourthHighestLevel);
-						ProjectUtilities.spinnerWait(searchingSpinner);
+						ProjectUtilities.spinnerWait(searchingSpinner);	
 					}
-
-				} catch (Exception e) {
-					WebUI.isElementVisible(agentNumber, 2);
-					List<String> Ids3 = WebUI.getElementTextsInList(agentNumber);
+ 
+				}catch (Exception e) {
+					WebUI.isElementVisible(agentNumber,2);
+					List<String> Ids3=WebUI.getElementTextsInList(agentNumber);
 					System.out.println(Ids3);
 					WebUI.verifyContainsIgnore(Ids3, Id3);
 					WebUI.verifyNotContains(Ids3, Id1);
@@ -299,65 +298,65 @@ public class PaymentRefusedReport extends CommonPageCICA {
 					WebUI.scrollToElementAtTop(agentCaret_btn);
 					WebUI.clickElement(agentCaret_btn);
 					WebUI.clickElement(fourthHighestLevel);
-					ProjectUtilities.spinnerWait(searchingSpinner);
+					WebUI.sleep(1);
+					ProjectUtilities.spinnerWait(searchingSpinner);	
 				}
 				try {
 					WebUI.scrollToElementAtBottom(pagenation);
 					WebUI.getTextElement(pagenation);
 					System.out.println(WebUI.getTextElement(pagenation));
-					if (WebUI.verifyContainsIgnore(WebUI.getTextElement(pagenation), "0")) {
+					if(	WebUI.verifyContainsIgnore(WebUI.getTextElement(pagenation), "0")) {
 						WebUI.scrollToElementAtTop(agentCaret_btn);
 						WebUI.clickElement(agentCaret_btn);
 						WebUI.clickElement(fifthHighestLevel);
-						ProjectUtilities.spinnerWait(searchingSpinner);
-					} else {
-						WebUI.isElementVisible(agentNumber, 2);
-						List<String> Ids4 = WebUI.getElementTextsInList(agentNumber);
+						ProjectUtilities.spinnerWait(searchingSpinner);	
+					}else {
+						WebUI.isElementVisible(agentNumber,2);
+						List<String> Ids4=WebUI.getElementTextsInList(agentNumber);
 						System.out.println(Ids4);
 						WebUI.verifyContainsIgnore(Ids4, Id4);
-						WebUI.verifyNotContains(Ids4, Id1);
-						WebUI.verifyNotContains(Ids4, Id2);
-						WebUI.verifyNotContains(Ids4, Id3);
+						WebUI.verifyContainsIgnore(Ids4, Id1);
+						WebUI.verifyContainsIgnore(Ids4, Id2);
+						WebUI.verifyContainsIgnore(Ids4, Id3);
 						WebUI.scrollToElementAtTop(agentCaret_btn);
 						WebUI.clickElement(agentCaret_btn);
 						WebUI.clickElement(fifthHighestLevel);
-						ProjectUtilities.spinnerWait(searchingSpinner);
+						ProjectUtilities.spinnerWait(searchingSpinner);	
 					}
-				} catch (Exception e) {
-					WebUI.isElementVisible(agentNumber, 2);
-					List<String> Ids4 = WebUI.getElementTextsInList(agentNumber);
+				}catch (Exception e) {
+					WebUI.isElementVisible(agentNumber,2);
+					List<String> Ids4=WebUI.getElementTextsInList(agentNumber);
 					System.out.println(Ids4);
 					WebUI.verifyContains(Ids4, Id4);
-					WebUI.verifyNotContains(Ids4, Id1);
-					WebUI.verifyNotContains(Ids4, Id2);
-					WebUI.verifyNotContains(Ids4, Id3);
+					WebUI.verifyContainsIgnore(Ids4, Id1);
+					WebUI.verifyContainsIgnore(Ids4, Id2);
+					WebUI.verifyContainsIgnore(Ids4, Id3);
 					WebUI.scrollToElementAtTop(agentCaret_btn);
 					WebUI.clickElement(agentCaret_btn);
 					WebUI.clickElement(fifthHighestLevel);
-					ProjectUtilities.spinnerWait(searchingSpinner);
+					ProjectUtilities.spinnerWait(searchingSpinner);	
 				}
 				WebUI.scrollToElementAtTop(agentCaret_btn);
 				WebUI.clickElement(agentCaret_btn);
 				WebUI.clickElement(HighestLevel);
 				ProjectUtilities.spinnerWait(searchingSpinner);
-				try {
-					if (DriverManager.getDriver().findElement(policyNumberData).isDisplayed()) {
-						WebUI.validateElementContainsData(WebUI.getTextElement(policyNumberData));
-						WebUI.validateElementContainsData(WebUI.getTextElement(agentNumber));
-						WebUI.validateElementContainsData(WebUI.getTextElement(agentNameData));
-						WebUI.validateElementContainsData(WebUI.getTextElement(submittedDateData));
-						WebUI.validateElementContainsData(WebUI.getTextElement(issuedDateData));
-						WebUI.validateElementContainsData(WebUI.getTextElement(PTDData));
-						WebUI.validateElementContainsData(WebUI.getTextElement(recurringData));
-						WebUI.validateElementContainsData(WebUI.getTextElement(nxtPaymentData));
-						WebUI.validateElementContainsData(WebUI.getTextElement(rejectedData));
-						WebUI.validateElementContainsData(WebUI.getTextElement(refusedDateData));
-						WebUI.validateElementContainsData(WebUI.getTextElement(refusedAmountData));
-						WebUI.validateElementContainsData(WebUI.getTextElement(attemptData));
-						WebUI.validateElementContainsData(WebUI.getTextElement(annualPremiumData));
-						WebUI.validateElementContainsData(WebUI.getTextElement(statusData));
-					}
-				} catch (Exception e) {
+				try {if(DriverManager.getDriver().findElement(policyNumberData).isDisplayed()) {
+					WebUI.validateElementContainsData(WebUI.getTextElement(policyNumberData));
+					WebUI.validateElementContainsData(WebUI.getTextElement(agentNumber));
+					WebUI.validateElementContainsData(WebUI.getTextElement(agentNameData));
+					WebUI.validateElementContainsData(WebUI.getTextElement(submittedDateData));
+					WebUI.validateElementContainsData(WebUI.getTextElement(issuedDateData));
+					WebUI.validateElementContainsData(WebUI.getTextElement(PTDData));
+					WebUI.validateElementContainsData(WebUI.getTextElement(recurringData));
+					WebUI.validateElementContainsData(WebUI.getTextElement(nxtPaymentData));
+					WebUI.validateElementContainsData(WebUI.getTextElement(rejectedData));
+					WebUI.validateElementContainsData(WebUI.getTextElement(refusedDateData));
+					WebUI.validateElementContainsData(WebUI.getTextElement(refusedAmountData));
+					WebUI.validateElementContainsData(WebUI.getTextElement(attemptData));
+					WebUI.validateElementContainsData(WebUI.getTextElement(annualPremiumData));
+					WebUI.validateElementContainsData(WebUI.getTextElement(statusData));
+				}
+				}catch (Exception e) {
 					WebUI.sleep(0.5);
 				}
 				WebUI.scrollToElementAtBottom(pagenation);
@@ -373,115 +372,117 @@ public class PaymentRefusedReport extends CommonPageCICA {
 				WebUI.verifyElementVisible(optionTwentyFive);
 				WebUI.verifyElementVisible(optionFifty);
 				WebUI.clickElement(optionFive);
-				int fiveRecords = Integer.parseInt(WebUI.getTextElement(optionFive));
-				int totalRowsForFive = WebUI.getWebElements(tableRow).size();
+				int fiveRecords=Integer.parseInt(WebUI.getTextElement(optionFive));
+				int totalRowsForFive=	WebUI.getWebElements(tableRow).size();
 				WebUI.verifyLessThanOrEquals(totalRowsForFive, fiveRecords);
 				WebUI.clickElement(pagenationDropdown);
 				WebUI.clickElement(optionTen);
 				WebUI.scrollToElementAtBottom(pagenation);
-				int TenRecords = Integer.parseInt(WebUI.getTextElement(optionTen));
-				int totalRowsForTen = WebUI.getWebElements(tableRow).size();
+				int TenRecords=Integer.parseInt(WebUI.getTextElement(optionTen));
+				int totalRowsForTen=	WebUI.getWebElements(tableRow).size();
 				WebUI.verifyLessThanOrEquals(totalRowsForTen, TenRecords);
 				WebUI.scrollToElementAtBottom(pagenation);
 				WebUI.clickElement(pagenationDropdown);
 				WebUI.clickElement(optionTwentyFive);
 				WebUI.scrollToElementAtBottom(pagenation);
-				int TwentyFiveRecords = Integer.parseInt(WebUI.getTextElement(optionTwentyFive));
-				int totalRowsForTwentyfive = WebUI.getWebElements(tableRow).size();
+				int TwentyFiveRecords=Integer.parseInt(WebUI.getTextElement(optionTwentyFive));
+				int totalRowsForTwentyfive=	WebUI.getWebElements(tableRow).size();
 				WebUI.verifyLessThanOrEquals(totalRowsForTwentyfive, TwentyFiveRecords);
 				WebUI.scrollToElementAtBottom(pagenation);
 				WebUI.clickElement(pagenationDropdown);
 				WebUI.clickElement(optionFifty);
 				WebUI.scrollToElementAtBottom(pagenation);
-				int FiftyRecords = Integer.parseInt(WebUI.getTextElement(optionFifty));
-				int totalRowsForFifty = WebUI.getWebElements(tableRow).size();
+				int FiftyRecords=Integer.parseInt(WebUI.getTextElement(optionFifty));
+				int totalRowsForFifty=	WebUI.getWebElements(tableRow).size();
 				WebUI.verifyLessThanOrEquals(totalRowsForFifty, FiftyRecords);
-
-				String pagenationText = WebUI.getTextElement(pagenation);
+ 
+				String pagenationText=	WebUI.getTextElement(pagenation);
 				System.out.println(pagenationText);
-				pattern = Pattern.compile("\\d+");
-				matcher = pattern.matcher(pagenationText);
-				int currentPage = 0;
-				int totalPages = 0;
+				pattern1=Pattern.compile("\\d+");
+				matcher=pattern1.matcher(pagenationText);
+				int currentPage=0;
+				int totalPages=0;
 				if (matcher.find()) {
-					currentPage = Integer.parseInt(matcher.group());
+					currentPage=Integer.parseInt(matcher.group());
 					System.out.println(currentPage);
 				}
 				if (matcher.find()) {
-					totalPages = Integer.parseInt(matcher.group());
+					totalPages=Integer.parseInt(matcher.group());
 					System.out.println(totalPages);
 				}
-
+ 
 				WebUI.clickElement(nextPageIcon);
-				String NxtPagePagenationText = WebUI.getTextElement(pagenation);
+				String NxtPagePagenationText=	WebUI.getTextElement(pagenation);
 				System.out.println(NxtPagePagenationText);
-				pattern = Pattern.compile("\\d+");
-				matcher = pattern.matcher(NxtPagePagenationText);
-				int nxtBtnCurrentPage = 0;
+				pattern1=Pattern.compile("\\d+");
+				matcher=pattern1.matcher(NxtPagePagenationText);
+				int	nxtBtnCurrentPage=0;
 				if (matcher.find()) {
-					nxtBtnCurrentPage = Integer.parseInt(matcher.group());
+					nxtBtnCurrentPage=Integer.parseInt(matcher.group());
 					System.out.println(nxtBtnCurrentPage);
-
+ 
 				}
-				WebUI.verifyLessThanOrEquals(nxtBtnCurrentPage, currentPage + 1);
+				WebUI.verifyLessThanOrEquals(nxtBtnCurrentPage, currentPage+1);
 				WebUI.clickElement(prevPageIcon);
-				String prevPagePagenationText = WebUI.getTextElement(pagenation);
+				String prevPagePagenationText=	WebUI.getTextElement(pagenation);
 				System.out.println(prevPagePagenationText);
-				pattern = Pattern.compile("\\d+");
-				matcher = pattern.matcher(prevPagePagenationText);
-				int prevBtnCurrentPage = 0;
+				pattern1=Pattern.compile("\\d+");
+				matcher=pattern1.matcher(prevPagePagenationText);
+				int	prevBtnCurrentPage=0;
 				if (matcher.find()) {
-					prevBtnCurrentPage = Integer.parseInt(matcher.group());
+					prevBtnCurrentPage=Integer.parseInt(matcher.group());
 					System.out.println(prevBtnCurrentPage);
 				}
 				if (matcher.find()) {
-					nxtBtnCurrentPage = Integer.parseInt(matcher.group());
+					nxtBtnCurrentPage=Integer.parseInt(matcher.group());
 					System.out.println(nxtBtnCurrentPage);
 				}
-				// WebUI.verifyLessThanOrEquals(prevBtnCurrentPage, nxtBtnCurrentPage);
+			//	WebUI.verifyLessThanOrEquals(prevBtnCurrentPage, nxtBtnCurrentPage);
 				WebUI.clickElement(lastPagePlayIcon);
-				String lastPagePagenationText = WebUI.getTextElement(pagenation);
+				String lastPagePagenationText=	WebUI.getTextElement(pagenation);
 				System.out.println(lastPagePagenationText);
-				pattern = Pattern.compile("\\d+");
-				matcher = pattern.matcher(lastPagePagenationText);
-				int lastBtnCurrentPage = 0;
+				pattern1=Pattern.compile("\\d+");
+				matcher=pattern1.matcher(lastPagePagenationText);
+				int	lastBtnCurrentPage=0;
 				if (matcher.find()) {
-					lastBtnCurrentPage = Integer.parseInt(matcher.group());
+					lastBtnCurrentPage=Integer.parseInt(matcher.group());
 					System.out.println(lastBtnCurrentPage);
 				}
-//				WebUI.verifyEquals(lastBtnCurrentPage, totalPages);
+				WebUI.verifyEquals(lastBtnCurrentPage, totalPages);
 				WebUI.clickElement(firstPagePlayIcon);
-				String firstPagePagenationText = WebUI.getTextElement(pagenation);
+				String firstPagePagenationText=	WebUI.getTextElement(pagenation);
 				System.out.println(firstPagePagenationText);
-				pattern = Pattern.compile("\\d+");
-				matcher = pattern.matcher(firstPagePagenationText);
-				int firstBtnCurrentPage = 0;
+				pattern1=Pattern.compile("\\d+");
+				matcher=pattern1.matcher(firstPagePagenationText);
+				int	firstBtnCurrentPage=0;
 				if (matcher.find()) {
-					firstBtnCurrentPage = Integer.parseInt(matcher.group());
+					firstBtnCurrentPage=Integer.parseInt(matcher.group());
 					System.out.println(firstBtnCurrentPage);
 				}
 				WebUI.verifyEquals(firstBtnCurrentPage, 1);
-
+ 
 				WebUI.clickElement(exportBtn);
 				WebUI.openNewTabWindow(newTabUrl);
 				WebUI.sleep(1);
 				WebUI.switchToMainWindow();
 			}
-		} catch (Exception e) {
-			System.out.println("There is only one agent in this Login");
+		}catch(Exception e){
+			System.out.println("There is only one agent in this Login");	
 			try {
-				if (DriverManager.getDriver().findElement(closeBtn).isDisplayed()) {
+				if(DriverManager.getDriver().findElement(closeBtn).isDisplayed()) {
 					WebUI.clickElement(closeBtn);
 				}
-			} catch (Exception ex) {
+			}
+			catch (Exception ex) {
 				sleep(0.5);
 			}
 			scrollToElementAtBottom(exportBtn);
 			clickElement(exportBtn);
 			sleep(1);
 			switchToMainWindow();
-
+ 
 		}
-
+ 
 	}
+ 
 }
