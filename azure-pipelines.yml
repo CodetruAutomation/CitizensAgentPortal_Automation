@@ -1,8 +1,8 @@
 trigger:
-- main
+- main  # Change this to your default branch name
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
 
 parameters:
 - name: SUITE_FILE
@@ -11,7 +11,29 @@ parameters:
   values:
     - MasterSuite_Regression_Application_SingleLogin.xml
     - MasterSuite_Sanity_GuaranteedIssue_MulLogins.xml
-    # Add other suite file options here...
+    - MasterSuite_Sanity_GuaranteedIssue_QuadRun.xml
+    - MasterSuite_Sanity_GuaranteedIssue_SingleLogin.xml
+    - MasterSuite_Sanity_MulLogins.xml
+    - MasterSuite_Sanity_QuadRun.xml
+    - MasterSuite_Sanity_SingleLogin.xml
+    - Regression_AccountBalanceHistory.xml
+    - Regression_AccountBalanceReport.xml
+    - Regression_ActivityReports.xml
+    - Regression_AllModules.xml
+    - Regression_ApplicationModule.xml
+    - Regression_ApplicationPaymentStatusReport.xml
+    - Regression_CheckReport.xml
+    - Regression_CheckReportHistory.xml
+    - Regression_GuaranteedIssue.xml
+    - Regression_OtherModules.xml
+    - Regression_PaymentRefusedReport.xml
+    - Regression_RenewalPremiumReports.xml
+    - Regression_ReportModules.xml
+    - Regression_StandardToGuaranteed.xml
+    - Regression_StatusReport.xml
+    - Sanity_ApplicationModule.xml
+    - Sanity_GuaranteedIssue.xml
+    - Sanity_StandardToGuaranteed.xml
 
 stages:
 - stage: Clean
@@ -29,10 +51,10 @@ stages:
   displayName: 'Git Checkout'
   jobs:
   - job: GitCheckout
-    displayName: 'Checkout Code from GitHub'
+    displayName: 'Checkout Code from GitLab'
     steps:
     - script: |
-        git clone https://$(GITHUB_PAT):x-oauth-basic@github.com/CodetruAutomation/CitizensAgentPortal_Automation.git
+        git clone https://$(GITLAB_PAT):x-oauth-basic@git.codetru.org/codetru/citizens-automation.git
       displayName: 'Checkout Code'
 
 - stage: Test
@@ -43,7 +65,7 @@ stages:
     steps:
     - task: JavaToolInstaller@0
       inputs:
-        versionSpec: '17'
+        versionSpec: '17'  # Specify Java version
 
     - task: Maven@3
       inputs:
