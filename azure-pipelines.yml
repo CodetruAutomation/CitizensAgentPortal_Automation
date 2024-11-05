@@ -1,78 +1,73 @@
+# azure-pipelines.yml
 trigger:
-- main  # This should be your default branch
+  branches:
+    include:
+      - main
 
-pool:
-  vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
+pr:
+  branches:
+    include:
+      - main
 
 parameters:
   - name: SUITE_FILE
     type: string
-    default: 'MasterSuite_Regression_Application_SingleLogin.xml'  # Default value
     values:
-      - 'MasterSuite_Regression_Application_SingleLogin.xml'
-      - 'MasterSuite_Sanity_GuaranteedIssue_MulLogins.xml'
-      - 'MasterSuite_Sanity_GuaranteedIssue_QuadRun.xml'
-      - 'MasterSuite_Sanity_GuaranteedIssue_SingleLogin.xml'
-      - 'MasterSuite_Sanity_MulLogins.xml'
-      - 'MasterSuite_Sanity_QuadRun.xml'
-      - 'MasterSuite_Sanity_SingleLogin.xml'
-      - 'Regression_AccountBalanceHistory.xml'
-      - 'Regression_AccountBalanceReport.xml'
-      - 'Regression_ActivityReports.xml'
-      - 'Regression_AllModules.xml'
-      - 'Regression_ApplicationModule.xml'
-      - 'Regression_ApplicationPaymentStatusReport.xml'
-      - 'Regression_CheckReport.xml'
-      - 'Regression_CheckReportHistory.xml'
-      - 'Regression_GuaranteedIssue.xml'
-      - 'Regression_OtherModules.xml'
-      - 'Regression_PaymentRefusedReport.xml'
-      - 'Regression_RenewalPremiumReports.xml'
-      - 'Regression_ReportModules.xml'
-      - 'Regression_StandardToGuaranteed.xml'
-      - 'Regression_StatusReport.xml'
-      - 'Sanity_ApplicationModule.xml'
-      - 'Sanity_GuaranteedIssue.xml'
-      - 'Sanity_StandardToGuaranteed.xml'
+      - MasterSuite_Regression_Application_SingleLogin.xml
+      - MasterSuite_Sanity_GuaranteedIssue_MulLogins.xml
+      - MasterSuite_Sanity_GuaranteedIssue_QuadRun.xml
+      - MasterSuite_Sanity_GuaranteedIssue_SingleLogin.xml
+      - MasterSuite_Sanity_MulLogins.xml
+      - MasterSuite_Sanity_QuadRun.xml
+      - MasterSuite_Sanity_SingleLogin.xml
+      - Regression_AccountBalanceHistory.xml
+      - Regression_AccountBalanceReport.xml
+      - Regression_ActivityReports.xml
+      - Regression_AllModules.xml
+      - Regression_ApplicationModule.xml
+      - Regression_ApplicationPaymentStatusReport.xml
+      - Regression_CheckReport.xml
+      - Regression_CheckReportHistory.xml
+      - Regression_GuaranteedIssue.xml
+      - Regression_OtherModules.xml
+      - Regression_PaymentRefusedReport.xml
+      - Regression_RenewalPremiumReports.xml
+      - Regression_ReportModules.xml
+      - Regression_StandardToGuaranteed.xml
+      - Regression_StatusReport.xml
+      - Sanity_ApplicationModule.xml
+      - Sanity_GuaranteedIssue.xml
+      - Sanity_StandardToGuaranteed.xml
+
+pool:
+  vmImage: 'ubuntu-latest'
 
 stages:
-- stage: Build
-  displayName: 'Build Stage'
-  jobs:
-  - job: MavenBuild
-    displayName: 'Maven Build and Test'
-    steps:
-    - checkout: self  # Check out the source code
+  - stage: CleanWorkspace
+    jobs:
+      - job: Clean
+        steps:
+          - task: DeleteFiles@1
+            inputs:
+              SourceFolder: '$(Build.SourcesDirectory)'
 
-    - task: JavaToolInstaller@0  # Install Java
-      inputs:
-        versionSpec: '17'  # Specify Java version
-        jdkArchitectureOption: 'x64'  # Choose the architecture (x64 is common)
-        jdkSourceOption: 'PreInstalled'  # Choose PreInstalled or Install from a source
-        jdkDirectory: '/usr/lib/jvm/jdk-17'  # Specify the JDK directory if needed
+  - stage: Checkout
+    jobs:
+      - job: GitCheckout
+        steps:
+          - checkout: self
+            clean: true
 
-    - task: MavenAuthenticate@0  # Optional: Authenticate if using private Maven repositories
-      inputs:
-        mavenAuthenticate: true
-        
-    - task: Maven@3
-      inputs:
-        mavenPomFile: 'pom.xml'  # Path to your pom.xml
-        goals: 'clean install'  # Maven goals to execute
-        options: '-DskipTests=true'  # Skip tests during the build stage
-        publishJUnitResults: false  # Do not publish results here
-        codeCoverageToolOption: 'None'  # Specify code coverage tool if needed
+  - stage: Test
+    jobs:
+      - job: RunTests
+        steps:
+          - script: |
+              mvn clean test -DsuiteXmlFile=src/test/resources/suites/citizens/$(SUITE_FILE)
+            displayName: 'Run Test Suite'
 
-    - script: |
-        echo "Selected Suite File: ${SUITE_FILE}"
-        suiteXmlFile="${SUITE_FILE}"
-
-        # Check if the suite file exists
-        if [ -f "src/test/resources/suites/citizens/${suiteXmlFile}" ]; then
-            echo "Running tests with suite file: ${suiteXmlFile}"
-            mvn test -DsuiteXmlFile="src/test/resources/suites/citizens/${suiteXmlFile}" -Dmaven.test.failure.ignore=true
-        else
-            echo "Suite file does not exist: src/test/resources/suites/citizens/${suiteXmlFile}"
-            exit 1
-        fi
-      displayName: 'Run Tests'
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFiles: '**/testng-results.xml'
+              testRunTitle: 'TestNG Results'
+            displayName: 'Publish TestNG Results'
