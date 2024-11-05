@@ -462,14 +462,14 @@
                     </configuration>
                 </plugin>
 
-               <plugin>
+              <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-surefire-plugin</artifactId>
     <version>${maven-surefire-plugin.version}</version>
     <configuration>
         <suiteXmlFiles>
-            <!-- Use the suiteXmlFile system property if set, otherwise default to Sanity_ApplicationModule.xml -->
-            <suiteXmlFile>${suiteXmlFile ?: src/test/resources/suites/citizens/Sanity_ApplicationModule.xml}</suiteXmlFile>
+            <!-- Use the suiteXmlFile property if provided, otherwise default to Sanity_ApplicationModule.xml -->
+            <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
         </suiteXmlFiles>
         <argLine>
             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjweaver.version}/aspectjweaver-${aspectjweaver.version}.jar"
@@ -480,7 +480,6 @@
         </systemPropertyVariables>
     </configuration>
 </plugin>
-
 
                 <plugin>
                     <groupId>io.qameta.allure</groupId>
