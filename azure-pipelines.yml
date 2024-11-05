@@ -7,7 +7,7 @@ pool:
 parameters:
   - name: SUITE_FILE
     type: string
-    default: 'MasterSuite_Regression_Application_SingleLogin.xml'  # Change this to your preferred default
+    default: 'MasterSuite_Regression_Application_SingleLogin.xml'  # Default value
     values:
       - 'MasterSuite_Regression_Application_SingleLogin.xml'
       - 'MasterSuite_Sanity_GuaranteedIssue_MulLogins.xml'
@@ -65,12 +65,16 @@ stages:
 
     - script: |
         echo "Selected Suite File: ${SUITE_FILE}"
-        # Verify the suite file exists
-        if [ -f "src/test/resources/suites/citizens/${SUITE_FILE}" ]; then
-            echo "Running the tests with suite file: ${SUITE_FILE}"
-            mvn test -DsuiteXmlFile=src/test/resources/suites/citizens/${SUITE_FILE} -Dmaven.test.failure.ignore=true
+        
+        # Define the path to the suite file
+        SUITE_PATH="src/test/resources/suites/citizens/${SUITE_FILE}"
+        
+        # Verify if the suite file exists
+        if [ -f "${SUITE_PATH}" ]; then
+            echo "Running the tests with suite file: ${SUITE_PATH}"
+            mvn test -DsuiteXmlFile=${SUITE_PATH} -Dmaven.test.failure.ignore=true
         else
-            echo "Suite file does not exist: src/test/resources/suites/citizens/${SUITE_FILE}"
+            echo "Suite file does not exist: ${SUITE_PATH}"
             exit 1
         fi
       displayName: 'Run Tests'
