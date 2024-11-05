@@ -1,39 +1,17 @@
 trigger:
-- main  # This triggers the pipeline on changes to the main branch
+- main
 
 pool:
-  vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
+  vmImage: 'ubuntu-latest'
 
 parameters:
 - name: SUITE_FILE
   type: string
-  default: 'MasterSuite_Regression_Application_SingleLogin.xml'  # Default suite file
+  default: 'MasterSuite_Regression_Application_SingleLogin.xml'
   values:
     - MasterSuite_Regression_Application_SingleLogin.xml
     - MasterSuite_Sanity_GuaranteedIssue_MulLogins.xml
-    - MasterSuite_Sanity_GuaranteedIssue_QuadRun.xml
-    - MasterSuite_Sanity_GuaranteedIssue_SingleLogin.xml
-    - MasterSuite_Sanity_MulLogins.xml
-    - MasterSuite_Sanity_QuadRun.xml
-    - MasterSuite_Sanity_SingleLogin.xml
-    - Regression_AccountBalanceHistory.xml
-    - Regression_AccountBalanceReport.xml
-    - Regression_ActivityReports.xml
-    - Regression_AllModules.xml
-    - Regression_ApplicationModule.xml
-    - Regression_ApplicationPaymentStatusReport.xml
-    - Regression_CheckReport.xml
-    - Regression_CheckReportHistory.xml
-    - Regression_GuaranteedIssue.xml
-    - Regression_OtherModules.xml
-    - Regression_PaymentRefusedReport.xml
-    - Regression_RenewalPremiumReports.xml
-    - Regression_ReportModules.xml
-    - Regression_StandardToGuaranteed.xml
-    - Regression_StatusReport.xml
-    - Sanity_ApplicationModule.xml
-    - Sanity_GuaranteedIssue.xml
-    - Sanity_StandardToGuaranteed.xml
+    # Add other suite file options here...
 
 stages:
 - stage: Clean
@@ -44,7 +22,6 @@ stages:
     steps:
     - script: |
         echo "Cleaning workspace..."
-        # Ensure the build directory is clean before checkout
         rm -rf $(Pipeline.Workspace)/*
       displayName: 'Clean Workspace'
 
@@ -54,8 +31,9 @@ stages:
   - job: GitCheckout
     displayName: 'Checkout Code from GitHub'
     steps:
-    - checkout: self  # Checkout the code from the repository
-      clean: true  # Clean the repository before checking out
+    - script: |
+        git clone https://$(GITHUB_PAT):x-oauth-basic@github.com/CodetruAutomation/CitizensAgentPortal_Automation.git
+      displayName: 'Checkout Code'
 
 - stage: Test
   displayName: 'Run Tests'
@@ -63,26 +41,25 @@ stages:
   - job: MavenTest
     displayName: 'Maven Build and Test'
     steps:
-    - task: JavaToolInstaller@0  # Install Java
+    - task: JavaToolInstaller@0
       inputs:
-        versionSpec: '17'  # Specify Java version
-        jdkArchitectureOption: 'x64'  # Choose the architecture (x64 is common)
+        versionSpec: '17'
 
     - task: Maven@3
       inputs:
-        mavenPomFile: 'pom.xml'  # Path to your pom.xml
-        goals: 'clean test'  # Maven goals to execute
-        options: "-DsuiteXmlFile=src/test/resources/suites/citizens/$(SUITE_FILE)"  # Pass the suite file path
-        publishJUnitResults: true  # Publish test results to Azure DevOps
-        testResultsFiles: '**/target/surefire-reports/*.xml'  # Path to the test results
+        mavenPomFile: 'pom.xml'
+        goals: 'clean test'
+        options: "-DsuiteXmlFile=src/test/resources/suites/citizens/$(SUITE_FILE)"
+        publishJUnitResults: true
+        testResultsFiles: '**/target/surefire-reports/*.xml'
 
     - script: |
         echo "Running additional scripts or commands..."
         if [ -f ./your_script.sh ]; then
-          chmod +x ./your_script.sh  # Make sure your script is executable
-          ./your_script.sh  # Run the additional script
+          chmod +x ./your_script.sh
+          ./your_script.sh
         else
-          echo "your_script.sh not found!"  # Inform if the script doesn't exist
-          exit 1  # Fail the job if the script is missing
+          echo "your_script.sh not found!"
+          exit 1
         fi
       displayName: 'Run Additional Shell Script'
