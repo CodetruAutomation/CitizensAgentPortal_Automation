@@ -44,6 +44,7 @@ stages:
     steps:
     - script: |
         echo "Cleaning workspace..."
+        # Remove all files from the sources directory to prevent conflicts
         rm -rf $(Build.SourcesDirectory)/*
       displayName: 'Clean Workspace'
 
@@ -55,6 +56,7 @@ stages:
     steps:
     - script: |
         echo "Checking out branch: main"
+        # Clone the GitHub repository into the sources directory
         git clone -b main https://github.com/CodetruAutomation/CitizensAgentPortal_Automation.git $(Build.SourcesDirectory)
       displayName: 'Checkout Git Repository'
 
