@@ -162,10 +162,10 @@ public class AgencyDashboard extends CommonPageCICA {
 		WebUI.mouseHover(agencyDashboard);
 		WebUI.sleep(1.5);
 		WebUI.clickElementWithJs(combinedDashboard);
-		WebUI.sleep(1.5);
-		WebUI.mouseHoverwithaxes(375, 515);
-		WebUI.sleep(1);
-		WebUI.mouseHoverwithaxes(710, 515);
+//		WebUI.sleep(1.5);
+//		WebUI.mouseHoverwithaxes(375, 515);
+//		WebUI.sleep(1);
+//		WebUI.mouseHoverwithaxes(710, 515);
 		WebUI.sleep(1);
 		WebUI.verifyElementVisible(InprogressCard);
 		WebUI.verifyElementVisible(arrearsCard);
