@@ -1,5 +1,5 @@
 trigger:
-- main  # Change this to your default branch name
+- main  # This should be your default branch
 
 pool:
   vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
@@ -65,16 +65,10 @@ stages:
 
     - script: |
         echo "Selected Suite File: ${SUITE_FILE}"
-        
-        # Define the path to the suite file
-        SUITE_PATH="src/test/resources/suites/citizens/${SUITE_FILE}"
-        
-        # Verify if the suite file exists
-        if [ -f "${SUITE_PATH}" ]; then
-            echo "Running the tests with suite file: ${SUITE_PATH}"
-            mvn test -DsuiteXmlFile=${SUITE_PATH} -Dmaven.test.failure.ignore=true
-        else
-            echo "Suite file does not exist: ${SUITE_PATH}"
-            exit 1
-        fi
+
+        # Define the suiteXmlFile property for Maven
+        suiteXmlFile="${SUITE_FILE}"
+
+        # Run tests using the suite file selected
+        mvn test -DsuiteXmlFile="${suiteXmlFile}" -Dmaven.test.failure.ignore=true
       displayName: 'Run Tests'
