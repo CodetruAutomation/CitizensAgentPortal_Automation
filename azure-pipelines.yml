@@ -12,6 +12,7 @@ pr:
 parameters:
   - name: SUITE_FILE
     type: string
+    default: 'MasterSuite_Regression_Application_SingleLogin.xml'  # Default value for the SUITE_FILE parameter
     values:
       - MasterSuite_Regression_Application_SingleLogin.xml
       - MasterSuite_Sanity_GuaranteedIssue_MulLogins.xml
@@ -58,7 +59,20 @@ stages:
           - checkout: self
             clean: true
 
+  - stage: SetupJava
+    jobs:
+      - job: InstallJava
+        steps:
+          - script: |
+              sudo apt-get update
+              sudo apt-get install -y openjdk-17-jdk
+              echo "JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))" | tee -a /etc/environment
+              source /etc/environment
+              java -version
+            displayName: 'Install and Set up JDK 17'
+
   - stage: Test
+    dependsOn: SetupJava
     jobs:
       - job: RunTests
         steps:
