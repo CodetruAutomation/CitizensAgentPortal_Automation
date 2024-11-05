@@ -7,14 +7,14 @@
 
 	<test name="CITIZENS REGRESSION TEST ALL MODULES">
 		<parameter name="BROWSER" value="chrome" />
-		<parameter name="ROW_NUMBER" value="3" />
+		<parameter name="ROW_NUMBER" value="10" />
 		<classes>
 			<class name="com.codetru.project.cica.testcases.loginModule.LoginModule" />
-		<!--	<class name="com.codetru.project.cica.testcases.profileModule.ProfileModule" />
+		<class name="com.codetru.project.cica.testcases.profileModule.ProfileModule" />
 			<class name="com.codetru.project.cica.testcases.dashboardModule.Dashboard_Module" />
-			<class name="com.codetru.project.cica.testcases.customerModule.CustomerModule" />-->
+			<class name="com.codetru.project.cica.testcases.customerModule.CustomerModule" />
 			<class name="com.codetru.project.cica.testcases.policyPaymentsModule.PolicyPayment" />
-			<!--<class name="com.codetru.project.cica.testcases.regressionApplicationModule.HomePageTest" />
+			<class name="com.codetru.project.cica.testcases.regressionApplicationModule.HomePageTest" />
 			<class name="com.codetru.project.cica.testcases.regressionApplicationModule.Step1_Test" />
 			<class name="com.codetru.project.cica.testcases.regressionApplicationModule.Step2_Test" />
 			<class name="com.codetru.project.cica.testcases.regressionApplicationModule.Step3_Test" />
@@ -34,7 +34,7 @@
 			<class name="com.codetru.project.cica.testcases.reportsModule.StatusReport" />
 			<class name="com.codetru.project.cica.testcases.reportsModule.RenewalPremiumReports" />
 		    <class name="com.codetru.project.cica.testcases.reportsModule.CheckReport" />
-		    <class name="com.codetru.project.cica.testcases.reportsModule.CheckReportHistory" />-->
+		    <class name="com.codetru.project.cica.testcases.reportsModule.CheckReportHistory" />
 			
 
 		</classes>
