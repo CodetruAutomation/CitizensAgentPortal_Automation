@@ -1,0 +1,152 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Sanity Tests CICA - Application Module - GI" parallel="tests" thread-count="10"
+	verbose="1">
+
+	<listeners>
+		<listener class-name="com.codetru.listeners.AnnotationTransformer" />
+	</listeners>
+	<test name="CITIZENS SANITY APPLICATION MODULE GI FLOW - 1">
+		<parameter name="BROWSER" value="chrome" />
+		<parameter name="ROW_NUMBER" value="1" />
+		<classes>
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step1_Test_NV_Guarantee" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step2_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step3_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step4_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step5_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step7_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step8_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step9_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step10_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.regressionApplicationModule.MasterTest_Guarantee" />
+		</classes>
+	</test>
+
+	<test name="CITIZENS SANITY APPLICATION MODULE GI FLOW - 2">
+		<parameter name="BROWSER" value="edge" />
+		<parameter name="ROW_NUMBER" value="2" />
+		<classes>
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step1_Test_NV_Guarantee" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step2_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step3_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step4_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step5_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step7_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step8_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step9_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step10_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.regressionApplicationModule.MasterTest_Guarantee" />
+		</classes>
+	</test>
+
+	<test name="CITIZENS SANITY APPLICATION MODULE GI FLOW - 3">
+		<parameter name="BROWSER" value="chrome" />
+		<parameter name="ROW_NUMBER" value="3" />
+		<classes>
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step1_Test_NV_Guarantee" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step2_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step3_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step4_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step5_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step7_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step8_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step9_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step10_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.regressionApplicationModule.MasterTest_Guarantee" />
+		</classes>
+	</test>
+
+	<test name="CITIZENS SANITY APPLICATION MODULE GI FLOW - 4">
+		<parameter name="BROWSER" value="edge" />
+		<parameter name="ROW_NUMBER" value="4" />
+		<classes>
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step1_Test_NV_Guarantee" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step2_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step3_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step4_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step5_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step7_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step8_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step9_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step10_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.regressionApplicationModule.MasterTest_Guarantee" />
+		</classes>
+	</test>
+	
+	<test name="CITIZENS SANITY APPLICATION MODULE GI FLOW - 5">
+		<parameter name="BROWSER" value="chrome" />
+		<parameter name="ROW_NUMBER" value="5" />
+		<classes>
+			<!--	<class name="com.codetru.project.cica.testcases.newApp.LoginTest" />	-->
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step1_Test_NV_Guarantee" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step2_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step3_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step4_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step5_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step7_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step8_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step9_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step10_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.regressionApplicationModule.MasterTest_Guarantee" />
+		</classes>
+	</test>
+
+	<test name="CITIZENS SANITY APPLICATION MODULE GI FLOW - 6">
+		<parameter name="BROWSER" value="edge" />
+		<parameter name="ROW_NUMBER" value="6" />
+		<classes>
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step1_Test_NV_Guarantee" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step2_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step3_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step4_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step5_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step7_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step8_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step9_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step10_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.regressionApplicationModule.MasterTest_Guarantee" />
+		</classes>
+	</test>
+
+	<test name="CITIZENS SANITY APPLICATION MODULE GI FLOW - 7">
+		<parameter name="BROWSER" value="chrome" />
+		<parameter name="ROW_NUMBER" value="7" />
+		<classes>
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step1_Test_NV_Guarantee" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step2_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step3_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step4_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step5_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step7_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step8_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step9_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step10_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.regressionApplicationModule.MasterTest_Guarantee" />
+		</classes>
+	</test>
+
+	<test name="CITIZENS SANITY APPLICATION MODULE GI FLOW - 8">
+		<parameter name="BROWSER" value="edge" />
+		<parameter name="ROW_NUMBER" value="8" />
+		<classes>
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step1_Test_NV_Guarantee" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step2_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step3_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step4_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step5_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step7_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step8_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step9_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step10_Test_NV" />
+			<class name="com.codetru.project.cica.testcases.regressionApplicationModule.MasterTest_Guarantee" />
+		</classes>
+	</test>
+</suite>
