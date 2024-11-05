@@ -1,19 +1,41 @@
 trigger:
-- main  # This is your default branch
+- main  # Change this to your default branch name
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
 
-steps:
+stages:
+- stage: Build
+  displayName: 'Build Stage'
+  jobs:
+  - job: MavenBuild
+    displayName: 'Maven Build and Test'
+    steps:
+    - checkout: self  # Check out the source code
 
-    - task: Maven@4
+    - task: JavaToolInstaller@0  # Install Java
       inputs:
-        mavenPomFile: 'pom.xml'
-        publishJUnitResults: true
-        testResultsFiles: '**/surefire-reports/TEST-*.xml'
-        javaHomeOption: 'Path'
-        jdkDirectory: 'C:\Program Files\Java\jdk-20'
-        mavenVersionOption: 'Default'
-        mavenAuthenticateFeed: false
-        effectivePomSkip: false
-        sonarQubeRunAnalysis: false
+        versionSpec: '17'  # Specify Java version
+        jdkArchitectureOption: 'x64'  # Choose the architecture (x64 is common)
+        jdkSourceOption: 'PreInstalled'  # Choose PreInstalled or Install from a source
+        jdkDirectory: '/usr/lib/jvm/jdk-17'  # Specify the JDK directory if needed
+
+    - task: MavenAuthenticate@0  # Optional: Authenticate if using private Maven repositories
+      inputs:
+        mavenAuthenticate: true
+        
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'pom.xml'  # Path to your pom.xml
+        goals: 'clean install'  # Maven goals to execute
+        options: '-DskipTests=false'  # Specify any options
+        publishJUnitResults: true  # Publish test results to Azure DevOps
+        testResultsFiles: '**/target/surefire-reports/*.xml'  # Path to the test results
+        codeCoverageToolOption: 'None'  # Specify code coverage tool if needed
+
+    - script: |
+        echo "Running additional scripts or commands..."
+        # Example: Running a shell script after Maven build
+        chmod +x ./your_script.sh  # Make sure your script is executable
+        ./your_script.sh  # Replace with your actual script
+      displayName: 'Run Additional Shell Script'
