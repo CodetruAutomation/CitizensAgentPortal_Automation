@@ -44,8 +44,8 @@ stages:
     steps:
     - script: |
         echo "Cleaning workspace..."
-        # Remove all files from the sources directory to prevent conflicts
-        rm -rf $(Build.SourcesDirectory)/*
+        # Ensure the build directory is clean before checkout
+        rm -rf $(Pipeline.Workspace)/*
       displayName: 'Clean Workspace'
 
 - stage: Checkout
@@ -54,11 +54,8 @@ stages:
   - job: GitCheckout
     displayName: 'Checkout Code from GitHub'
     steps:
-    - script: |
-        echo "Checking out branch: main"
-        # Clone the GitHub repository into the sources directory
-        git clone -b main https://github.com/CodetruAutomation/CitizensAgentPortal_Automation.git $(Build.SourcesDirectory)
-      displayName: 'Checkout Git Repository'
+    - checkout: self  # Checkout the code from the repository
+      clean: true  # Clean the repository before checking out
 
 - stage: Test
   displayName: 'Run Tests'
@@ -73,7 +70,7 @@ stages:
 
     - task: Maven@3
       inputs:
-        mavenPomFile: '$(Build.SourcesDirectory)/pom.xml'  # Path to your pom.xml
+        mavenPomFile: 'pom.xml'  # Path to your pom.xml
         goals: 'clean test'  # Maven goals to execute
         options: "-DsuiteXmlFile=src/test/resources/suites/citizens/$(SUITE_FILE)"  # Pass the suite file path
         publishJUnitResults: true  # Publish test results to Azure DevOps
