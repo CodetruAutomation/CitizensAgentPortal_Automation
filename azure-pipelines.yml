@@ -36,45 +36,46 @@ parameters:
     - Sanity_StandardToGuaranteed.xml
 
 stages:
-- stage: Build
-  displayName: 'Build Stage'
+- stage: Clean
+  displayName: 'Clean Workspace'
   jobs:
-  - job: MavenBuild
+  - job: CleanWorkspace
+    displayName: 'Clean Workspace'
+    steps:
+    - script: |
+        echo "Cleaning workspace..."
+        rm -rf $(Build.SourcesDirectory)/*
+      displayName: 'Clean Workspace'
+
+- stage: Checkout
+  displayName: 'Git Checkout'
+  jobs:
+  - job: GitCheckout
+    displayName: 'Checkout Code from GitLab'
+    steps:
+    - script: |
+        echo "Checking out branch: citizens"
+        git clone -b citizens http://git.codetru.org/codetru/citizens-automation.git $(Build.SourcesDirectory)
+      displayName: 'Checkout Git Repository'
+
+- stage: Test
+  displayName: 'Run Tests'
+  jobs:
+  - job: MavenTest
     displayName: 'Maven Build and Test'
     steps:
-    - checkout: self  # Check out the source code
-
     - task: JavaToolInstaller@0  # Install Java
       inputs:
         versionSpec: '17'  # Specify Java version
         jdkArchitectureOption: 'x64'  # Choose the architecture (x64 is common)
-        jdkSourceOption: 'PreInstalled'  # Choose PreInstalled or Install from a source
-
-    - task: MavenAuthenticate@0  # Optional: Authenticate if using private Maven repositories
-      inputs:
-        mavenAuthenticate: true
-        
-    - script: |
-        echo "Selected Suite File: $(SUITE_FILE)"  # Print the selected suite file
-        echo "Verifying if the suite file exists..."
-        SUITE_PATH="src/test/resources/suites/citizens/$(SUITE_FILE)"
-        echo "Checking path: $SUITE_PATH"  # Print the constructed path for verification
-        if [ -f "$SUITE_PATH" ]; then
-          echo "Suite file exists."
-        else
-          echo "Suite file does not exist: $SUITE_PATH"
-          exit 1  # Fail the job if the file does not exist
-        fi
-      displayName: 'Check Suite File'
 
     - task: Maven@3
       inputs:
-        mavenPomFile: 'pom.xml'  # Path to your pom.xml
+        mavenPomFile: '$(Build.SourcesDirectory)/pom.xml'  # Path to your pom.xml
         goals: 'clean test'  # Maven goals to execute
-        options: "-DsuiteXmlFile=$SUITE_PATH"  # Pass the suite file path as an argument
+        options: "-DsuiteXmlFile=src/test/resources/suites/citizens/$(SUITE_FILE)"  # Pass the suite file path
         publishJUnitResults: true  # Publish test results to Azure DevOps
         testResultsFiles: '**/target/surefire-reports/*.xml'  # Path to the test results
-        codeCoverageToolOption: 'None'  # Specify code coverage tool if needed
 
     - script: |
         echo "Running additional scripts or commands..."
