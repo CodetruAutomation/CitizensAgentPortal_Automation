@@ -1,0 +1,90 @@
+trigger:
+- main  # Change this to your default branch name
+
+pool:
+  vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
+
+parameters:
+- name: SUITE_FILE
+  type: string
+  default: 'MasterSuite_Regression_Application_SingleLogin.xml'  # Default value
+  values:
+    - MasterSuite_Regression_Application_SingleLogin.xml
+    - MasterSuite_Sanity_GuaranteedIssue_MulLogins.xml
+    - MasterSuite_Sanity_GuaranteedIssue_QuadRun.xml
+    - MasterSuite_Sanity_GuaranteedIssue_SingleLogin.xml
+    - MasterSuite_Sanity_MulLogins.xml
+    - MasterSuite_Sanity_QuadRun.xml
+    - MasterSuite_Sanity_SingleLogin.xml
+    - Regression_AccountBalanceHistory.xml
+    - Regression_AccountBalanceReport.xml
+    - Regression_ActivityReports.xml
+    - Regression_AllModules.xml
+    - Regression_ApplicationModule.xml
+    - Regression_ApplicationPaymentStatusReport.xml
+    - Regression_CheckReport.xml
+    - Regression_CheckReportHistory.xml
+    - Regression_GuaranteedIssue.xml
+    - Regression_OtherModules.xml
+    - Regression_PaymentRefusedReport.xml
+    - Regression_RenewalPremiumReports.xml
+    - Regression_ReportModules.xml
+    - Regression_StandardToGuaranteed.xml
+    - Regression_StatusReport.xml
+    - Sanity_ApplicationModule.xml
+    - Sanity_GuaranteedIssue.xml
+    - Sanity_StandardToGuaranteed.xml
+
+stages:
+- stage: CleanWorkspace
+  displayName: 'Clean Workspace'
+  jobs:
+  - job: Clean
+    steps:
+    - script: |
+        echo "Cleaning workspace..."
+        # Clean workspace step (if needed, else Azure DevOps cleans the workspace automatically)
+        rm -rf $(Pipeline.Workspace)/*
+      displayName: 'Clean Workspace'
+
+- stage: Checkout
+  displayName: 'Git Checkout'
+  jobs:
+  - job: Checkout
+    steps:
+    - checkout: self  # Check out the source code
+    - script: |
+        echo "Checking out the specific branch..."
+        git checkout citizens  # Checkout the desired branch
+      displayName: 'Checkout citizens branch'
+
+- stage: Test
+  displayName: 'Run Tests'
+  jobs:
+  - job: MavenTest
+    steps:
+    - task: JavaToolInstaller@0  # Install Java
+      inputs:
+        versionSpec: '17'  # Specify Java version
+        jdkArchitectureOption: 'x64'  # Choose the architecture (x64 is common)
+        jdkSourceOption: 'PreInstalled'  # Choose PreInstalled or Install from a source
+
+    - task: MavenAuthenticate@0  # Optional: Authenticate if using private Maven repositories
+      inputs:
+        mavenAuthenticate: true
+        
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'pom.xml'  # Path to your pom.xml
+        goals: 'clean test'  # Maven goals to execute
+        options: '-DsuiteXmlFile=src/test/resources/suites/citizens/$(SUITE_FILE)'  # Use the suite file parameter
+        publishJUnitResults: true  # Publish test results to Azure DevOps
+        testResultsFiles: '**/target/surefire-reports/*.xml'  # Path to the test results
+        codeCoverageToolOption: 'None'  # Specify code coverage tool if needed
+
+    - script: |
+        echo "Running additional scripts or commands..."
+        # Example: Running a shell script after Maven test
+        chmod +x ./your_script.sh  # Make sure your script is executable
+        ./your_script.sh  # Replace with your actual script
+      displayName: 'Run Additional Shell Script'
