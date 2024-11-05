@@ -462,24 +462,25 @@
                     </configuration>
                 </plugin>
 
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>${maven-surefire-plugin.version}</version>
-                    <configuration>
-                        <suiteXmlFiles>
-                            <!--<suiteXmlFile>${suite.all}</suiteXmlFile>-->
-                            <suiteXmlFile>src/test/resources/suites/citizens/Sanity_ApplicationModule.xml</suiteXmlFile>
-                        </suiteXmlFiles>
-                        <argLine>
-                            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjweaver.version}/aspectjweaver-${aspectjweaver.version}.jar"
-                        </argLine>
-                        <testFailureIgnore>${maven.test.failure.ignore}</testFailureIgnore>
-                        <systemPropertyVariables>
-                            <allure.results.directory>target/allure-results</allure.results.directory>
-                        </systemPropertyVariables>
-                    </configuration>
-                </plugin>
+               <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>${maven-surefire-plugin.version}</version>
+    <configuration>
+        <suiteXmlFiles>
+            <!-- Use the suiteXmlFile system property if set, otherwise default to Sanity_ApplicationModule.xml -->
+            <suiteXmlFile>${suiteXmlFile ?: src/test/resources/suites/citizens/Sanity_ApplicationModule.xml}</suiteXmlFile>
+        </suiteXmlFiles>
+        <argLine>
+            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjweaver.version}/aspectjweaver-${aspectjweaver.version}.jar"
+        </argLine>
+        <testFailureIgnore>${maven.test.failure.ignore}</testFailureIgnore>
+        <systemPropertyVariables>
+            <allure.results.directory>target/allure-results</allure.results.directory>
+        </systemPropertyVariables>
+    </configuration>
+</plugin>
+
 
                 <plugin>
                     <groupId>io.qameta.allure</groupId>
