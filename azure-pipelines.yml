@@ -1,7 +1,7 @@
 trigger:
   branches:
     include:
-      - master  # Adjust this to match your default branch
+      - main  # Adjust this to match your default branch
 
 pool:
   vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
