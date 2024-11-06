@@ -85,9 +85,3 @@ stages:
           # Example publishing TestNG results (customize if needed)
           # Replace with a task if Azure DevOps has specific handling for TestNG
         displayName: 'Publish TestNG Results'
-
-      - script: |
-          echo "Running additional scripts or commands..."
-          chmod +x ./your_script.sh
-          ./your_script.sh
-        displayName: 'Run Additional Shell Script'
