@@ -7,7 +7,7 @@
 
 	<test name="CITIZENS REGRESSION TEST - POLICY PAYMENTS MODULE">
 		<parameter name="BROWSER" value="chrome" />
-		<parameter name="ROW_NUMBER" value="10" />
+		<parameter name="ROW_NUMBER" value="1" />
 		<classes>
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Login_NV" />
 			<class name="com.codetru.project.cica.testcases.policyPaymentsModule.PolicyPayment" />
