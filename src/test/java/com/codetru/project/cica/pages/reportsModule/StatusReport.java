@@ -77,7 +77,7 @@ public class StatusReport extends CommonPageCICA {
 
 		WebUI.sleep(10);
 		WebUI.verifyElementVisible(title);
-		ProjectUtilities.spinnerWait(pleaseWaitSpinner);
+		ProjectUtilities.spinnerWaitWithTime(pleaseWaitSpinner,30);
 		try {
 			for(int i=0;i<5;i++) {
 				if(	DriverManager.getDriver().findElement(errorPopup).isDisplayed()) {

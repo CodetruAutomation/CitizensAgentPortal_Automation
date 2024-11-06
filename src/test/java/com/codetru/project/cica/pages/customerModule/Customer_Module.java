@@ -75,7 +75,7 @@ public class Customer_Module extends CommonPageCICA {
 		//		WebUI.verifyElementVisible(no_result);
 		WebUI.clickElement(directCustomers);
 		WebUI.sleep(1);
-		ProjectUtilities.spinnerWait(pleaseWaitSpinner);
+		ProjectUtilities.spinnerWaitWithTime(pleaseWaitSpinner,30);
 		WebUI.sleep(0.5);
 		String validPolicyNumber= WebUI.getTextElement(secondPolicyNumber);
 		String[]names= 	WebUI.getTextElement(listofNames).split(",");
