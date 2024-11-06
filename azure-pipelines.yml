@@ -1,7 +1,7 @@
 trigger:
   branches:
     include:
-      - main  # Adjust this to match your default branch
+      - master  # Adjust this to match your default branch
 
 pool:
   vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
@@ -75,7 +75,7 @@ stages:
         inputs:
           mavenPomFile: 'pom.xml'  # Path to your pom.xml
           goals: 'clean test'  # Matching Jenkins goals with "test"
-          options: '-DsuiteXmlFile=src/test/resources/suites/citizens/$(SUITE_FILE)'  # Set suite file
+          options: '-DsuiteXmlFile=src/test/resources/suites/citizens/${{ parameters.SUITE_FILE }}'  # Use parameter for suite file
           publishJUnitResults: true  # Publish test results to Azure DevOps
           testResultsFiles: '**/target/surefire-reports/*.xml'  # Path to the test results
         displayName: 'Maven Build and Run Tests'
