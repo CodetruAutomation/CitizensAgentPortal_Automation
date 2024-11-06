@@ -47,13 +47,11 @@ public enum BrowserFactory {
             options.addArguments("--disable-infobars");
             options.addArguments("--disable-notifications");
             options.addArguments("--remote-allow-origins=*");
-            options.addArguments("--incognito");
 
             options.setAcceptInsecureCerts(true);
 
             if (Boolean.valueOf(FrameworkConstants.HEADLESS) == true) {
                 options.addArguments("--headless=new");
-                options.addArguments("--incognito");
                 //options.addArguments("window-size=1800,900");
             }
 
