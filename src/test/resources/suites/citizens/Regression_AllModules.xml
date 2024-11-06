@@ -7,7 +7,7 @@
 
 	<test name="CITIZENS REGRESSION TEST ALL MODULES">
 		<parameter name="BROWSER" value="chrome" />
-		<parameter name="ROW_NUMBER" value="7" />
+		<parameter name="ROW_NUMBER" value="12" />
 		<classes>
 			<class name="com.codetru.project.cica.testcases.loginModule.LoginModule" />
 		<class name="com.codetru.project.cica.testcases.profileModule.ProfileModule" />
