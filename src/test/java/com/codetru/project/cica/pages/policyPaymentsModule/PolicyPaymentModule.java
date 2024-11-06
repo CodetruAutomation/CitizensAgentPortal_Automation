@@ -13,6 +13,7 @@ import com.codetru.helpers.PropertiesHelpers;
 import com.codetru.keywords.WebUI;
 import com.codetru.project.cica.utils.ProjectUtilities;
 import com.codetru.utils.DataGenerateUtils;
+import com.codetru.utils.LogUtils;
 
 public class PolicyPaymentModule { 
 	private By policyPaymentTittle=By.xpath("//ion-title[.='Policy Payment']");
@@ -952,6 +953,8 @@ public class PolicyPaymentModule {
 			WebUI.sleep(3);
 		}else {
 			System.out.println("There are no Policies to make a payment");
+			LogUtils.info("There are no Policies to make a payment");
+			DriverManager.getDriver().navigate().back();
 		}
 
 	}
