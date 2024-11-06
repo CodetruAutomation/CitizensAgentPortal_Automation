@@ -152,34 +152,43 @@ public class ApplicationPaymentStatusReport extends CommonPageCICA {
 		WebUI.sleep(1);
 		WebUI.clickElement(resetBtn);
 		WebUI.sleep(1);
+		pattern = Pattern.compile("\\d+\\s*-\\s*-\\s*(\\d+)\\s*-\\s*([^,]+),\\s*(.+)");
 		List<String> listNames = WebUI.getElementTextsInList(agentsText);
 		int count = 0;
 		for (String name : listNames) {
-			if (count >= 2) {
-				break;
-			}
-			id = name.split("-")[2].trim();
-			fullName = name.split("-")[3].trim();
-			nameParts = fullName.split(",");
-			lastName = nameParts[0];
-			firstName = nameParts[1];
-			WebUI.setText(searchBoxInput, id);
-			WebUI.sleep(1);
-			WebUI.verifyContains(WebUI.getTextElement(agentsText), id);
-			WebUI.sleep(0.2);
-			WebUI.clearText(searchBoxInput);
-			WebUI.setText(searchBoxInput, firstName);
-			WebUI.sleep(1);
-			WebUI.verifyContains(WebUI.getTextElement(agentsText), firstName);
-			WebUI.sleep(0.2);
-			WebUI.clearText(searchBoxInput);
-			WebUI.setText(searchBoxInput, lastName);
-			WebUI.sleep(1);
-			WebUI.verifyContains(WebUI.getTextElement(agentsText), lastName);
-			WebUI.sleep(0.2);
-			WebUI.clearText(searchBoxInput);
-			count++;
-			System.out.println(count);
+			System.out.println(name);
+		    if (count >= 2) {
+		        break;
+		    }
+		    System.out.println("Processing: " + name);  
+		     matcher = pattern.matcher(name);
+		    if (matcher.find()) {
+		        id = matcher.group(1).trim();
+		        lastName = matcher.group(2).trim();
+		        firstName = matcher.group(3).trim();
+		        System.out.println("ID: " + id);
+		        System.out.println("Last Name: " + lastName);
+		        System.out.println("First Name: " + firstName);
+		        WebUI.setText(searchBoxInput, id);
+		        WebUI.sleep(1);
+		        WebUI.verifyContains(WebUI.getTextElement(agentsText), id);
+		        WebUI.sleep(0.2);
+		        WebUI.clearText(searchBoxInput);
+		        WebUI.setText(searchBoxInput, firstName);
+		        WebUI.sleep(1);
+		        WebUI.verifyContains(WebUI.getTextElement(agentsText), firstName);
+		        WebUI.sleep(0.2);
+		        WebUI.clearText(searchBoxInput);
+		        WebUI.setText(searchBoxInput, lastName);
+		        WebUI.sleep(1);
+		        WebUI.verifyContains(WebUI.getTextElement(agentsText), lastName);
+		        WebUI.sleep(0.2);
+		        WebUI.clearText(searchBoxInput);
+		        count++;
+		        System.out.println("Count: " + count);  
+		    } else {
+		        System.out.println("Pattern did not match for: " + name);  
+		    }
 		}
 		WebUI.clickElement(resetBtn);
 		WebUI.clickElement(closeBtn);
