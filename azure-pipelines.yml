@@ -1,6 +1,3 @@
-# Remove the entire trigger section
-# No automatic trigger is configured
-
 pool:
   vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
 
