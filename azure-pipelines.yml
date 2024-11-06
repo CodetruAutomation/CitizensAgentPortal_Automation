@@ -1,89 +1,64 @@
-# azure-pipelines.yml
 trigger:
   branches:
     include:
-      - main
-
-pr:
-  branches:
-    include:
-      - main
-
-parameters:
-  - name: SUITE_FILE
-    type: string
-    default: 'MasterSuite_Regression_Application_SingleLogin.xml'  # Default value for the SUITE_FILE parameter
-    values:
-      - MasterSuite_Regression_Application_SingleLogin.xml
-      - MasterSuite_Sanity_GuaranteedIssue_MulLogins.xml
-      - MasterSuite_Sanity_GuaranteedIssue_QuadRun.xml
-      - MasterSuite_Sanity_GuaranteedIssue_SingleLogin.xml
-      - MasterSuite_Sanity_MulLogins.xml
-      - MasterSuite_Sanity_QuadRun.xml
-      - MasterSuite_Sanity_SingleLogin.xml
-      - Regression_AccountBalanceHistory.xml
-      - Regression_AccountBalanceReport.xml
-      - Regression_ActivityReports.xml
-      - Regression_AllModules.xml
-      - Regression_ApplicationModule.xml
-      - Regression_ApplicationPaymentStatusReport.xml
-      - Regression_CheckReport.xml
-      - Regression_CheckReportHistory.xml
-      - Regression_GuaranteedIssue.xml
-      - Regression_OtherModules.xml
-      - Regression_PaymentRefusedReport.xml
-      - Regression_RenewalPremiumReports.xml
-      - Regression_ReportModules.xml
-      - Regression_StandardToGuaranteed.xml
-      - Regression_StatusReport.xml
-      - Sanity_ApplicationModule.xml
-      - Sanity_GuaranteedIssue.xml
-      - Sanity_StandardToGuaranteed.xml
+      - main  # Adjust this to match your default branch
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
+
+variables:
+  SUITE_FILE: 'MasterSuite_Regression_Application_SingleLogin.xml'  # Default suite file; can be updated from Azure DevOps
 
 stages:
-  - stage: CleanWorkspace
-    jobs:
-      - job: Clean
-        steps:
-          - task: DeleteFiles@1
-            inputs:
-              SourceFolder: '$(Build.SourcesDirectory)'
+- stage: CleanWorkspace
+  displayName: 'Clean Workspace'
+  jobs:
+  - job: Clean
+    displayName: 'Clean Workspace Directory'
+    steps:
+      - script: |
+          echo "Cleaning workspace..."
+          rm -rf $(Build.SourcesDirectory)/*
+        displayName: 'Clean Workspace'
 
-  - stage: Checkout
-    jobs:
-      - job: GitCheckout
-        steps:
-          - checkout: self
-            clean: true
+- stage: Build
+  displayName: 'Build and Test'
+  jobs:
+  - job: MavenBuild
+    displayName: 'Maven Build and Test'
+    steps:
+      - checkout: self  # Check out the source code
+        displayName: 'Git Checkout'
 
-  - stage: SetupJava
-    jobs:
-      - job: InstallJava
-        steps:
-          - script: |
-              sudo apt-get update
-              sudo apt-get install -y openjdk-17-jdk
-              echo "JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))" | tee -a /etc/environment
-              echo "JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))" >> $(Agent.TempDirectory)/mavenrc
-              export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
-              export PATH=$JAVA_HOME/bin:$PATH
-              java -version
-            displayName: 'Install and Set up JDK 17'
+      - task: JavaToolInstaller@0  # Install Java
+        inputs:
+          versionSpec: '17'  # Specify Java version
+          jdkArchitectureOption: 'x64'
+          jdkSourceOption: 'PreInstalled'
+        displayName: 'Install Java 17'
 
-  - stage: Test
-    dependsOn: SetupJava
-    jobs:
-      - job: RunTests
-        steps:
-          - script: |
-              mvn clean test -DsuiteXmlFile=src/test/resources/suites/citizens/$(SUITE_FILE)
-            displayName: 'Run Test Suite'
+      - task: MavenAuthenticate@0  # Optional: Authenticate if using private Maven repositories
+        inputs:
+          mavenAuthenticate: true
+        displayName: 'Maven Authentication'
 
-          - task: PublishTestResults@2
-            inputs:
-              testResultsFiles: '**/testng-results.xml'
-              testRunTitle: 'TestNG Results'
-            displayName: 'Publish TestNG Results'
+      - task: Maven@3
+        inputs:
+          mavenPomFile: 'pom.xml'  # Path to your pom.xml
+          goals: 'clean test'  # Matching Jenkins goals with "test"
+          options: '-DsuiteXmlFile=src/test/resources/suites/citizens/$(SUITE_FILE)'  # Set suite file
+          publishJUnitResults: true  # Publish test results to Azure DevOps
+          testResultsFiles: '**/target/surefire-reports/*.xml'  # Path to the test results
+        displayName: 'Maven Build and Run Tests'
+
+      - script: |
+          echo "Publishing TestNG results..."
+          # Example publishing TestNG results (customize if needed)
+          # Replace with a task if Azure DevOps has specific handling for TestNG
+        displayName: 'Publish TestNG Results'
+
+      - script: |
+          echo "Running additional scripts or commands..."
+          chmod +x ./your_script.sh
+          ./your_script.sh
+        displayName: 'Run Additional Shell Script'
