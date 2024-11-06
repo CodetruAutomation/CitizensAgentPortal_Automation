@@ -1,7 +1,5 @@
-trigger:
-  branches:
-    include:
-      - main  # Adjust this to match your default branch
+# Remove the entire trigger section
+# No automatic trigger is configured
 
 pool:
   vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
@@ -82,6 +80,4 @@ stages:
 
       - script: |
           echo "Publishing TestNG results..."
-          # Example publishing TestNG results (customize if needed)
-          # Replace with a task if Azure DevOps has specific handling for TestNG
         displayName: 'Publish TestNG Results'
