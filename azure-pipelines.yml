@@ -5,7 +5,7 @@ parameters:
 - name: SUITE_FILE
   displayName: 'Select the suite file to run'
   type: string
-  default: 'MasterSuite_Regression_Application_SingleLogin.xml'
+  default: 'Sanity_ApplicationModule.xml'
   values:
     - 'MasterSuite_Regression_Application_SingleLogin.xml'
     - 'MasterSuite_Sanity_GuaranteedIssue_MulLogins.xml'
@@ -32,6 +32,10 @@ parameters:
     - 'Sanity_ApplicationModule.xml'
     - 'Sanity_GuaranteedIssue.xml'
     - 'Sanity_StandardToGuaranteed.xml'
+    - 'Regression_DashboardModule.xml'
+    - 'Regression_CustomerModule.xml'
+    - 'Regression_PolicyPayment.xml'
+    - 'Regression_ProfileModule.xml'
 
 stages:
 - stage: CleanWorkspace
