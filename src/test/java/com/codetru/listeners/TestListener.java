@@ -162,9 +162,11 @@ public class TestListener implements ITestListener, ISuiteListener, IInvokedMeth
         LogUtils.info("Test case: " + getTestName(iTestResult) + " is passed.");
         count_passedTCs = count_passedTCs + 1;
 
-        if (SCREENSHOT_PASSED_STEPS.equals(YES)) {
+       
             CaptureHelpers.captureScreenshot(DriverManager.getDriver(), getTestName(iTestResult));
-        }
+            ExtentReportManager.addScreenShot(Status.PASS, getTestName(iTestResult));
+
+   
 
         //ExtentReports log operation for passed tests.
         ExtentReportManager.logMessage(Status.PASS, "Test case: " + getTestName(iTestResult) + " is passed.");
@@ -179,9 +181,10 @@ public class TestListener implements ITestListener, ISuiteListener, IInvokedMeth
         LogUtils.error("Test case: " + getTestName(iTestResult) + " is failed.");
         count_failedTCs = count_failedTCs + 1;
 
-        if (SCREENSHOT_FAILED_STEPS.equals(YES)) {
             CaptureHelpers.captureScreenshot(DriverManager.getDriver(), getTestName(iTestResult));
-        }
+            ExtentReportManager.addScreenShot(Status.PASS, getTestName(iTestResult));
+
+        
 
         if (VIDEO_RECORD.toLowerCase().trim().equals(YES)) {
             screenRecorder.stopRecording(true);
@@ -223,3 +226,4 @@ public class TestListener implements ITestListener, ISuiteListener, IInvokedMeth
     }
 
 }
+
