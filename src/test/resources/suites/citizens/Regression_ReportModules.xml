@@ -7,7 +7,7 @@
 
 	<test name="CITIZENS REGRESSION TEST REPORTS MODULE - 1">
 		<parameter name="BROWSER" value="chrome" />
-		<parameter name="ROW_NUMBER" value="4" />
+		<parameter name="ROW_NUMBER" value="5" />
 		<classes>
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Login_NV" />
 			<class name="com.codetru.project.cica.testcases.reportsModule.ActivityReports" />
