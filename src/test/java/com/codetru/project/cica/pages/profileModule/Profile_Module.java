@@ -593,7 +593,7 @@ public class Profile_Module extends CommonPageCICA{
 		WebUI.clickElementsWithJs(profileIcon2);
 		WebUI.sleep(2);
 		WebUI.clickElement(licences);
-		WebUI.sleep(2);
+		WebUI.sleep(6);
  
 		ProjectUtilities.spinnerWaitWithTime(Licenses_Appointment_Data_Popup, 40);
 		WebUI.verifyElementVisible(licensesPage);
