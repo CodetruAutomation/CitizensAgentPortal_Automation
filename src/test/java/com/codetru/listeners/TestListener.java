@@ -1,13 +1,11 @@
 package com.codetru.listeners;
 
-import static com.codetru.constants.FrameworkConstants.SCREENSHOT_FAILED_STEPS;
-import static com.codetru.constants.FrameworkConstants.SCREENSHOT_PASSED_STEPS;
+
 import static com.codetru.constants.FrameworkConstants.SCREENSHOT_SKIPPED_STEPS;
 import static com.codetru.constants.FrameworkConstants.VIDEO_RECORD;
 import static com.codetru.constants.FrameworkConstants.YES;
 
-import java.awt.AWTException;
-import java.io.IOException;
+
 
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
@@ -49,11 +47,7 @@ public class TestListener implements ITestListener, ISuiteListener, IInvokedMeth
     public static String methodName = "";
     
     public TestListener() {
-//        try {
-//            screenRecorder = new ScreenRecoderHelpers();
-//        } catch (IOException | AWTException e) {
-//            System.out.println(e.getMessage());
-//        }
+
     }
 
     public String getTestName(ITestResult result) {
@@ -67,25 +61,15 @@ public class TestListener implements ITestListener, ISuiteListener, IInvokedMeth
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
     	
-        // Before every method in the Test Class
-        //System.out.println(method.getTestMethod().getMethodName());
     }
 
     @Override
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
-        // After every method in the Test Class
-        //System.out.println(method.getTestMethod().getMethodName());
     }
 
     @Override
     public void onStart(ISuite iSuite) {
         System.out.println("========= INSTALLING CONFIGURATION DATA =========");
-//        try {
-//            FileUtils.deleteDirectory(new File("target/allure-results"));
-//            System.out.println("Deleted Directory target/allure-results");
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
 
         PropertiesHelpers.loadAllFiles();
         AllureManager.setAllureEnvironmentInformation();
@@ -111,7 +95,6 @@ public class TestListener implements ITestListener, ISuiteListener, IInvokedMeth
         //Write information in Allure Report
         AllureEnvironmentWriter.allureEnvironmentWriter(ImmutableMap.<String, String>builder().put("Test URL", FrameworkConstants.URL_CRM).put("Target Execution", FrameworkConstants.TARGET).put("Global Timeout", String.valueOf(FrameworkConstants.WAIT_DEFAULT)).put("Page Load Timeout", String.valueOf(FrameworkConstants.WAIT_PAGE_LOADED)).put("Headless Mode", FrameworkConstants.HEADLESS).put("Local Browser", String.valueOf(Browser.CHROME)).put("Remote URL", FrameworkConstants.REMOTE_URL).put("Remote Port", FrameworkConstants.REMOTE_PORT).put("TCs Total", String.valueOf(count_totalTCs)).put("TCs Passed", String.valueOf(count_passedTCs)).put("TCs Skipped", String.valueOf(count_skippedTCs)).put("TCs Failed", String.valueOf(count_failedTCs)).build());
 
-        //FileHelpers.copyFile("src/test/resources/config/allure/environment.xml", "target/allure-results/environment.xml");
         FileHelpers.copyFile("src/test/resources/config/allure/categories.json", "target/allure-results/categories.json");
         FileHelpers.copyFile("src/test/resources/config/allure/executor.json", "target/allure-results/executor.json");
 
@@ -148,8 +131,6 @@ public class TestListener implements ITestListener, ISuiteListener, IInvokedMeth
         ExtentReportManager.info(BrowserInfoUtils.getOSInfo());
        
         ExtentReportManager.info(testTag);
-//        LogUtils.info("Current running state or County number: "+Integer.toString(ThreadLocalManager.getLicStateIndex()));
-//        ExtentReportManager.info("Current running state or County number: "+Integer.toString(ThreadLocalManager.getLicStateIndex()));
         
         if (VIDEO_RECORD.toLowerCase().trim().equals(YES)) {
             screenRecorder.startRecording(getTestName(iTestResult));
