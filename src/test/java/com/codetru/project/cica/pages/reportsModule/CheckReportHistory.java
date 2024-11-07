@@ -115,7 +115,7 @@ public class CheckReportHistory extends CommonPageCICA {
 		String selectedMonth = WebUI.getTextElement(selectMnth);
 		WebUI.clickElement(selectMnth);
 		WebUI.clickElement(loadMnthBtn);
-		ProjectUtilities.spinnerWait(searchingSpinner);
+		ProjectUtilities.spinnerWaitWithTime(searchingSpinner,30);
 		try {
 			if (DriverManager.getDriver().findElement(checkDate).isDisplayed()) {
 				WebUI.scrollToElementAtBottom(checkDate);
@@ -131,7 +131,7 @@ public class CheckReportHistory extends CommonPageCICA {
 		}
 		WebUI.verifyElementVisible(loadAllBtn);
 		WebUI.clickElement(loadAllBtn);
-		ProjectUtilities.spinnerWait(searchingSpinner);
+		ProjectUtilities.spinnerWaitWithTime(searchingSpinner,30);
 		WebUI.scrollToElementAtBottom(loadAllBtnText);
 		WebUI.verifyElementVisible(loadAllBtnText);
 		WebUI.clickElement(exportBtn);
