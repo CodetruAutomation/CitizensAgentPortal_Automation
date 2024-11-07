@@ -7,7 +7,7 @@
 
 	<test name="CITIZENS REGRESSION TEST - PROFILE, DASHBOARD, CUSTOMER AND POLICY PAYMENTS MODULES">
 		<parameter name="BROWSER" value="chrome" />
-		<parameter name="ROW_NUMBER" value="7" />
+		<parameter name="ROW_NUMBER" value="1" />
 		<classes>
 			<class name="com.codetru.project.cica.testcases.loginModule.LoginModule" />
 			<class name="com.codetru.project.cica.testcases.profileModule.ProfileModule" />
