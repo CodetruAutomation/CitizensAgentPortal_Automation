@@ -22,10 +22,10 @@ public class BaseTest extends CommonPageCICA {
         driver.manage().window().maximize();
     }
 
-//    @AfterTest(alwaysRun = true)
-//    public void closeDriver() {
-//        DriverManager.quit();
-//    }
+    @AfterTest(alwaysRun = true)
+    public void closeDriver() {
+        DriverManager.quit();
+    }
 
     public WebDriver createBrowser(@Optional("chrome") String browser) {
         PropertiesHelpers.loadAllFiles();
