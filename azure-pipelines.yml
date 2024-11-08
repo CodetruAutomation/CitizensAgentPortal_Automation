@@ -1,5 +1,5 @@
 pool:
-  vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
+  vmImage: 'ubuntu-latest'
 
 parameters:
 - name: SUITE_FILE
@@ -37,6 +37,8 @@ parameters:
     - 'Regression_PolicyPayment.xml'
     - 'Regression_ProfileModule.xml'
 
+trigger: none  # Disables automatic triggering on push
+
 stages:
 - stage: CleanWorkspace
   displayName: 'Clean Workspace'
@@ -55,28 +57,44 @@ stages:
   - job: MavenBuild
     displayName: 'Maven Build and Test'
     steps:
-      - checkout: self  # Check out the source code
+      - checkout: self
         displayName: 'Git Checkout'
 
-      - task: JavaToolInstaller@0  # Install Java
+      # Cache Maven dependencies
+      - task: Cache@2
         inputs:
-          versionSpec: '17'  # Specify Java version
+          key: 'maven | $(Agent.OS) | maven'
+          path: $(MAVEN_OPTS)
+        displayName: 'Cache Maven Dependencies'
+
+      # Cache Java
+      - task: Cache@2
+        inputs:
+          key: 'java | $(Agent.OS) | 17'
+          path: $(JAVA_HOME)
+        displayName: 'Cache Java Dependencies'
+
+      # Install Java only if not cached
+      - task: JavaToolInstaller@0
+        inputs:
+          versionSpec: '17'
           jdkArchitectureOption: 'x64'
           jdkSourceOption: 'PreInstalled'
-        displayName: 'Install Java 17'
+        displayName: 'Install Java 17 (if not cached)'
 
-      - task: MavenAuthenticate@0  # Optional: Authenticate if using private Maven repositories
+      # Maven Authentication, if required
+      - task: MavenAuthenticate@0
         inputs:
           mavenAuthenticate: true
         displayName: 'Maven Authentication'
 
       - task: Maven@3
         inputs:
-          mavenPomFile: 'pom.xml'  # Path to your pom.xml
-          goals: 'clean test'  # Matching Jenkins goals with "test"
-          options: '-DsuiteXmlFile=src/test/resources/suites/citizens/${{ parameters.SUITE_FILE }}'  # Use parameter for suite file
-          publishJUnitResults: true  # Publish test results to Azure DevOps
-          testResultsFiles: '**/target/surefire-reports/*.xml'  # Path to the test results
+          mavenPomFile: 'pom.xml'
+          goals: 'clean test'
+          options: '-DsuiteXmlFile=src/test/resources/suites/citizens/${{ parameters.SUITE_FILE }}'
+          publishJUnitResults: true
+          testResultsFiles: '**/target/surefire-reports/*.xml'
         displayName: 'Maven Build and Run Tests'
 
       - script: |
