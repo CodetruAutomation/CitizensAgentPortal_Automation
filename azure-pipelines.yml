@@ -60,17 +60,24 @@ stages:
       - checkout: self
         displayName: 'Git Checkout'
 
-      # Cache Maven dependencies based on pom.xml file hash
+      # Sanitize the branch name by replacing slashes with hyphens
+      - script: |
+          echo "Sanitizing branch name for cache key..."
+          BRANCH_NAME=$(Build.SourceBranchName | tr '/' '-')
+          echo "##vso[task.setvariable variable=CACHE_BRANCH_NAME]$BRANCH_NAME"
+        displayName: 'Sanitize Branch Name for Cache Key'
+
+      # Cache Maven dependencies based on sanitized branch name
       - task: Cache@2
         inputs:
-          key: 'maven-cache-$(Agent.OS)-$(Build.SourceBranch)-$(MD5(pom.xml))'
+          key: 'maven-cache-$(Agent.OS)-$(CACHE_BRANCH_NAME)-$(MD5(pom.xml))'
           restoreKeys: |
-            maven-cache-$(Agent.OS)-$(Build.SourceBranch)
+            maven-cache-$(Agent.OS)-$(CACHE_BRANCH_NAME)
             maven-cache-$(Agent.OS)
           path: $(MAVEN_CACHE_DIRECTORY)
         displayName: 'Cache Maven Dependencies'
 
-      # Ensure MAVEN_CACHE_DIRECTORY exists and set it if not predefined
+      # Ensure MAVEN_CACHE_DIRECTORY exists
       - script: |
           echo "Setting up Maven cache directory"
           mkdir -p ~/.m2/repository
