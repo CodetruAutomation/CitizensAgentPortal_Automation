@@ -67,22 +67,15 @@ stages:
           echo "##vso[task.setvariable variable=CACHE_BRANCH_NAME]$BRANCH_NAME"
         displayName: 'Sanitize Branch Name for Cache Key'
 
-      # Cache Maven dependencies based on sanitized branch name
+      # Cache Maven dependencies based on sanitized branch name and OS
       - task: Cache@2
         inputs:
-          key: 'maven-cache-$(Agent.OS)-$(CACHE_BRANCH_NAME)-$(MD5(pom.xml))'
+          key: 'maven-cache-$(Agent.OS)-$(CACHE_BRANCH_NAME)'
           restoreKeys: |
             maven-cache-$(Agent.OS)-$(CACHE_BRANCH_NAME)
             maven-cache-$(Agent.OS)
-          path: $(MAVEN_CACHE_DIRECTORY)
+          path: ~/.m2/repository
         displayName: 'Cache Maven Dependencies'
-
-      # Ensure MAVEN_CACHE_DIRECTORY exists
-      - script: |
-          echo "Setting up Maven cache directory"
-          mkdir -p ~/.m2/repository
-          echo "MAVEN_CACHE_DIRECTORY=~/.m2/repository" >> $(Build.Bash)
-        displayName: 'Set Maven Cache Directory'
 
       - task: JavaToolInstaller@0
         inputs:
