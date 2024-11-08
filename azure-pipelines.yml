@@ -1,3 +1,5 @@
+trigger: none  # Disable automatic triggering on code pushes
+
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -58,12 +60,22 @@ stages:
       - checkout: self
         displayName: 'Git Checkout'
 
+      # Cache Maven dependencies based on pom.xml file hash
       - task: Cache@2
         inputs:
-          key: 'maven | "$(Agent.OS)" | **/pom.xml'
-          path: ~/.m2/repository
-          cacheHitVar: 'MAVEN_CACHE_RESTORED'
+          key: 'maven-cache-$(Agent.OS)-$(Build.SourceBranch)-$(MD5(pom.xml))'
+          restoreKeys: |
+            maven-cache-$(Agent.OS)-$(Build.SourceBranch)
+            maven-cache-$(Agent.OS)
+          path: $(MAVEN_CACHE_DIRECTORY)
         displayName: 'Cache Maven Dependencies'
+
+      # Ensure MAVEN_CACHE_DIRECTORY exists and set it if not predefined
+      - script: |
+          echo "Setting up Maven cache directory"
+          mkdir -p ~/.m2/repository
+          echo "MAVEN_CACHE_DIRECTORY=~/.m2/repository" >> $(Build.Bash)
+        displayName: 'Set Maven Cache Directory'
 
       - task: JavaToolInstaller@0
         inputs:
