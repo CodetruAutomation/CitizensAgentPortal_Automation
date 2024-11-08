@@ -26,7 +26,7 @@
 	</test>
 	
 	<test name="CITIZENS SANITY TEST APPLICATION MODULE WITH MULTIPLE STATES 2">
-		<parameter name="BROWSER" value="edge" />
+		<parameter name="BROWSER" value="chrome" />
 		<parameter name="ROW_NUMBER" value="2" />
 		<classes>
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
@@ -66,7 +66,7 @@
 	</test>
 	
 	<test name="CITIZENS SANITY TEST APPLICATION MODULE WITH MULTIPLE STATES 4">
-		<parameter name="BROWSER" value="edge" />
+		<parameter name="BROWSER" value="chrome" />
 		<parameter name="ROW_NUMBER" value="4" />
 		<classes>
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
@@ -106,7 +106,7 @@
 	</test>
 	
 	<test name="CITIZENS SANITY TEST APPLICATION MODULE WITH MULTIPLE STATES 6">
-		<parameter name="BROWSER" value="edge" />
+		<parameter name="BROWSER" value="chrome" />
 		<parameter name="ROW_NUMBER" value="6" />
 		<classes>
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
@@ -146,7 +146,7 @@
 	</test>
 	
 	<test name="CITIZENS SANITY TEST APPLICATION MODULE WITH MULTIPLE STATES 8">
-		<parameter name="BROWSER" value="edge" />
+		<parameter name="BROWSER" value="chrome" />
 		<parameter name="ROW_NUMBER" value="8" />
 		<classes>
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
