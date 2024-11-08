@@ -48,7 +48,7 @@ public class PolicyPaymentModule {
 	private By nullValuePayment=By.xpath("//select[@formcontrolname='PaymentType']/option[1]");
 	private By nullValueRelation=By.xpath("//select[@formcontrolname='Relationship']/option[1]");
 	private By selectPremium=By.xpath("//option[text()='Premium']");
-	private By parent=By.xpath("//option[text()='Parent ']");	
+	private By parent=By.xpath("//option[text()='Parent ']"); 
 	private By selected=By.xpath("//select[@formcontrolname='Relationship']");
 	private By paymentType=By.xpath("//select[@formcontrolname='PaymentType']");
 	private By paymentDropdown=By.xpath("//select[@formcontrolname='PaymentType']/option");
@@ -117,7 +117,7 @@ public class PolicyPaymentModule {
 	private By emptyValue=By.xpath("(//select[@formcontrolname='State']/option)[1]");
 	private By transactionalTotalBilling=By.xpath("(//ion-col/following-sibling::ion-col/h2)[2]");
 	private By someErrosMsg=By.xpath("//div[text()='There are some errors on this page. Please correct before continuing.']");
-	private By makeAnotherpaymentBtn=By.xpath("//ion-button[text()='Make Another Payment ']");
+	   private By makeAnotherpaymentBtn=By.xpath("//ion-button[text()='Make Another Payment ']");
 	private By india=By.xpath("//option[text()=' INDIA']");
 	//CreditCardPayment
 	private By CardNumber = By.xpath("//input[@name='cardNumber']");
@@ -162,801 +162,804 @@ public class PolicyPaymentModule {
 
 	public void Make_a_Payment() throws Exception {
 
-		String firstpolicy_number = null ;
-		String thirdPolicyNumber=null;
-		String one="1";
-		double transactionalTotal=0;
-		String secondPolicyNumber=null;
-		String invalidMaxAccountNumber="7412036589741256398";
-		String expectedMaxErr="The maximum number of characters is 17.";
-		String expectedMaxErrRoutingNumber="The maximum number of characters is 9.";
-		String validAccNum = "4099999992";            
-		String validRoutingNum = "011075150";
-		String expectedMinErrRoutingNumber="The minimum number of characters is 8.";
-		String Max_Name = "PaymentasdfgaedfsdfgwSEDFGASDFGBASDFGBASDFGASDFGBASDFGSADF1234sdfsghdsfghjdfgh2345";
-		String max50chars= "sadfgsadfgsadfghasfgasdfghsadfgasdfghsadfghsdafghjasdfgn";
-		String Max_error_70 ="The maximum number of characters is 70.";
-		String Max_error_50 ="The maximum number of characters is 50.";
-		String unitedstates="US";
-		String Mandatory_Err = "Please enter a value.";
-		String billing_Max_Name = "qwertyuiopasdfghj";
-		String billing_Max_Name_Err = "The maximum number of characters is 15.";
-		String billing_numeric_Err = "Enter aphabets only";
-		String billing_max_city_Err = "The maximum number of characters is 40.";
-		String billing_Zip_Format_Err = "Please use a number format.";
-		String billing_Zip_Min_Char_Err = "The minimum number of characters is 5.";
-		String billing_Zip_Max_Char_Err = "The maximum number of characters is 10.";
-		String billing_Ph_Format_Err = "Please use a number format.";
-		String billing_Ph_Min_Char_Err = "The minimum number of characters is 10.";
-		String billing_Ph_Max_Char_Err = "The maximum number of characters is 10.";
-		String billing_Email_Format_Err = "Email is not in the correct format";
-		String billing_Invalid_Card_Err = "Enter a valid card number";
-		String billing_Card_Holder_Name_Err = "Enter a valid cardholder's name";
-		String billing_Card_Month_Err = "Enter a valid month";
-		String billing_Card_Year_Err = "Enter a valid year";
-		String billing_Card_PastYear_Err = "Expiry date must be in the future";
-		String billing_Card_SecuCode_Err = "Enter a valid security code";
-		String billing_Pin_Hint = "Last 3 digits on the back of card";
-		String billing_Pin_Hint_Front = "4 digits on the front of card";
-		String errorMsgInvalidPolicyNumber="Policy Number must be validated by searching.";
-		String invalidEmailErrMsg="You have entered an invalid email address!";
-		String fifty="50";
-		String cicaOrgPolicyNumber="7205000014";
-		String reccurringPolicyNum = null;
-		List<String> reccurringColPolicy=null;
-		List<String> validPolicies=null;
+	String firstpolicy_number = null ;
+	String thirdPolicyNumber=null;
+	String one="1";
+	double transactionalTotal=0;
+	String secondPolicyNumber=null;
+	String invalidMaxAccountNumber="7412036589741256398";
+	String expectedMaxErr="The maximum number of characters is 17.";
+	String expectedMaxErrRoutingNumber="The maximum number of characters is 9.";
+	String validAccNum = "4099999992";            
+	String validRoutingNum = "011075150";
+	String expectedMinErrRoutingNumber="The minimum number of characters is 8.";
+	String Max_Name = "PaymentasdfgaedfsdfgwSEDFGASDFGBASDFGBASDFGASDFGBASDFGSADF1234sdfsghdsfghjdfgh2345";
+	String max50chars= "sadfgsadfgsadfghasfgasdfghsadfgasdfghsadfghsdafghjasdfgn";
+	String Max_error_70 ="The maximum number of characters is 70.";
+	String Max_error_50 ="The maximum number of characters is 50.";
+	String unitedstates="US";
+	String Mandatory_Err = "Please enter a value.";
+	String billing_Max_Name = "qwertyuiopasdfghj";
+	String billing_Max_Name_Err = "The maximum number of characters is 15.";
+	String billing_numeric_Err = "Enter aphabets only";
+	String billing_max_city_Err = "The maximum number of characters is 40.";
+	String billing_Zip_Format_Err = "Please use a number format.";
+	String billing_Zip_Min_Char_Err = "The minimum number of characters is 5.";
+	String billing_Zip_Max_Char_Err = "The maximum number of characters is 10.";
+	String billing_Ph_Format_Err = "Please use a number format.";
+	String billing_Ph_Min_Char_Err = "The minimum number of characters is 10.";
+	String billing_Ph_Max_Char_Err = "The maximum number of characters is 10.";
+	String billing_Email_Format_Err = "Email is not in the correct format";
+	String billing_Invalid_Card_Err = "Enter a valid card number";
+	String billing_Card_Holder_Name_Err = "Enter a valid cardholder's name";
+	String billing_Card_Month_Err = "Enter a valid month";
+	String billing_Card_Year_Err = "Enter a valid year";
+	String billing_Card_PastYear_Err = "Expiry date must be in the future";
+	String billing_Card_SecuCode_Err = "Enter a valid security code";
+	String billing_Pin_Hint = "Last 3 digits on the back of card";
+	String billing_Pin_Hint_Front = "4 digits on the front of card";
+	String errorMsgInvalidPolicyNumber="Policy Number must be validated by searching.";
+	String invalidEmailErrMsg="You have entered an invalid email address!";
+	String fifty="50";
+	String cicaOrgPolicyNumber="7205000014";
+	String reccurringPolicyNum = null;
+	List<String> reccurringColPolicy=null;
+	List<String> validPolicies=null;
 
 
-		WebUI.verifyElementVisible(policyPaymentTittle);
-		WebUI.verifyElementVisible(policyNumberField);
-		WebUI.verifyElementVisible(InsuredNamberField);
-		WebUI.verifyElementVisible(paidToDateField);
-		WebUI.verifyElementVisible(relationshipField);
-		WebUI.verifyElementVisible(paymentTypeField);
-		WebUI.verifyElementVisible(amountField);
-		WebUI.verifyElementVisible(addAnotherPaymentBtn);
-		WebUI.clickElement(nxtBtn);
-		WebUI.verifyElementVisible(desclaimerBox);
-		WebUI.clickElement(Disclaimeryes);
-		WebUI.clickElement(nxtBtn2);
-		WebUI.sleep(2);
-		WebUI.verifyElementVisible(err_msg_policyNumber);
-		WebUI.verifyElementVisible(err_msg_premium);
-		WebUI.verifyElementVisible(err_msg_relation);
-		WebUI.verifyElementVisible(errMsgAmount);
-		WebUI.clickElement(chevronArrowUp);
-		//		WebUI.verifyElementNotPresent(policyNumberField);
-		WebUI.clickElement(chevronArrowDown);
-		WebUI.sleep(2);
-		WebUI.setText(policyNumberInput, "qwer7412!!@0");
-		WebUI.sleep(1);
-		WebUI.verifyElementVisible(policyHeader);
-		WebUI.verifyElementVisible(err_msg_policyNumber);
-		WebUI.clearTextCtrlA(policyNumberInput);
-		WebUI.verifyElementPresent(err_msg_policyNumber);
-		WebUI.setText(policyNumberInput, "2200007217");
-		WebUI.verifyElementVisible(err_msg_policyNumber);
-		WebUI.verifyEquals(WebUI.getTextElement(err_msg_policyNumber).trim(), errorMsgInvalidPolicyNumber);	
-		//*** If we trying to search the cica org policy number in Alligent org, error message should be display*** 
-		//		WebUI.sleep(2);
-		//		WebUI.clearAndFillText(policyNumberInput, cicaOrgPolicyNumber);
-		//		WebUI.clickElement(policySearchBtn);
-		//		WebUI.verifyElementVisible(policyNotExist);
-		WebUI.sleep(2);
-		WebUI.clickElement(customersTab);
-		WebUI.clickElement(directCustomersBtn);
-		WebUI.sleep(2);
-		ProjectUtilities.spinnerWait(pleaseWaitSpinner);
-		List<WebElement> policyNumbersEle = WebUI.getWebElements(policyNumbersInCustomersTab);
-		//		List<String> policyNumbersList=WebUI.getListElementsText(policyNumbersInCustomersTab);
-		for (int i = 0; i < 5; i++) {
-			String terminatedPolicyNumber = policyNumbersEle.get(i).getText();
-			System.out.println("terminatedPolicies for :"+terminatedPolicyNumber);
-			policyNumbersEle.get(i).click();
-			ProjectUtilities.spinnerWait(pleaseWaitSpinner);
-			try {
-				DriverManager.getDriver().findElement(terminatedPolicy).isDisplayed();
+	WebUI.verifyElementVisible(policyPaymentTittle);
+	WebUI.verifyElementVisible(policyNumberField);
+	WebUI.verifyElementVisible(InsuredNamberField);
+	WebUI.verifyElementVisible(paidToDateField);
+	WebUI.verifyElementVisible(relationshipField);
+	WebUI.verifyElementVisible(paymentTypeField);
+	WebUI.verifyElementVisible(amountField);
+	WebUI.verifyElementVisible(addAnotherPaymentBtn);
+	WebUI.clickElement(nxtBtn);
+	WebUI.verifyElementVisible(desclaimerBox);
+	WebUI.clickElement(Disclaimeryes);
+	WebUI.clickElement(nxtBtn2);
+	WebUI.sleep(2);
+	WebUI.verifyElementVisible(err_msg_policyNumber);
+	WebUI.verifyElementVisible(err_msg_premium);
+	WebUI.verifyElementVisible(err_msg_relation);
+	WebUI.verifyElementVisible(errMsgAmount);
+	WebUI.clickElement(chevronArrowUp);
+	// WebUI.verifyElementNotPresent(policyNumberField);
+	WebUI.clickElement(chevronArrowDown);
+	WebUI.sleep(2);
+	WebUI.setText(policyNumberInput, "qwer7412!!@0");
+	WebUI.sleep(1);
+	WebUI.verifyElementVisible(policyHeader);
+	WebUI.verifyElementVisible(err_msg_policyNumber);
+	WebUI.clearTextCtrlA(policyNumberInput);
+	WebUI.verifyElementPresent(err_msg_policyNumber);
+	WebUI.setText(policyNumberInput, "2200007217");
+	WebUI.verifyElementVisible(err_msg_policyNumber);
+	WebUI.verifyEquals(WebUI.getTextElement(err_msg_policyNumber).trim(), errorMsgInvalidPolicyNumber); 
+	//*** If we trying to search the cica org policy number in Alligent org, error message should be display*** 
+	// WebUI.sleep(2);
+	// WebUI.clearAndFillText(policyNumberInput, cicaOrgPolicyNumber);
+	// WebUI.clickElement(policySearchBtn);
+	// WebUI.verifyElementVisible(policyNotExist);
+	WebUI.sleep(2);
+	WebUI.clickElement(customersTab);
+	WebUI.clickElement(directCustomersBtn);
+	WebUI.sleep(2);
+	ProjectUtilities.spinnerWait(pleaseWaitSpinner);
+	List<WebElement> policyNumbersEle = WebUI.getWebElements(policyNumbersInCustomersTab);
+	// List<String> policyNumbersList=WebUI.getListElementsText(policyNumbersInCustomersTab);
+	for (int i = 0; i < 5; i++) {
+	String terminatedPolicyNumber = policyNumbersEle.get(i).getText();
+	System.out.println("terminatedPolicies for :"+terminatedPolicyNumber);
+	policyNumbersEle.get(i).click();
+	ProjectUtilities.spinnerWait(pleaseWaitSpinner);
+	try {
+	DriverManager.getDriver().findElement(terminatedPolicy).isDisplayed();
 
-				System.out.println(terminatedPolicyNumber);
-				WebUI.sleep(1);
-				DriverManager.getDriver().navigate().back();
-				WebUI.sleep(1);
-				WebUI.clickElement(policypaymentBtn);
-				WebUI.clearAndFillText(policyNumberInput, terminatedPolicyNumber);
-				WebUI.clickElement(policySearchBtn);
-				WebUI.verifyElementVisible(policyNotFound);
-				WebUI.clickElement(ok_btn);
-				WebUI.sleep(2);
-				break;
-			} catch (Exception exception) {
-				WebUI.sleep(1);
-				DriverManager.getDriver().navigate().back();
-				WebUI.sleep(1);
-				//continue;
-			}
-		}
-		WebUI.clickElement(reportsBtn);
-		WebUI.clickElementWithJs(renewalPremium);
-		WebUI.sleep(1);
-		ProjectUtilities.spinnerWait(searchingSpinner);
-		WebUI.releaseElement(reportsBtn);
-		WebUI.clickElement(allBtn);
-		ProjectUtilities.spinnerWait(searchingSpinner);
-		WebUI.scrollToElementAtBottom(pagenation);
-		WebUI.selectOptionByText(pagenationDropdown, fifty);
-		WebUI.sleep(4);
-		WebUI.scrollToElementAtBottom(pagenation);
-		WebUI.clickElement(pagenation);
-		WebUI.scrollToElementAtTop(allBtn);
-		WebUI.sleep(2);
-		WebUI.clickElement(reccurringCol);
-		try {
-			for(int i=1;i<=5; i++) {
-				try {
-					DriverManager.getDriver().findElement(reccuringPolicyNumberInreports).isDisplayed();
-					break;
-				}catch (Exception e) {
-					WebUI.clickElement(reccurringCol);
-				}
-			}
-			WebUI.sleep(2);
-			reccurringColPolicy=WebUI.getListElementsText(reccuringPolicyNumberInreports);
-			System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+reccurringColPolicy);
-			WebUI.sleep(2);
-			WebUI.clickElement(policypaymentBtn);
-			WebUI.sleep(1);
-			WebUI.clearAndFillText(policyNumberInput, reccurringColPolicy.get(0));
-			WebUI.sleep(1.5);
-			WebUI.clickElement(policySearchBtn);
-			WebUI.sleep(2);
-			WebUI.verifyElementVisible(reccurringPolicyErrText);
-			WebUI.clickElement(nxtBtn);
-			WebUI.clickElement(paymentAlertcancelBtn);
-			String reccurringMyName= WebUI.getAttributeElement(insuredName, "value");
-			WebUI.validateElementContainsData(reccurringMyName);
-			//	WebUI.verifyElementNotEditable(insuredName); //it should not be editable since it is auto-populated field
-			String reccurringDate= WebUI.getAttributeElement(paidToDate, "value");
-			WebUI.validateElementContainsData(reccurringDate);
-			//		WebUI.verifyElementEnabled(paidToDate);
-			WebUI.isValidDateFormat(reccurringDate);
-			WebUI.clickElement(addAnotherPaymentBtn);
-			String reccurringDate2= WebUI.getAttributeElement(paidToDate, "value");
-			//	WebUI.verifyNotEquals(reccurringDate, reccurringDate2); //It shouldnt be equal
-			WebUI.clickElement(trashBtn);
-			WebUI.sleep(0.5);
-			WebUI.clickElement(chevronArrowDown);
-			WebUI.clickElement(relationDropdown);
-			WebUI.verifyElementVisible(relationshipDropdownValues);
-			WebUI.clickElement(parent);
-			WebUI.clickElement(relationDropdown);
-			WebUI.clickElement(nullValueRelation);
-			WebUI.verifyElementVisible(err_msg_relation);
-			WebUI.clickElement(relationDropdown);
-			WebUI.getTextElement(parent);
-			WebUI.clickElement(parent);
-			WebUI.clickElement(paymentType);
-			WebUI.clickElement(selectPremium);	
-			WebUI.clickElement(nxtBtn);
-			WebUI.verifyElementVisible(paymentAlert);
-			WebUI.verifyElementVisible(paymentAlertcancelBtn);
-			WebUI.verifyElementVisible(paymentAlertNextBtn);
-			WebUI.clickElement(paymentAlertcancelBtn);
-			WebUI.verifyElementNotVisible(paymentAlert);
-			WebUI.clickElement(nxtBtn);
-			WebUI.clickElement(paymentAlertNextBtn);
-			WebUI.verifyElementVisible(desclaimerBox);
-			WebUI.verifyElementVisible(closeBtn);
-			WebUI.clickElement(closeBtn);
-			WebUI.verifyElementVisible(addAnotherPaymentBtn);
-			WebUI.clickElement(nxtBtn);
-			WebUI.clickElement(paymentAlertNextBtn);
-			WebUI.clickElement(nxtBtn2);
-			WebUI.verifyElementVisible(addAnotherPaymentBtn);
-			WebUI.clickElement(nxtBtn);
-			WebUI.clickElement(paymentAlertNextBtn);
-			WebUI.clickElement(Disclaimeryes);
-			WebUI.clickElement(nxtBtn2);
-			WebUI.sleep(2);
-			//Billing Information Page
-			WebUI.clickElement(backArrow);
-			WebUI.sleep(2);	
-		}catch(Exception e) {
-			System.out.println("There is no Reccurring Policies for this agent");
-		}	
+	System.out.println(terminatedPolicyNumber);
+	WebUI.sleep(1);
+	DriverManager.getDriver().navigate().back();
+	WebUI.sleep(1);
+	WebUI.clickElement(policypaymentBtn);
+	WebUI.clearAndFillText(policyNumberInput, terminatedPolicyNumber);
+	WebUI.clickElement(policySearchBtn);
+	WebUI.verifyElementVisible(policyNotFound);
+	WebUI.clickElement(ok_btn);
+	WebUI.sleep(2);
+	break;
+	} catch (Exception exception) {
+	WebUI.sleep(1);
+	DriverManager.getDriver().navigate().back();
+	WebUI.sleep(1);
+	//continue;
+	}
+	}
+	WebUI.clickElement(reportsBtn);
+	WebUI.clickElementWithJs(renewalPremium);
+	WebUI.sleep(1);
+	ProjectUtilities.spinnerWait(searchingSpinner);
+	WebUI.releaseElement(reportsBtn);
+	WebUI.clickElement(allBtn);
+	ProjectUtilities.spinnerWait(searchingSpinner);
+	WebUI.scrollToElementAtBottom(pagenation);
+	WebUI.selectOptionByText(pagenationDropdown, fifty);
+	WebUI.sleep(4);
+	WebUI.scrollToElementAtBottom(pagenation);
+	WebUI.clickElement(pagenation);
+	WebUI.scrollToElementAtTop(allBtn);
+	WebUI.sleep(2);
+	WebUI.clickElement(reccurringCol);
+	try {
+	for(int i=1;i<=5; i++) {
+	try {
+	DriverManager.getDriver().findElement(reccuringPolicyNumberInreports).isDisplayed();
+	break;
+	}catch (Exception e) {
+	WebUI.clickElement(reccurringCol);
+	}
+	}
+	WebUI.sleep(2);
+	reccurringColPolicy=WebUI.getListElementsText(reccuringPolicyNumberInreports);
+	System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+reccurringColPolicy);
+	WebUI.sleep(2);
+	WebUI.clickElement(policypaymentBtn);
+	WebUI.sleep(1);
+	WebUI.clearAndFillText(policyNumberInput, reccurringColPolicy.get(0));
+	WebUI.sleep(1.5);
+	WebUI.clickElement(policySearchBtn);
+	WebUI.sleep(2);
+	WebUI.verifyElementVisible(reccurringPolicyErrText);
+	WebUI.clickElement(nxtBtn);
+	WebUI.clickElement(paymentAlertcancelBtn);
+	String reccurringMyName= WebUI.getAttributeElement(insuredName, "value");
+	WebUI.validateElementContainsData(reccurringMyName);
+	// WebUI.verifyElementNotEditable(insuredName); //it should not be editable since it is auto-populated field
+	String reccurringDate= WebUI.getAttributeElement(paidToDate, "value");
+	WebUI.validateElementContainsData(reccurringDate);
+	// WebUI.verifyElementEnabled(paidToDate);
+	WebUI.isValidDateFormat(reccurringDate);
+	WebUI.clickElement(addAnotherPaymentBtn);
+	String reccurringDate2= WebUI.getAttributeElement(paidToDate, "value");
+	// WebUI.verifyNotEquals(reccurringDate, reccurringDate2); //It shouldnt be equal
+	WebUI.clickElement(trashBtn);
+	WebUI.sleep(0.5);
+	WebUI.clickElement(chevronArrowDown);
+	WebUI.clickElement(relationDropdown);
+	WebUI.verifyElementVisible(relationshipDropdownValues);
+	WebUI.clickElement(parent);
+	WebUI.clickElement(relationDropdown);
+	WebUI.clickElement(nullValueRelation);
+	WebUI.verifyElementVisible(err_msg_relation);
+	WebUI.clickElement(relationDropdown);
+	WebUI.getTextElement(parent);
+	WebUI.clickElement(parent);
+	WebUI.clickElement(paymentType);
+	WebUI.clickElement(selectPremium); 
+	WebUI.clickElement(nxtBtn);
+	WebUI.verifyElementVisible(paymentAlert);
+	WebUI.verifyElementVisible(paymentAlertcancelBtn);
+	WebUI.verifyElementVisible(paymentAlertNextBtn);
+	WebUI.clickElement(paymentAlertcancelBtn);
+	WebUI.verifyElementNotVisible(paymentAlert);
+	WebUI.clickElement(nxtBtn);
+	WebUI.clickElement(paymentAlertNextBtn);
+	WebUI.verifyElementVisible(desclaimerBox);
+	WebUI.verifyElementVisible(closeBtn);
+	WebUI.clickElement(closeBtn);
+	WebUI.verifyElementVisible(addAnotherPaymentBtn);
+	WebUI.clickElement(nxtBtn);
+	WebUI.clickElement(paymentAlertNextBtn);
+	WebUI.clickElement(nxtBtn2);
+	WebUI.verifyElementVisible(addAnotherPaymentBtn);
+	WebUI.clickElement(nxtBtn);
+	WebUI.clickElement(paymentAlertNextBtn);
+	WebUI.clickElement(Disclaimeryes);
+	WebUI.clickElement(nxtBtn2);
+	WebUI.sleep(2);
+	//Billing Information Page
+	WebUI.clickElement(backArrow);
+	WebUI.sleep(2); 
+	}catch(Exception e) {
+	System.out.println("There is no Reccurring Policies for this agent");
+	} 
 
-		WebUI.clickElement(reportsBtn);
-		WebUI.clickElementWithJs(renewalPremium);
-		WebUI.sleep(1);
-		ProjectUtilities.spinnerWait(searchingSpinner);
-		WebUI.releaseElement(reportsBtn);
-		WebUI.clickElement(allBtn);
-		WebUI.sleep(1);
-		ProjectUtilities.spinnerWait(searchingSpinner);
-		WebUI.scrollToElementAtBottom(pagenation);
-		WebUI.selectOptionByText(pagenationDropdown, fifty);
-		WebUI.sleep(2);
-		WebUI.scrollToElementAtTop(allBtn);
-		try {
-			validPolicies=WebUI.getListElementsText(paymentPolicyNumbers);
-			System.out.println("Valid Policies Count "+validPolicies.size());
-			if(validPolicies.size()>=2) {
-				WebUI.clickElement(policypaymentBtn);
-				for (String number : validPolicies) {
-					firstpolicy_number=number;
-					WebUI.clearAndFillText(policyNumberInput, firstpolicy_number);
-					break;
-				}
-				WebUI.clickElement(policySearchBtn);
-				WebUI.sleep(2);
-				WebUI.verifyElementNotVisible(policyNotFound);
-				WebUI.verifyElementNotVisible(reccurringPolicyErrText);
+	WebUI.clickElement(reportsBtn);
+	WebUI.clickElementWithJs(renewalPremium);
+	WebUI.sleep(1);
+	ProjectUtilities.spinnerWait(searchingSpinner);
+	WebUI.releaseElement(reportsBtn);
+	WebUI.clickElement(allBtn);
+	WebUI.sleep(1);
+	ProjectUtilities.spinnerWait(searchingSpinner);
+	WebUI.scrollToElementAtBottom(pagenation);
+	WebUI.selectOptionByText(pagenationDropdown, fifty);
+	WebUI.sleep(2);
+	WebUI.scrollToElementAtTop(allBtn);
+	try {
+	if(DriverManager.getDriver().findElement(paymentPolicyNumbers).isDisplayed()) {
+	validPolicies=WebUI.getListElementsText(paymentPolicyNumbers);
+	System.out.println("Valid Policies Count "+validPolicies.size());
+	if(validPolicies.size()>=2) {
+	WebUI.clickElement(policypaymentBtn);
+	for (String number : validPolicies) {
+	firstpolicy_number=number;
+	WebUI.clearAndFillText(policyNumberInput, firstpolicy_number);
+	break;
+	}
+	WebUI.clickElement(policySearchBtn);
+	WebUI.sleep(2);
+	WebUI.verifyElementNotVisible(policyNotFound);
+	WebUI.verifyElementNotVisible(reccurringPolicyErrText);
 
-				WebUI.verifyElementVisible(validData);
-				String myname= WebUI.getAttributeElement(insuredName, "value");
-				WebUI.validateElementContainsData(myname);
-				String date= WebUI.getAttributeElement(paidToDate, "value");
-				WebUI.validateElementContainsData(date);
-				//		WebUI.verifyElementEnabled(paidToDate);
-				WebUI.isValidDateFormat(date);
-				WebUI.clickElement(relationDropdown);
-				WebUI.verifyElementVisible(relationshipDropdownValues);
-				WebUI.clickElement(parent);
-				WebUI.clickElement(relationDropdown);
-				WebUI.clickElement(nullValueRelation);
-				WebUI.verifyElementVisible(err_msg_relation);
-				WebUI.clickElement(relationDropdown);
-				WebUI.getTextElement(parent);
-				WebUI.clickElement(parent);
-				String selectedOption=WebUI.getAttributeElement(selected, "value");
-				System.out.println(selectedOption);
-				WebUI.verifyEquals(WebUI.getTextElement(parent), selectedOption);
-				WebUI.clickElement(paymentType);
-				WebUI.verifyElementVisible(paymentDropdown);
-				WebUI.clickElement(selectPremium);
-				WebUI.clickElement(paymentType);
-				WebUI.clickElement(nullValuePayment);
-				WebUI.verifyElementVisible(err_msg_premium);
-				WebUI.clickElement(paymentType);
-				WebUI.clickElement(selectPremium);
-				WebUI.verifyElementVisible(modePremium);
-				WebUI.verifyElementVisible(no_ofPremiumsToPay);
-				String modepremiumValue=WebUI.getAttributeElement(modePremiumValue, "value");
-				WebUI.validateElementContainsData(modepremiumValue);
-				WebUI.verifyElementNotEditable(modePremiumValue);
-				String noofPremiumValue=WebUI.getAttributeElement(noofPremiumsToPayValue, "value");
-				System.out.println(noofPremiumValue);
-				WebUI.verifyEquals(one, noofPremiumValue);
-				WebUI.verifyElementEditable(noofPremiumsToPayValue);
-				WebUI.setText(noofPremiumsToPayValue, "6");
-				WebUI.clearTextCtrlA(noofPremiumsToPayValue);
-				WebUI.setText(noofPremiumsToPayValue, "10");
-				WebUI.verifyElementVisible(err_msg_noofPremiumsToPay);
-				WebUI.clearAndFillText(noofPremiumsToPayValue, "six");
-				WebUI.verifyElementVisible(amountInput);
-				WebUI.verifyEquals(WebUI.getAttributeElement(amountInput, "value"), "NaN");
-				WebUI.verifyElementVisible(errMsgAmount);
-				WebUI.clickElement(paymentType);
-				WebUI.clickElement(othersPaymentType);
-				WebUI.verifyElementNotVisible(modePremium);
-				WebUI.verifyElementNotVisible(no_ofPremiumsToPay);
-				WebUI.verifyElementEditable(amountInput);
-				WebUI.clearAndFillText(amountInput, "25001");
-				WebUI.verifyElementVisible(errMsgAmount);
-				WebUI.clearAndFillText(amountInput, "qwerty");
-				WebUI.clearText(amountInput);
-				WebUI.verifyElementVisible(nullErrMsgAmount);
-				WebUI.clickElement(paymentType);
-				WebUI.clickElement(selectPremium);
-				WebUI.clearAndFillText(noofPremiumsToPayValue, "3");
-				String premiumvalue=WebUI.getAttributeElement(noofPremiumsToPayValue, "value");
-				double premiumvalueNumber=Double.parseDouble(premiumvalue);
-				String modevalue=WebUI.getAttributeElement(modePremiumValue, "value");
-				System.out.println(modevalue);
-				double modevalueNumber=Double.parseDouble(modevalue);
-				System.out.println(modevalueNumber);
-				double total=premiumvalueNumber*modevalueNumber;
-				String amountUsValue=WebUI.getAttributeElement(amountInput, "value");
-				double  amountUsValueNumber=Double.parseDouble(amountUsValue);
-				System.out.println(amountUsValueNumber);
-				WebUI.verifyEquals(total, amountUsValueNumber);
-				WebUI.clickElement(addAnotherPaymentBtn);
-				WebUI.verifyElementNotVisible(err_msg_policyNumber);
-				WebUI.clickElement(trashBtn);
-				WebUI.clickElement(addAnotherPaymentBtn);
-				for ( String policyNumber1: validPolicies) {
-					if(policyNumber1.equals(firstpolicy_number)) {
-						continue;
-					}else {
-						WebUI.setText(policyNumberInput, policyNumber1);
-						WebUI.sleep(2);
-						WebUI.clickElement(policySearchBtn);
-					}
-					try{
-						DriverManager.getDriver().findElement(policyNotFound).isDisplayed();
-						WebUI.clickElement(ok_btn);
-						WebUI.clearText(policyNumberInput);
-						continue;
-					}catch (Exception e) {
-						System.out.println(policyNumber1+" Is a valid Polid Policy Number");
-						secondPolicyNumber=policyNumber1;
-						break;
-					}
-				}
-				String date2= WebUI.getAttributeElement(paidToDate, "value");
-				//		WebUI.verifyNotEquals(date, date2);  //Both dates should not be equal
-				WebUI.clickElement(relationDropdown);
-				WebUI.clickElement(parent);
-				WebUI.clickElement(paymentType);
-				WebUI.clickElement(selectPremium);
-				String firsttext=	WebUI.getTextElement(firstTotalAmount);
-				double firstTextamount=	WebUI.roundOf(firsttext);
-				System.out.println(firstTextamount);
-				String text=	WebUI.getTextElement(totalAmount);
-				double amount=	WebUI.roundOf(text);
-				System.out.println(amount);
-				double totalAmount=WebUI.roundOfDouble(amount+firstTextamount);
-				System.out.println(totalAmount);
-				String transAmount=	WebUI.getTextElement(transactionalAmount);
-				transactionalTotal=	WebUI.roundOf(transAmount);
-				WebUI.verifyEquals(transactionalTotal, totalAmount);
-				WebUI.clickElement(nxtBtn);
-				WebUI.sleep(2);
+	WebUI.verifyElementVisible(validData);
+	String myname= WebUI.getAttributeElement(insuredName, "value");
+	WebUI.validateElementContainsData(myname);
+	String date= WebUI.getAttributeElement(paidToDate, "value");
+	WebUI.validateElementContainsData(date);
+	// WebUI.verifyElementEnabled(paidToDate);
+	WebUI.isValidDateFormat(date);
+	WebUI.clickElement(relationDropdown);
+	WebUI.verifyElementVisible(relationshipDropdownValues);
+	WebUI.clickElement(parent);
+	WebUI.clickElement(relationDropdown);
+	WebUI.clickElement(nullValueRelation);
+	WebUI.verifyElementVisible(err_msg_relation);
+	WebUI.clickElement(relationDropdown);
+	WebUI.getTextElement(parent);
+	WebUI.clickElement(parent);
+	String selectedOption=WebUI.getAttributeElement(selected, "value");
+	System.out.println(selectedOption);
+	WebUI.verifyEquals(WebUI.getTextElement(parent), selectedOption);
+	WebUI.clickElement(paymentType);
+	WebUI.verifyElementVisible(paymentDropdown);
+	WebUI.clickElement(selectPremium);
+	WebUI.clickElement(paymentType);
+	WebUI.clickElement(nullValuePayment);
+	WebUI.verifyElementVisible(err_msg_premium);
+	WebUI.clickElement(paymentType);
+	WebUI.clickElement(selectPremium);
+	WebUI.verifyElementVisible(modePremium);
+	WebUI.verifyElementVisible(no_ofPremiumsToPay);
+	String modepremiumValue=WebUI.getAttributeElement(modePremiumValue, "value");
+	WebUI.validateElementContainsData(modepremiumValue);
+	WebUI.verifyElementNotEditable(modePremiumValue);
+	String noofPremiumValue=WebUI.getAttributeElement(noofPremiumsToPayValue, "value");
+	System.out.println(noofPremiumValue);
+	WebUI.verifyEquals(one, noofPremiumValue);
+	WebUI.verifyElementEditable(noofPremiumsToPayValue);
+	WebUI.setText(noofPremiumsToPayValue, "6");
+	WebUI.clearTextCtrlA(noofPremiumsToPayValue);
+	WebUI.setText(noofPremiumsToPayValue, "10");
+	WebUI.verifyElementVisible(err_msg_noofPremiumsToPay);
+	WebUI.clearAndFillText(noofPremiumsToPayValue, "six");
+	WebUI.verifyElementVisible(amountInput);
+	WebUI.verifyEquals(WebUI.getAttributeElement(amountInput, "value"), "NaN");
+	WebUI.verifyElementVisible(errMsgAmount);
+	WebUI.clickElement(paymentType);
+	WebUI.clickElement(othersPaymentType);
+	WebUI.verifyElementNotVisible(modePremium);
+	WebUI.verifyElementNotVisible(no_ofPremiumsToPay);
+	WebUI.verifyElementEditable(amountInput);
+	WebUI.clearAndFillText(amountInput, "25001");
+	WebUI.verifyElementVisible(errMsgAmount);
+	WebUI.clearAndFillText(amountInput, "qwerty");
+	WebUI.clearText(amountInput);
+	WebUI.verifyElementVisible(nullErrMsgAmount);
+	WebUI.clickElement(paymentType);
+	WebUI.clickElement(selectPremium);
+	WebUI.clearAndFillText(noofPremiumsToPayValue, "3");
+	String premiumvalue=WebUI.getAttributeElement(noofPremiumsToPayValue, "value");
+	double premiumvalueNumber=Double.parseDouble(premiumvalue);
+	String modevalue=WebUI.getAttributeElement(modePremiumValue, "value");
+	System.out.println(modevalue);
+	double modevalueNumber=Double.parseDouble(modevalue);
+	System.out.println(modevalueNumber);
+	double total=premiumvalueNumber*modevalueNumber;
+	String amountUsValue=WebUI.getAttributeElement(amountInput, "value");
+	double  amountUsValueNumber=Double.parseDouble(amountUsValue);
+	System.out.println(amountUsValueNumber);
+	WebUI.verifyEquals(total, amountUsValueNumber);
+	WebUI.clickElement(addAnotherPaymentBtn);
+	WebUI.verifyElementNotVisible(err_msg_policyNumber);
+	WebUI.clickElement(trashBtn);
+	WebUI.clickElement(addAnotherPaymentBtn);
+	for ( String policyNumber1: validPolicies) {
+	if(policyNumber1.equals(firstpolicy_number)) {
+	continue;
+	}else {
+	WebUI.setText(policyNumberInput, policyNumber1);
+	WebUI.sleep(2);
+	WebUI.clickElement(policySearchBtn);
+	}
+	try{
+	DriverManager.getDriver().findElement(policyNotFound).isDisplayed();
+	WebUI.clickElement(ok_btn);
+	WebUI.clearText(policyNumberInput);
+	continue;
+	}catch (Exception e) {
+	System.out.println(policyNumber1+" Is a valid Polid Policy Number");
+	secondPolicyNumber=policyNumber1;
+	break;
+	}
+	}
+	String date2= WebUI.getAttributeElement(paidToDate, "value");
+	// WebUI.verifyNotEquals(date, date2);  //Both dates should not be equal
+	WebUI.clickElement(relationDropdown);
+	WebUI.clickElement(parent);
+	WebUI.clickElement(paymentType);
+	WebUI.clickElement(selectPremium);
+	String firsttext= WebUI.getTextElement(firstTotalAmount);
+	double firstTextamount= WebUI.roundOf(firsttext);
+	System.out.println(firstTextamount);
+	String text= WebUI.getTextElement(totalAmount);
+	double amount= WebUI.roundOf(text);
+	System.out.println(amount);
+	double totalAmount=WebUI.roundOfDouble(amount+firstTextamount);
+	System.out.println(totalAmount);
+	String transAmount= WebUI.getTextElement(transactionalAmount);
+	transactionalTotal= WebUI.roundOf(transAmount);
+	WebUI.verifyEquals(transactionalTotal, totalAmount);
+	WebUI.clickElement(nxtBtn);
+	WebUI.sleep(2);
 
-				WebUI.verifyElementVisible(desclaimerBox);
-				WebUI.verifyElementVisible(closeBtn);
-				WebUI.clickElement(closeBtn);
-				WebUI.verifyElementVisible(addAnotherPaymentBtn);
-				WebUI.clickElement(nxtBtn);
-				WebUI.clickElement(nxtBtn2);
-				WebUI.verifyElementVisible(addAnotherPaymentBtn);
-				WebUI.clickElement(nxtBtn);
-				WebUI.clickElement(Disclaimeryes);
-				WebUI.clickElement(nxtBtn2);
-				WebUI.sleep(2);
-			}else {
-				System.out.println("There is only one payment policies for this agent");
-			}
+	WebUI.verifyElementVisible(desclaimerBox);
+	WebUI.verifyElementVisible(closeBtn);
+	WebUI.clickElement(closeBtn);
+	WebUI.verifyElementVisible(addAnotherPaymentBtn);
+	WebUI.clickElement(nxtBtn);
+	WebUI.clickElement(nxtBtn2);
+	WebUI.verifyElementVisible(addAnotherPaymentBtn);
+	WebUI.clickElement(nxtBtn);
+	WebUI.clickElement(Disclaimeryes);
+	WebUI.clickElement(nxtBtn2);
+	WebUI.sleep(2);
 
-			WebUI.clickElement(policypaymentBtn);
-			WebUI.sleep(2);
-			WebUI.verifyElementVisible(addAnotherPaymentBtn);
-			WebUI.clickElement(nxtBtn);
-			WebUI.clickElement(Disclaimeryes);
-			WebUI.clickElement(nxtBtn2);
-			WebUI.sleep(2);
-			WebUI.verifyElementVisible(successSymbolPayment);
-			WebUI.verifyElementVisible(preferncesBlock);
-			WebUI.verifyElementVisible(billingInformationPage);
-			WebUI.verifyElementVisible(creditCardRadioBtn);
-			WebUI.verifyElementVisible(achRadioBtn);
-			WebUI.clickElement(achRadioBtn);
-			WebUI.verifyElementVisible(accountNumberField);
-			WebUI.verifyElementVisible(accountTypeField);
-			WebUI.verifyElementVisible(routingNumberField);
-			WebUI.clickElement(nxtBtnInBillingInfoPage);
-			WebUI.scrollToElementAtTop(preferncesBlock);
-			WebUI.verifyElementVisible(errMsgAccountNumber);
-			WebUI.verifyElementVisible(errMsgAccountType);
-			WebUI.verifyElementVisible(errMsgRoutingNumber);
-			WebUI.clickElement(selectAccountType);
-			WebUI.verifyElementVisible(checkingType);
-			WebUI.verifyElementVisible(savingsType);
-			WebUI.clickElement(savingsType);
-			WebUI.clickElement(selectAccountType);
-			WebUI.clickElement(checkingType);
-			WebUI.setText(accountNumberInput, invalidMaxAccountNumber);
-			WebUI.verifyEquals(WebUI.getTextElement(errMsgAccountNumber).trim(), expectedMaxErr);
-			WebUI.clearAndFillText(accountNumberInput, validAccNum);
-			String routingNumber = DataGenerateUtils.randomPhoneNumber();
-			WebUI.setText(routingNumberInput, routingNumber);
-			WebUI.verifyEquals(WebUI.getTextElement(errMsgRoutingNumber).trim(), expectedMaxErrRoutingNumber);
-			String zipcode=DataGenerateUtils.randomZipCode();
-			WebUI.clearAndFillText(routingNumberInput, zipcode);
-			WebUI.verifyEquals(WebUI.getTextElement(errMsgRoutingNumber).trim(), expectedMinErrRoutingNumber);
-			WebUI.clearAndFillText(routingNumberInput, validRoutingNum);
-			WebUI.scrollToElementAtBottom(nxtBtnInBillingInfoPage);
-			WebUI.verifyElementVisible(billingFirstName);
-			WebUI.verifyElementVisible(billingLastName);
-			WebUI.verifyElementVisible(billingStreetAddress);
-			WebUI.verifyElementVisible(billingCityAndRegion);
-			WebUI.verifyElementVisible(billingCountry);
-			WebUI.verifyElementVisible(billingZipCode);
-			WebUI.verifyElementVisible(billingPhoneNumber);
-			WebUI.verifyElementVisible(billingEmailAddress);
-			WebUI.verifyElementVisible(billingNotes);
-			WebUI.clickElement(nxtBtnInBillingInfoPage);
-			WebUI.verifyElementVisible(err_firstName);
-			WebUI.verifyElementVisible(err_lastName);
-			WebUI.verifyElementVisible(err_streetAddress);
-			WebUI.verifyElementVisible(err_city);
-			WebUI.verifyElementVisible(err_state);
-			WebUI.verifyElementVisible(err_phone);
-			WebUI.verifyElementVisible(err_email);
-			WebUI.verifyElementVisible(err_zipcode);
-			WebUI.scrollToElementAtBottom(someErrosMsg);
-			WebUI.verifyElementVisible(someErrosMsg);
-			WebUI.scrollToElementAtTop(billingFirstName);
-			WebUI.setText(billingFirstName, billing_Max_Name);
-			WebUI.verifyEquals(WebUI.getTextElement(err_firstName).trim(), billing_Max_Name_Err);
-			//		WebUI.setText(billingFirstName, "52364");              //User should be able to see error message 
-			//		WebUI.verifyEquals(WebUI.getTextElement(err_firstName).trim(), billing_numeric_Err);
-			WebUI.clearTextCtrlA(billingFirstName);
-			WebUI.verifyEquals(WebUI.getTextElement(err_firstName), Mandatory_Err );
+	WebUI.clickElement(policypaymentBtn);
+	WebUI.sleep(2);
+	WebUI.verifyElementVisible(addAnotherPaymentBtn);
+	WebUI.clickElement(nxtBtn);
+	WebUI.clickElement(Disclaimeryes);
+	WebUI.clickElement(nxtBtn2);
+	WebUI.sleep(2);
+	WebUI.verifyElementVisible(successSymbolPayment);
+	WebUI.verifyElementVisible(preferncesBlock);
+	WebUI.verifyElementVisible(billingInformationPage);
+	WebUI.verifyElementVisible(creditCardRadioBtn);
+	WebUI.verifyElementVisible(achRadioBtn);
+	WebUI.clickElement(achRadioBtn);
+	WebUI.verifyElementVisible(accountNumberField);
+	WebUI.verifyElementVisible(accountTypeField);
+	WebUI.verifyElementVisible(routingNumberField);
+	WebUI.clickElement(nxtBtnInBillingInfoPage);
+	WebUI.scrollToElementAtTop(preferncesBlock);
+	WebUI.verifyElementVisible(errMsgAccountNumber);
+	WebUI.verifyElementVisible(errMsgAccountType);
+	WebUI.verifyElementVisible(errMsgRoutingNumber);
+	WebUI.clickElement(selectAccountType);
+	WebUI.verifyElementVisible(checkingType);
+	WebUI.verifyElementVisible(savingsType);
+	WebUI.clickElement(savingsType);
+	WebUI.clickElement(selectAccountType);
+	WebUI.clickElement(checkingType);
+	WebUI.setText(accountNumberInput, invalidMaxAccountNumber);
+	WebUI.verifyEquals(WebUI.getTextElement(errMsgAccountNumber).trim(), expectedMaxErr);
+	WebUI.clearAndFillText(accountNumberInput, validAccNum);
+	String routingNumber = DataGenerateUtils.randomPhoneNumber();
+	WebUI.setText(routingNumberInput, routingNumber);
+	WebUI.verifyEquals(WebUI.getTextElement(errMsgRoutingNumber).trim(), expectedMaxErrRoutingNumber);
+	String zipcode=DataGenerateUtils.randomZipCode();
+	WebUI.clearAndFillText(routingNumberInput, zipcode);
+	WebUI.verifyEquals(WebUI.getTextElement(errMsgRoutingNumber).trim(), expectedMinErrRoutingNumber);
+	WebUI.clearAndFillText(routingNumberInput, validRoutingNum);
+	WebUI.scrollToElementAtBottom(nxtBtnInBillingInfoPage);
+	WebUI.verifyElementVisible(billingFirstName);
+	WebUI.verifyElementVisible(billingLastName);
+	WebUI.verifyElementVisible(billingStreetAddress);
+	WebUI.verifyElementVisible(billingCityAndRegion);
+	WebUI.verifyElementVisible(billingCountry);
+	WebUI.verifyElementVisible(billingZipCode);
+	WebUI.verifyElementVisible(billingPhoneNumber);
+	WebUI.verifyElementVisible(billingEmailAddress);
+	WebUI.verifyElementVisible(billingNotes);
+	WebUI.clickElement(nxtBtnInBillingInfoPage);
+	WebUI.verifyElementVisible(err_firstName);
+	WebUI.verifyElementVisible(err_lastName);
+	WebUI.verifyElementVisible(err_streetAddress);
+	WebUI.verifyElementVisible(err_city);
+	WebUI.verifyElementVisible(err_state);
+	WebUI.verifyElementVisible(err_phone);
+	WebUI.verifyElementVisible(err_email);
+	WebUI.verifyElementVisible(err_zipcode);
+	WebUI.scrollToElementAtBottom(someErrosMsg);
+	WebUI.verifyElementVisible(someErrosMsg);
+	WebUI.scrollToElementAtTop(billingFirstName);
+	WebUI.setText(billingFirstName, billing_Max_Name);
+	WebUI.verifyEquals(WebUI.getTextElement(err_firstName).trim(), billing_Max_Name_Err);
+	// WebUI.setText(billingFirstName, "52364");              //User should be able to see error message 
+	// WebUI.verifyEquals(WebUI.getTextElement(err_firstName).trim(), billing_numeric_Err);
+	WebUI.clearTextCtrlA(billingFirstName);
+	WebUI.verifyEquals(WebUI.getTextElement(err_firstName), Mandatory_Err );
 
 
 
-			WebUI.setText(billingLastName, Max_Name);
-			WebUI.verifyEquals(WebUI.getTextElement(err_lastName).trim(), Max_error_70);
-			//		WebUI.setText(billingLastName, "52364");                  //User should be able to see error message 
-			//		WebUI.verifyEquals(WebUI.getTextElement(err_firstName).trim(), billing_numeric_Err);
-			WebUI.clearTextCtrlA(billingLastName);
-			WebUI.verifyEquals(WebUI.getTextElement(err_lastName), Mandatory_Err );
+	WebUI.setText(billingLastName, Max_Name);
+	WebUI.verifyEquals(WebUI.getTextElement(err_lastName).trim(), Max_error_70);
+	// WebUI.setText(billingLastName, "52364");                  //User should be able to see error message 
+	// WebUI.verifyEquals(WebUI.getTextElement(err_firstName).trim(), billing_numeric_Err);
+	WebUI.clearTextCtrlA(billingLastName);
+	WebUI.verifyEquals(WebUI.getTextElement(err_lastName), Mandatory_Err );
 
-			WebUI.setText(billingCityAndRegion, max50chars);
-			WebUI.verifyEquals(WebUI.getTextElement(err_city).trim(), billing_max_city_Err);
-			//		WebUI.setText(billingCityAndRegion, "52364");                //User should be able to see error message 
-			//		WebUI.verifyEquals(WebUI.getTextElement(err_city).trim(), billing_numeric_Err);
-			WebUI.clearTextCtrlA(billingCityAndRegion);
-			WebUI.verifyEquals(WebUI.getTextElement(err_city), Mandatory_Err );
+	WebUI.setText(billingCityAndRegion, max50chars);
+	WebUI.verifyEquals(WebUI.getTextElement(err_city).trim(), billing_max_city_Err);
+	// WebUI.setText(billingCityAndRegion, "52364");                //User should be able to see error message 
+	// WebUI.verifyEquals(WebUI.getTextElement(err_city).trim(), billing_numeric_Err);
+	WebUI.clearTextCtrlA(billingCityAndRegion);
+	WebUI.verifyEquals(WebUI.getTextElement(err_city), Mandatory_Err );
 
-			WebUI.setText(billingStreetAddress, max50chars);
-			WebUI.verifyEquals(WebUI.getTextElement(err_streetAddress).trim(), Max_error_50);
-			WebUI.clearTextCtrlA(billingStreetAddress);
-			WebUI.verifyEquals(WebUI.getTextElement(err_streetAddress), Mandatory_Err );
+	WebUI.setText(billingStreetAddress, max50chars);
+	WebUI.verifyEquals(WebUI.getTextElement(err_streetAddress).trim(), Max_error_50);
+	WebUI.clearTextCtrlA(billingStreetAddress);
+	WebUI.verifyEquals(WebUI.getTextElement(err_streetAddress), Mandatory_Err );
 
-			WebUI.clickElement(billingState);
-			WebUI.clickElement(arkansas);
-			WebUI.clickElement(billingState);
-			WebUI.clickElement(emptyValue);
-			WebUI.verifyEquals(WebUI.getTextElement(err_state), Mandatory_Err);
-			WebUI.clickElement(billingState);
-			WebUI.clickElement(arkansas);
-			WebUI.setText(billingNotes, "This is the ACH payment");
-			WebUI.setText(billingZipCode, "14523698702");
-			WebUI.verifyEquals(WebUI.getTextElement(err_zipcode).trim(), billing_Zip_Max_Char_Err);
-			WebUI.clearTextCtrlA(billingZipCode);
-			WebUI.setText(billingZipCode, "1236");
-			WebUI.verifyEquals(WebUI.getTextElement(err_zipcode).trim(), billing_Zip_Min_Char_Err);
-			WebUI.clearTextCtrlA(billingZipCode);
-			WebUI.setText(billingZipCode, "sdf%@");
-			WebUI.verifyEquals(WebUI.getTextElement(err_zipcode).trim(), billing_Zip_Format_Err);
-			WebUI.clearTextCtrlA(billingZipCode);
-			WebUI.verifyEquals(WebUI.getTextElement(err_zipcode), billing_Zip_Format_Err );
+	WebUI.clickElement(billingState);
+	WebUI.clickElement(arkansas);
+	WebUI.clickElement(billingState);
+	WebUI.clickElement(emptyValue);
+	WebUI.verifyEquals(WebUI.getTextElement(err_state), Mandatory_Err);
+	WebUI.clickElement(billingState);
+	WebUI.clickElement(arkansas);
+	WebUI.setText(billingNotes, "This is the ACH payment");
+	WebUI.setText(billingZipCode, "14523698702");
+	WebUI.verifyEquals(WebUI.getTextElement(err_zipcode).trim(), billing_Zip_Max_Char_Err);
+	WebUI.clearTextCtrlA(billingZipCode);
+	WebUI.setText(billingZipCode, "1236");
+	WebUI.verifyEquals(WebUI.getTextElement(err_zipcode).trim(), billing_Zip_Min_Char_Err);
+	WebUI.clearTextCtrlA(billingZipCode);
+	WebUI.setText(billingZipCode, "sdf%@");
+	WebUI.verifyEquals(WebUI.getTextElement(err_zipcode).trim(), billing_Zip_Format_Err);
+	WebUI.clearTextCtrlA(billingZipCode);
+	WebUI.verifyEquals(WebUI.getTextElement(err_zipcode), billing_Zip_Format_Err );
 
-			String countryName=WebUI.getAttributeElement(billingCountry, "value");
-			WebUI.validateElementContainsData(countryName);
-			WebUI.verifyEquals(countryName, unitedstates);
+	String countryName=WebUI.getAttributeElement(billingCountry, "value");
+	WebUI.validateElementContainsData(countryName);
+	WebUI.verifyEquals(countryName, unitedstates);
 
-			WebUI.setText(billingPhoneNumber, "14523698702");
-			WebUI.verifyEquals(WebUI.getTextElement(err_phone).trim(), billing_Ph_Max_Char_Err);
-			WebUI.clearTextCtrlA(billingPhoneNumber);
-			WebUI.setText(billingPhoneNumber, "1236");
-			WebUI.verifyEquals(WebUI.getTextElement(err_phone).trim(), billing_Ph_Min_Char_Err);
-			WebUI.clearTextCtrlA(billingPhoneNumber);
-			WebUI.setText(billingPhoneNumber, "sdfds@#$");
-			WebUI.verifyEquals(WebUI.getTextElement(err_phone).trim(), billing_Ph_Format_Err);
-			WebUI.clearTextCtrlA(billingPhoneNumber);
-			WebUI.verifyEquals(WebUI.getTextElement(err_phone), billing_Ph_Format_Err );
+	WebUI.setText(billingPhoneNumber, "14523698702");
+	WebUI.verifyEquals(WebUI.getTextElement(err_phone).trim(), billing_Ph_Max_Char_Err);
+	WebUI.clearTextCtrlA(billingPhoneNumber);
+	WebUI.setText(billingPhoneNumber, "1236");
+	WebUI.verifyEquals(WebUI.getTextElement(err_phone).trim(), billing_Ph_Min_Char_Err);
+	WebUI.clearTextCtrlA(billingPhoneNumber);
+	WebUI.setText(billingPhoneNumber, "sdfds@#$");
+	WebUI.verifyEquals(WebUI.getTextElement(err_phone).trim(), billing_Ph_Format_Err);
+	WebUI.clearTextCtrlA(billingPhoneNumber);
+	WebUI.verifyEquals(WebUI.getTextElement(err_phone), billing_Ph_Format_Err );
 
-			WebUI.setText(billingEmailAddress, max50chars);
-			WebUI.verifyEquals(WebUI.getTextElement(err_email).trim(), Max_error_50);
-			WebUI.clearTextCtrlA(billingEmailAddress);
-			WebUI.setText(billingEmailAddress, "sdfds@gmail");
-			WebUI.verifyEquals(WebUI.getTextElement(err_email).trim(), billing_Email_Format_Err);
-			WebUI.clearTextCtrlA(billingEmailAddress);
-			WebUI.verifyEquals(WebUI.getTextElement(err_email), Mandatory_Err );
-			String RandomBillingFirstName = DataGenerateUtils.randomFirstName();
-			WebUI.clearAndFillText(billingFirstName,RandomBillingFirstName);
-			String RandomBillinglastName = DataGenerateUtils.randomLastName();
-			WebUI.clearAndFillText(billingLastName,RandomBillinglastName);
-			String RandombillingAddress=DataGenerateUtils.randomStreetName();
-			WebUI.setText(billingStreetAddress, RandombillingAddress);
-			String Randombillingcity=DataGenerateUtils.randomCity();
-			WebUI.setText(billingCityAndRegion, Randombillingcity);
-			String RandomZipcode=DataGenerateUtils.randomZipCode();
-			WebUI.setText(billingZipCode, RandomZipcode);
-			String RandomPhnNumber=DataGenerateUtils.randomPhoneNumber();
-			WebUI.setText(billingPhoneNumber, RandomPhnNumber);
-			String RandomEmail=DataGenerateUtils.randomEmail();
-			WebUI.setText(billingEmailAddress, RandomEmail);
-			String billingtotal=WebUI.getTextElement(transactionalTotalBilling);
-			WebUI.verifyEquals(WebUI.roundOf(billingtotal), transactionalTotal);
-			WebUI.clickElement(nxtBtnInBillingInfoPage);
-			WebUI.sleep(5);
+	WebUI.setText(billingEmailAddress, max50chars);
+	WebUI.verifyEquals(WebUI.getTextElement(err_email).trim(), Max_error_50);
+	WebUI.clearTextCtrlA(billingEmailAddress);
+	WebUI.setText(billingEmailAddress, "sdfds@gmail");
+	WebUI.verifyEquals(WebUI.getTextElement(err_email).trim(), billing_Email_Format_Err);
+	WebUI.clearTextCtrlA(billingEmailAddress);
+	WebUI.verifyEquals(WebUI.getTextElement(err_email), Mandatory_Err );
+	String RandomBillingFirstName = DataGenerateUtils.randomFirstName();
+	WebUI.clearAndFillText(billingFirstName,RandomBillingFirstName);
+	String RandomBillinglastName = DataGenerateUtils.randomLastName();
+	WebUI.clearAndFillText(billingLastName,RandomBillinglastName);
+	String RandombillingAddress=DataGenerateUtils.randomStreetName();
+	WebUI.setText(billingStreetAddress, RandombillingAddress);
+	String Randombillingcity=DataGenerateUtils.randomCity();
+	WebUI.setText(billingCityAndRegion, Randombillingcity);
+	String RandomZipcode=DataGenerateUtils.randomZipCode();
+	WebUI.setText(billingZipCode, RandomZipcode);
+	String RandomPhnNumber=DataGenerateUtils.randomPhoneNumber();
+	WebUI.setText(billingPhoneNumber, RandomPhnNumber);
+	String RandomEmail=DataGenerateUtils.randomEmail();
+	WebUI.setText(billingEmailAddress, RandomEmail);
+	String billingtotal=WebUI.getTextElement(transactionalTotalBilling);
+	WebUI.verifyEquals(WebUI.roundOf(billingtotal), transactionalTotal);
+	WebUI.clickElement(nxtBtnInBillingInfoPage);
+	WebUI.sleep(5);
 
-			WebUI.clickElement(makeAnotherpaymentBtn);
-			WebUI.sleep(3);
-		}catch (Exception e) {
-			System.out.println("There are no payment policies for this agent");
-		}
-
-		//Credit Card Payment
-		if(validPolicies!=null) {
-			WebUI.clickElement(trashBtn);
-			WebUI.clickElement(chevronArrowDown);
-			WebUI.setText(policyNumberInput, secondPolicyNumber);
-			WebUI.sleep(2);
-			WebUI.clickElement(policySearchBtn);
-			try{
-				if(DriverManager.getDriver().findElement(policyNotFound).isDisplayed()){
-					WebUI.clickElement(ok_btn);
-				}
-				else {
-					WebUI.verifyElementIncurrentPage(reccurringPolicyErrText);
-
-				}
-				WebUI.clearText(policyNumberInput);
-
-			}catch (Exception e) {
-				System.out.println(secondPolicyNumber+" Is a valid Polid Policy Number");
-				thirdPolicyNumber=secondPolicyNumber;
-			}
-
-			System.out.println(thirdPolicyNumber);
-			WebUI.clickElement(policySearchBtn);
-			WebUI.clickElement(relationDropdown);
-			WebUI.clickElement(parent);
-			WebUI.clickElement(paymentType);
-			WebUI.clickElement(selectPremium);
-			WebUI.setText(noofPremiumsToPayValue, "2");
-			WebUI.clickElement(nxtBtn);
-			WebUI.clickElement(Disclaimeryes);
-			WebUI.clickElement(nxtBtn2);
-			WebUI.clickElement(creditCardRadioBtn);
-			WebUI.scrollToElementAtBottom(nxtBtnInBillingInfoPage);
-			WebUI.verifyElementVisible(billingFirstName);
-			WebUI.verifyElementVisible(billingLastName);
-			WebUI.verifyElementVisible(billingStreetAddress);
-			WebUI.verifyElementVisible(billingCityAndRegion);
-			WebUI.verifyElementVisible(billingCountry);
-			WebUI.verifyElementVisible(billingZipCode);
-			WebUI.verifyElementVisible(billingPhoneNumber);
-			WebUI.verifyElementVisible(billingEmailAddress);
-			WebUI.verifyElementVisible(billingNotes);
-			WebUI.clickElement(nxtBtnInBillingInfoPage);
-			WebUI.verifyElementVisible(err_firstName);
-			WebUI.verifyElementVisible(err_lastName);
-			WebUI.verifyElementVisible(err_streetAddress);
-			WebUI.verifyElementVisible(err_city);
-			WebUI.verifyElementVisible(err_state);
-
-			WebUI.verifyElementVisible(err_phone);
-			WebUI.verifyElementVisible(err_email);
-			WebUI.verifyElementVisible(err_zipcode);
-			WebUI.scrollToElementAtBottom(someErrosMsg);
-			WebUI.verifyElementVisible(someErrosMsg);
-			WebUI.scrollToElementAtTop(billingFirstName);
-			WebUI.setText(billingFirstName, billing_Max_Name);
-			WebUI.verifyEquals(WebUI.getTextElement(err_firstName).trim(), billing_Max_Name_Err);
-			WebUI.clearTextCtrlA(billingFirstName);
-			WebUI.verifyEquals(WebUI.getTextElement(err_firstName), Mandatory_Err );
-
-			WebUI.setText(billingLastName, Max_Name);
-			WebUI.verifyEquals(WebUI.getTextElement(err_lastName).trim(), Max_error_70);
-			WebUI.clearTextCtrlA(billingLastName);
-			WebUI.verifyEquals(WebUI.getTextElement(err_lastName), Mandatory_Err );
-
-			WebUI.setText(billingCityAndRegion, max50chars);
-			WebUI.verifyEquals(WebUI.getTextElement(err_city).trim(), billing_max_city_Err);
-			WebUI.clearTextCtrlA(billingCityAndRegion);
-			WebUI.verifyEquals(WebUI.getTextElement(err_city), Mandatory_Err );
-
-			WebUI.setText(billingStreetAddress, max50chars);
-			WebUI.verifyEquals(WebUI.getTextElement(err_streetAddress).trim(), Max_error_50);
-			WebUI.clearTextCtrlA(billingStreetAddress);
-			WebUI.verifyEquals(WebUI.getTextElement(err_streetAddress), Mandatory_Err );
-
-			WebUI.clickElement(billingState);
-			WebUI.clickElement(arkansas);
-			WebUI.clickElement(billingState);
-			WebUI.clickElement(emptyValue);
-			WebUI.verifyEquals(WebUI.getTextElement(err_state), Mandatory_Err);
-			WebUI.clickElement(billingState);
-			WebUI.clickElement(arkansas);
-
-			WebUI.clickElement(billingCountry);
-			WebUI.sleep(1);
-			WebUI.clickElement(india);
-
-			WebUI.setText(billingZipCode, "14523698702");
-			WebUI.verifyEquals(WebUI.getTextElement(err_zipcode).trim(), billing_Zip_Max_Char_Err);
-			WebUI.clearTextCtrlA(billingZipCode);
-			WebUI.setText(billingZipCode, "1236");
-			WebUI.verifyEquals(WebUI.getTextElement(err_zipcode).trim(), billing_Zip_Min_Char_Err);
-			WebUI.clearTextCtrlA(billingZipCode);
-			WebUI.setText(billingZipCode, "sdf%@");
-			WebUI.verifyEquals(WebUI.getTextElement(err_zipcode).trim(), billing_Zip_Format_Err);
-			WebUI.clearTextCtrlA(billingZipCode);
-			WebUI.verifyEquals(WebUI.getTextElement(err_zipcode), billing_Zip_Format_Err );
-
-			WebUI.setText(billingPhoneNumber, "14523698702");
-			WebUI.verifyEquals(WebUI.getTextElement(err_phone).trim(), billing_Ph_Max_Char_Err);
-			WebUI.clearTextCtrlA(billingPhoneNumber);
-			WebUI.setText(billingPhoneNumber, "1236");
-			WebUI.verifyEquals(WebUI.getTextElement(err_phone).trim(), billing_Ph_Min_Char_Err);
-			WebUI.clearTextCtrlA(billingPhoneNumber);
-			WebUI.setText(billingPhoneNumber, "sdfds@#$");
-			WebUI.verifyEquals(WebUI.getTextElement(err_phone).trim(), billing_Ph_Format_Err);
-			WebUI.clearTextCtrlA(billingPhoneNumber);
-			WebUI.verifyEquals(WebUI.getTextElement(err_phone), billing_Ph_Format_Err );
-
-			WebUI.setText(billingEmailAddress, max50chars);
-			WebUI.verifyEquals(WebUI.getTextElement(err_email).trim(), Max_error_50);
-			WebUI.clearTextCtrlA(billingEmailAddress);
-			WebUI.setText(billingEmailAddress, "sdfds@gmail");
-			WebUI.verifyEquals(WebUI.getTextElement(err_email).trim(), billing_Email_Format_Err);
-			WebUI.clearTextCtrlA(billingEmailAddress);
-			WebUI.verifyEquals(WebUI.getTextElement(err_email), Mandatory_Err );
-			WebUI.setText(billingNotes, "This is the Credit card payment");
-			String RandomBillingFirstName = DataGenerateUtils.randomFirstName();
-			WebUI.clearAndFillText(billingFirstName,RandomBillingFirstName);
-			String RandomBillinglastName = DataGenerateUtils.randomLastName();
-			WebUI.clearAndFillText(billingLastName,RandomBillinglastName);
-			String RandombillingAddress=DataGenerateUtils.randomStreetName();
-			WebUI.setText(billingStreetAddress, RandombillingAddress);
-			String Randombillingcity=DataGenerateUtils.randomCity();
-			WebUI.setText(billingCityAndRegion, Randombillingcity);
-			String RandomZipcode=DataGenerateUtils.randomZipCode();
-			WebUI.setText(billingZipCode, RandomZipcode);
-			String RandomPhnNumber=DataGenerateUtils.randomPhoneNumber();
-			WebUI.setText(billingPhoneNumber, RandomPhnNumber);
-			String RandomEmail=DataGenerateUtils.randomEmail();
-			WebUI.setText(billingEmailAddress, RandomEmail);
-			WebUI.clickElement(nxtBtnInBillingInfoPage);
-			WebUI.sleep(2);
-			WebUI.switchToFrameByIndex(0);
-			WebUI.sleep(1);
-			WebUI.switchToFrameByIndex(0);
-			WebUI.sleep(1);
-
-			WebUI.verifyElementVisible(CardNumber);
-			WebUI.verifyElementVisible(cardHolderName);
-			WebUI.verifyElementVisible(ExpiryMonth);
-			WebUI.verifyElementVisible(ExpiryYear);
-			WebUI.verifyElementVisible(SecurityCode);
-			WebUI.verifyElementVisible(cancelBtn);
-			WebUI.clearText(CardNumber);
-
-			WebUI.setText(CardNumber, "123456567");
-			WebUI.clickElement(cardHolderName);
-			WebUI.sleep(1);
-			WebUI.verifyElementVisible(cardNumberCrossMark);
-			WebUI.verifyElementVisible(Error_CardNumber);
-			WebUI.verifyContains(WebUI.getTextElement(Error_CardNumber).trim(), billing_Invalid_Card_Err);
-			WebUI.sleep(1);
-
-			WebUI.clickElement(CardNumber);
-			WebUI.sleep(1);
-			WebUI.clearText(CardNumber);
-			WebUI.setText(CardNumber, "5555555555554444124541");
-			WebUI.clickElement(cardHolderName);
-			WebUI.sleep(1);
-			WebUI.verifyElementVisible(cardNumberCrossMark);
-			WebUI.verifyElementVisible(Error_CardNumber);
-			WebUI.verifyContains(getTextElement(Error_CardNumber).trim(), billing_Invalid_Card_Err);
-			WebUI.sleep(1);
-
-			WebUI.clearAndFillText(CardNumber, PropertiesHelpers.getValue("billing_Card_No"));
-			WebUI.sleep(1);
-			WebUI.clickElement(cardHolderName);
-			WebUI.verifyElementVisible(cardnumbertickMark);
-			WebUI.verifyContains(getAttributeElement(CardNumber, "value").replace(" ", "").trim(), PropertiesHelpers.getValue("billing_Card_No"));
-
-			WebUI.clickElement(CardNumber);
-			WebUI.verifyContains(getTextElement(Error_CardHoldername).trim(), billing_Card_Holder_Name_Err);
-			WebUI.sleep(1);
-
-			WebUI.clearText(cardHolderName);
-			WebUI.setText(cardHolderName, "12451232");
-			WebUI.clickElement(CardNumber);
-			WebUI.sleep(1);
-			WebUI.verifyElementVisible(cardNameCrossMark);
-			WebUI.verifyElementVisible(Error_CardHoldername);
-			WebUI.verifyContains(getTextElement(Error_CardHoldername).trim(), billing_Card_Holder_Name_Err);
-			WebUI.sleep(1);
-
-			WebUI.clearAndFillText(cardHolderName, PropertiesHelpers.getValue("billing_CardHolder_Name"));
-			WebUI.sleep(1);
-			WebUI.clickElement(CardNumber);
-			WebUI.verifyElementVisible(cardNametickMark);
-			WebUI.verifyContains(getAttributeElement(cardHolderName, "value"), PropertiesHelpers.getValue("billing_CardHolder_Name"));
-
-			WebUI.clickElement(ExpiryMonth);
-			WebUI.sleep(1);
-			WebUI.clickElement(CardNumber);
-			WebUI.sleep(1);
-			WebUI.verifyElementVisible(expiryDateCrossMark);
-			WebUI.verifyElementVisible(Error_ExpiryMonth);
-			WebUI.verifyContains(getTextElement(Error_ExpiryMonth).trim(), billing_Card_Month_Err);
-			WebUI.sleep(1);
-
-			WebUI.clickElement(CardNumber);
-			WebUI.clearAndFillText(ExpiryMonth, "13");
-			WebUI.sleep(1);
-			WebUI.clickElement(CardNumber);
-			WebUI.verifyElementVisible(expiryDateCrossMark);
-			WebUI.verifyElementVisible(Error_ExpiryMonth, 2);
-			WebUI.verifyContains(getTextElement(Error_ExpiryMonth).trim(), billing_Card_Month_Err);
-			WebUI.sleep(1);
-
-			WebUI.clearAndFillText(ExpiryMonth, PropertiesHelpers.getValue("billing_Card_Exp_Mn"));
-			WebUI.sleep(1);
-			WebUI.verifyContains(getAttributeElement(ExpiryMonth, "value"), PropertiesHelpers.getValue("billing_Card_Exp_Mn"));
-
-			WebUI.clickElement(ExpiryYear);
-			WebUI.sleep(1);
-			WebUI.clickElement(CardNumber);
-			WebUI.sleep(1);
-			WebUI.verifyElementVisible(expiryDateCrossMark);
-			WebUI.verifyElementVisible(Error_ExpiryYear);
-			WebUI.verifyContains(getTextElement(Error_ExpiryYear).trim(), billing_Card_Year_Err);
-			WebUI.sleep(1);
-
-			WebUI.clearText(ExpiryYear);
-			WebUI.setText(ExpiryYear, "23");
-			WebUI.clickElement(CardNumber);
-			WebUI.sleep(1);
-			WebUI.verifyElementVisible(expiryDateCrossMark);
-			WebUI.verifyElementVisible(Error_ExpiryYear);
-			WebUI.verifyContains(getTextElement(Error_ExpiryYear).trim(), billing_Card_PastYear_Err);
-			WebUI.sleep(1);
-
-			WebUI.clickElement(CardNumber);
-			WebUI.clearAndFillText(ExpiryYear, PropertiesHelpers.getValue("billing_Card_Exp_Yr"));
-			WebUI.sleep(1);
-			WebUI.clickElement(CardNumber);
-			WebUI.verifyElementVisible(expiryDatetickMark);
-			WebUI.verifyContains(getAttributeElement(ExpiryYear, "value").trim(), PropertiesHelpers.getValue("billing_Card_Exp_Yr"));
-			WebUI.sleep(1);
-
-			WebUI.clearText(SecurityCode);
-			WebUI.setText(SecurityCode, "12");
-			WebUI.clickElement(CardNumber);
-			WebUI.sleep(1);
-			WebUI.verifyElementVisible(securityCodeCrossMark);
-			WebUI.verifyElementVisible(Error_SecurityCode);
-			WebUI.verifyContains(getTextElement(Error_SecurityCode).trim(), billing_Card_SecuCode_Err);
-			WebUI.sleep(1);
-
-			WebUI.clickElement(SecurityCode);
-			WebUI.clearAndFillText(SecurityCode, PropertiesHelpers.getValue("billing_Card_Security_Code"));
-			WebUI.sleep(1);
-			WebUI.clickElement(CardNumber);
-			WebUI.verifyElementVisible(securityCodetickMark);
-			WebUI.verifyContains(getAttributeElement(SecurityCode, "value").trim(), PropertiesHelpers.getValue("billing_Card_Security_Code"));
-			WebUI.sleep(1);
-
-			WebUI.verifyContains(getTextElement(SecurityCode_PInHintVisa_Master).trim(), billing_Pin_Hint);
-			WebUI.sleep(1);
-
-			WebUI.clearText(CardNumber);
-			WebUI.setText(CardNumber, "371449635398431");
-			WebUI.clickElement(SecurityCode);
-			WebUI.sleep(1);
-			WebUI.verifyElementVisible(SecurityCode_PInHintVisa_Master);
-			WebUI.verifyContains(getTextElement(SecurityCode_PInHintVisa_Master).trim(), billing_Pin_Hint_Front);
-			WebUI.sleep(1);
-
-			WebUI.clearAndFillText(CardNumber, PropertiesHelpers.getValue("billing_Card_No"));
-			WebUI.sleep(1);
-			WebUI.verifyContains(getAttributeElement(CardNumber, "value"), PropertiesHelpers.getValue("billing_Card_No"));
-			//		WebUI.verifyElementNotEnabled(MakePayment);         //Untill and unless enter the security code Make Payment button shouldnt be Enabled
-			WebUI.sleep(1);
-			WebUI.clickElement(SecurityCode);
-			WebUI.clearAndFillText(SecurityCode, PropertiesHelpers.getValue("billing_Card_Security_Code"));
-			WebUI.sleep(1);
-
-			WebUI.verifyContains(getAttributeElement(SecurityCode, "value").trim(), PropertiesHelpers.getValue("billing_Card_Security_Code"));
-			WebUI.sleep(1);
-
-			WebUI.clickElement(MakePayment);
-			WebUI.sleep(3);
-		}else {
-			System.out.println("There are no Policies to make a payment");
-			LogUtils.info("There are no Policies to make a payment");
-			DriverManager.getDriver().navigate().back();
-		}
+	WebUI.clickElement(makeAnotherpaymentBtn);
+	WebUI.sleep(3);
+	}
+	}
+	}catch (Exception e) {
+	System.out.println("There are no payment policies for this agent");
+	}
+	try {
+	if(validPolicies.size()>=2) {
+	WebUI.clickElement(trashBtn);
+	WebUI.clickElement(chevronArrowDown);
+	WebUI.setText(policyNumberInput, secondPolicyNumber);
+	WebUI.sleep(2);
+	WebUI.clickElement(policySearchBtn);
+	try{
+	if(DriverManager.getDriver().findElement(policyNotFound).isDisplayed()){
+	WebUI.clickElement(ok_btn);
+	}
+	else {
+	WebUI.verifyElementIncurrentPage(reccurringPolicyErrText);
 
 	}
+	WebUI.clearText(policyNumberInput);
 
-}
+	}catch (Exception e) {
+	System.out.println(secondPolicyNumber+" Is a valid Polid Policy Number");
+	thirdPolicyNumber=secondPolicyNumber;
+	}
+
+	System.out.println(thirdPolicyNumber);
+	WebUI.clickElement(policySearchBtn);
+	WebUI.clickElement(relationDropdown);
+	WebUI.clickElement(parent);
+	WebUI.clickElement(paymentType);
+	WebUI.clickElement(selectPremium);
+	WebUI.setText(noofPremiumsToPayValue, "2");
+	WebUI.clickElement(nxtBtn);
+	WebUI.clickElement(Disclaimeryes);
+	WebUI.clickElement(nxtBtn2);
+	WebUI.clickElement(creditCardRadioBtn);
+	WebUI.scrollToElementAtBottom(nxtBtnInBillingInfoPage);
+	WebUI.verifyElementVisible(billingFirstName);
+	WebUI.verifyElementVisible(billingLastName);
+	WebUI.verifyElementVisible(billingStreetAddress);
+	WebUI.verifyElementVisible(billingCityAndRegion);
+	WebUI.verifyElementVisible(billingCountry);
+	WebUI.verifyElementVisible(billingZipCode);
+	WebUI.verifyElementVisible(billingPhoneNumber);
+	WebUI.verifyElementVisible(billingEmailAddress);
+	WebUI.verifyElementVisible(billingNotes);
+	WebUI.clickElement(nxtBtnInBillingInfoPage);
+	WebUI.verifyElementVisible(err_firstName);
+	WebUI.verifyElementVisible(err_lastName);
+	WebUI.verifyElementVisible(err_streetAddress);
+	WebUI.verifyElementVisible(err_city);
+	WebUI.verifyElementVisible(err_state);
+
+	WebUI.verifyElementVisible(err_phone);
+	WebUI.verifyElementVisible(err_email);
+	WebUI.verifyElementVisible(err_zipcode);
+	WebUI.scrollToElementAtBottom(someErrosMsg);
+	WebUI.verifyElementVisible(someErrosMsg);
+	WebUI.scrollToElementAtTop(billingFirstName);
+	WebUI.setText(billingFirstName, billing_Max_Name);
+	WebUI.verifyEquals(WebUI.getTextElement(err_firstName).trim(), billing_Max_Name_Err);
+	WebUI.clearTextCtrlA(billingFirstName);
+	WebUI.verifyEquals(WebUI.getTextElement(err_firstName), Mandatory_Err );
+
+	WebUI.setText(billingLastName, Max_Name);
+	WebUI.verifyEquals(WebUI.getTextElement(err_lastName).trim(), Max_error_70);
+	WebUI.clearTextCtrlA(billingLastName);
+	WebUI.verifyEquals(WebUI.getTextElement(err_lastName), Mandatory_Err );
+
+	WebUI.setText(billingCityAndRegion, max50chars);
+	WebUI.verifyEquals(WebUI.getTextElement(err_city).trim(), billing_max_city_Err);
+	WebUI.clearTextCtrlA(billingCityAndRegion);
+	WebUI.verifyEquals(WebUI.getTextElement(err_city), Mandatory_Err );
+
+	WebUI.setText(billingStreetAddress, max50chars);
+	WebUI.verifyEquals(WebUI.getTextElement(err_streetAddress).trim(), Max_error_50);
+	WebUI.clearTextCtrlA(billingStreetAddress);
+	WebUI.verifyEquals(WebUI.getTextElement(err_streetAddress), Mandatory_Err );
+
+	WebUI.clickElement(billingState);
+	WebUI.clickElement(arkansas);
+	WebUI.clickElement(billingState);
+	WebUI.clickElement(emptyValue);
+	WebUI.verifyEquals(WebUI.getTextElement(err_state), Mandatory_Err);
+	WebUI.clickElement(billingState);
+	WebUI.clickElement(arkansas);
+
+	WebUI.clickElement(billingCountry);
+	WebUI.sleep(1);
+	WebUI.clickElement(india);
+
+	WebUI.setText(billingZipCode, "14523698702");
+	WebUI.verifyEquals(WebUI.getTextElement(err_zipcode).trim(), billing_Zip_Max_Char_Err);
+	WebUI.clearTextCtrlA(billingZipCode);
+	WebUI.setText(billingZipCode, "1236");
+	WebUI.verifyEquals(WebUI.getTextElement(err_zipcode).trim(), billing_Zip_Min_Char_Err);
+	WebUI.clearTextCtrlA(billingZipCode);
+	WebUI.setText(billingZipCode, "sdf%@");
+	WebUI.verifyEquals(WebUI.getTextElement(err_zipcode).trim(), billing_Zip_Format_Err);
+	WebUI.clearTextCtrlA(billingZipCode);
+	WebUI.verifyEquals(WebUI.getTextElement(err_zipcode), billing_Zip_Format_Err );
+
+	WebUI.setText(billingPhoneNumber, "14523698702");
+	WebUI.verifyEquals(WebUI.getTextElement(err_phone).trim(), billing_Ph_Max_Char_Err);
+	WebUI.clearTextCtrlA(billingPhoneNumber);
+	WebUI.setText(billingPhoneNumber, "1236");
+	WebUI.verifyEquals(WebUI.getTextElement(err_phone).trim(), billing_Ph_Min_Char_Err);
+	WebUI.clearTextCtrlA(billingPhoneNumber);
+	WebUI.setText(billingPhoneNumber, "sdfds@#$");
+	WebUI.verifyEquals(WebUI.getTextElement(err_phone).trim(), billing_Ph_Format_Err);
+	WebUI.clearTextCtrlA(billingPhoneNumber);
+	WebUI.verifyEquals(WebUI.getTextElement(err_phone), billing_Ph_Format_Err );
+
+	WebUI.setText(billingEmailAddress, max50chars);
+	WebUI.verifyEquals(WebUI.getTextElement(err_email).trim(), Max_error_50);
+	WebUI.clearTextCtrlA(billingEmailAddress);
+	WebUI.setText(billingEmailAddress, "sdfds@gmail");
+	WebUI.verifyEquals(WebUI.getTextElement(err_email).trim(), billing_Email_Format_Err);
+	WebUI.clearTextCtrlA(billingEmailAddress);
+	WebUI.verifyEquals(WebUI.getTextElement(err_email), Mandatory_Err );
+	WebUI.setText(billingNotes, "This is the Credit card payment");
+	String RandomBillingFirstName = DataGenerateUtils.randomFirstName();
+	WebUI.clearAndFillText(billingFirstName,RandomBillingFirstName);
+	String RandomBillinglastName = DataGenerateUtils.randomLastName();
+	WebUI.clearAndFillText(billingLastName,RandomBillinglastName);
+	String RandombillingAddress=DataGenerateUtils.randomStreetName();
+	WebUI.setText(billingStreetAddress, RandombillingAddress);
+	String Randombillingcity=DataGenerateUtils.randomCity();
+	WebUI.setText(billingCityAndRegion, Randombillingcity);
+	String RandomZipcode=DataGenerateUtils.randomZipCode();
+	WebUI.setText(billingZipCode, RandomZipcode);
+	String RandomPhnNumber=DataGenerateUtils.randomPhoneNumber();
+	WebUI.setText(billingPhoneNumber, RandomPhnNumber);
+	String RandomEmail=DataGenerateUtils.randomEmail();
+	WebUI.setText(billingEmailAddress, RandomEmail);
+	WebUI.clickElement(nxtBtnInBillingInfoPage);
+	WebUI.sleep(2);
+	WebUI.switchToFrameByIndex(0);
+	WebUI.sleep(1);
+	WebUI.switchToFrameByIndex(0);
+	WebUI.sleep(1);
+
+	WebUI.verifyElementVisible(CardNumber);
+	WebUI.verifyElementVisible(cardHolderName);
+	WebUI.verifyElementVisible(ExpiryMonth);
+	WebUI.verifyElementVisible(ExpiryYear);
+	WebUI.verifyElementVisible(SecurityCode);
+	WebUI.verifyElementVisible(cancelBtn);
+	WebUI.clearText(CardNumber);
+
+	WebUI.setText(CardNumber, "123456567");
+	WebUI.clickElement(cardHolderName);
+	WebUI.sleep(1);
+	WebUI.verifyElementVisible(cardNumberCrossMark);
+	WebUI.verifyElementVisible(Error_CardNumber);
+	WebUI.verifyContains(WebUI.getTextElement(Error_CardNumber).trim(), billing_Invalid_Card_Err);
+	WebUI.sleep(1);
+
+	WebUI.clickElement(CardNumber);
+	WebUI.sleep(1);
+	WebUI.clearText(CardNumber);
+	WebUI.setText(CardNumber, "5555555555554444124541");
+	WebUI.clickElement(cardHolderName);
+	WebUI.sleep(1);
+	WebUI.verifyElementVisible(cardNumberCrossMark);
+	WebUI.verifyElementVisible(Error_CardNumber);
+	WebUI.verifyContains(getTextElement(Error_CardNumber).trim(), billing_Invalid_Card_Err);
+	WebUI.sleep(1);
+
+	WebUI.clearAndFillText(CardNumber, PropertiesHelpers.getValue("billing_Card_No"));
+	WebUI.sleep(1);
+	WebUI.clickElement(cardHolderName);
+	WebUI.verifyElementVisible(cardnumbertickMark);
+	WebUI.verifyContains(getAttributeElement(CardNumber, "value").replace(" ", "").trim(), PropertiesHelpers.getValue("billing_Card_No"));
+
+	WebUI.clickElement(CardNumber);
+	WebUI.verifyContains(getTextElement(Error_CardHoldername).trim(), billing_Card_Holder_Name_Err);
+	WebUI.sleep(1);
+
+	WebUI.clearText(cardHolderName);
+	WebUI.setText(cardHolderName, "12451232");
+	WebUI.clickElement(CardNumber);
+	WebUI.sleep(1);
+	WebUI.verifyElementVisible(cardNameCrossMark);
+	WebUI.verifyElementVisible(Error_CardHoldername);
+	WebUI.verifyContains(getTextElement(Error_CardHoldername).trim(), billing_Card_Holder_Name_Err);
+	WebUI.sleep(1);
+
+	WebUI.clearAndFillText(cardHolderName, PropertiesHelpers.getValue("billing_CardHolder_Name"));
+	WebUI.sleep(1);
+	WebUI.clickElement(CardNumber);
+	WebUI.verifyElementVisible(cardNametickMark);
+	WebUI.verifyContains(getAttributeElement(cardHolderName, "value"), PropertiesHelpers.getValue("billing_CardHolder_Name"));
+
+	WebUI.clickElement(ExpiryMonth);
+	WebUI.sleep(1);
+	WebUI.clickElement(CardNumber);
+	WebUI.sleep(1);
+	WebUI.verifyElementVisible(expiryDateCrossMark);
+	WebUI.verifyElementVisible(Error_ExpiryMonth);
+	WebUI.verifyContains(getTextElement(Error_ExpiryMonth).trim(), billing_Card_Month_Err);
+	WebUI.sleep(1);
+
+	WebUI.clickElement(CardNumber);
+	WebUI.clearAndFillText(ExpiryMonth, "13");
+	WebUI.sleep(1);
+	WebUI.clickElement(CardNumber);
+	WebUI.verifyElementVisible(expiryDateCrossMark);
+	WebUI.verifyElementVisible(Error_ExpiryMonth, 2);
+	WebUI.verifyContains(getTextElement(Error_ExpiryMonth).trim(), billing_Card_Month_Err);
+	WebUI.sleep(1);
+
+	WebUI.clearAndFillText(ExpiryMonth, PropertiesHelpers.getValue("billing_Card_Exp_Mn"));
+	WebUI.sleep(1);
+	WebUI.verifyContains(getAttributeElement(ExpiryMonth, "value"), PropertiesHelpers.getValue("billing_Card_Exp_Mn"));
+
+	WebUI.clickElement(ExpiryYear);
+	WebUI.sleep(1);
+	WebUI.clickElement(CardNumber);
+	WebUI.sleep(1);
+	WebUI.verifyElementVisible(expiryDateCrossMark);
+	WebUI.verifyElementVisible(Error_ExpiryYear);
+	WebUI.verifyContains(getTextElement(Error_ExpiryYear).trim(), billing_Card_Year_Err);
+	WebUI.sleep(1);
+
+	WebUI.clearText(ExpiryYear);
+	WebUI.setText(ExpiryYear, "23");
+	WebUI.clickElement(CardNumber);
+	WebUI.sleep(1);
+	WebUI.verifyElementVisible(expiryDateCrossMark);
+	WebUI.verifyElementVisible(Error_ExpiryYear);
+	WebUI.verifyContains(getTextElement(Error_ExpiryYear).trim(), billing_Card_PastYear_Err);
+	WebUI.sleep(1);
+
+	WebUI.clickElement(CardNumber);
+	WebUI.clearAndFillText(ExpiryYear, PropertiesHelpers.getValue("billing_Card_Exp_Yr"));
+	WebUI.sleep(1);
+	WebUI.clickElement(CardNumber);
+	WebUI.verifyElementVisible(expiryDatetickMark);
+	WebUI.verifyContains(getAttributeElement(ExpiryYear, "value").trim(), PropertiesHelpers.getValue("billing_Card_Exp_Yr"));
+	WebUI.sleep(1);
+
+	WebUI.clearText(SecurityCode);
+	WebUI.setText(SecurityCode, "12");
+	WebUI.clickElement(CardNumber);
+	WebUI.sleep(1);
+	WebUI.verifyElementVisible(securityCodeCrossMark);
+	WebUI.verifyElementVisible(Error_SecurityCode);
+	WebUI.verifyContains(getTextElement(Error_SecurityCode).trim(), billing_Card_SecuCode_Err);
+	WebUI.sleep(1);
+
+	WebUI.clickElement(SecurityCode);
+	WebUI.clearAndFillText(SecurityCode, PropertiesHelpers.getValue("billing_Card_Security_Code"));
+	WebUI.sleep(1);
+	WebUI.clickElement(CardNumber);
+	WebUI.verifyElementVisible(securityCodetickMark);
+	WebUI.verifyContains(getAttributeElement(SecurityCode, "value").trim(), PropertiesHelpers.getValue("billing_Card_Security_Code"));
+	WebUI.sleep(1);
+
+	WebUI.verifyContains(getTextElement(SecurityCode_PInHintVisa_Master).trim(), billing_Pin_Hint);
+	WebUI.sleep(1);
+
+	WebUI.clearText(CardNumber);
+	WebUI.setText(CardNumber, "371449635398431");
+	WebUI.clickElement(SecurityCode);
+	WebUI.sleep(1);
+	WebUI.verifyElementVisible(SecurityCode_PInHintVisa_Master);
+	WebUI.verifyContains(getTextElement(SecurityCode_PInHintVisa_Master).trim(), billing_Pin_Hint_Front);
+	WebUI.sleep(1);
+
+	WebUI.clearAndFillText(CardNumber, PropertiesHelpers.getValue("billing_Card_No"));
+	WebUI.sleep(1);
+	WebUI.verifyContains(getAttributeElement(CardNumber, "value"), PropertiesHelpers.getValue("billing_Card_No"));
+	// WebUI.verifyElementNotEnabled(MakePayment);         //Untill and unless enter the security code Make Payment button shouldnt be Enabled
+	WebUI.sleep(1);
+	WebUI.clickElement(SecurityCode);
+	WebUI.clearAndFillText(SecurityCode, PropertiesHelpers.getValue("billing_Card_Security_Code"));
+	WebUI.sleep(1);
+
+	WebUI.verifyContains(getAttributeElement(SecurityCode, "value").trim(), PropertiesHelpers.getValue("billing_Card_Security_Code"));
+	WebUI.sleep(1);
+
+	WebUI.clickElement(MakePayment);
+	WebUI.sleep(3);
+	}else {
+	System.out.println("There are no Policies to make a payment");
+	LogUtils.info("There are no Policies to make a payment");
+	DriverManager.getDriver().navigate().back();
+	}
+	}catch(Exception ex){
+	System.out.println("There are no Policies to make a payment");
+	LogUtils.info("There are no Policies to make a payment");
+	DriverManager.getDriver().navigate().back();
+	}
+
+	}
+	}
