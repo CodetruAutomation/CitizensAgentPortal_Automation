@@ -63,14 +63,16 @@ stages:
       # Cache Maven dependencies
       - task: Cache@2
         inputs:
-          key: 'maven | $(Agent.OS) | maven'
-          path: $(MAVEN_OPTS)
+          key: 'maven | "$(Agent.OS)" | pom.xml'
+          path: ~/.m2/repository
+          restoreKeys: |
+            maven | "$(Agent.OS)"
         displayName: 'Cache Maven Dependencies'
 
-      # Cache Java
+      # Cache Java (optional but useful)
       - task: Cache@2
         inputs:
-          key: 'java | $(Agent.OS) | 17'
+          key: 'java | "$(Agent.OS)" | 17'
           path: $(JAVA_HOME)
         displayName: 'Cache Java Dependencies'
 
