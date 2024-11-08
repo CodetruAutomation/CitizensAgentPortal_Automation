@@ -1,3 +1,5 @@
+trigger: none  # Disable automatic triggers on push
+
 pool:
   vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
 
