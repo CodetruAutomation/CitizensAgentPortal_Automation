@@ -1,5 +1,3 @@
-trigger: none  # Disable automatic triggering on code pushes
-
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -40,17 +38,6 @@ parameters:
     - 'Regression_ProfileModule.xml'
 
 stages:
-- stage: CleanWorkspace
-  displayName: 'Clean Workspace'
-  jobs:
-  - job: Clean
-    displayName: 'Clean Workspace Directory'
-    steps:
-      - script: |
-          echo "Cleaning workspace..."
-          rm -rf $(Build.SourcesDirectory)/*
-        displayName: 'Clean Workspace'
-
 - stage: Build
   displayName: 'Build and Test'
   jobs:
@@ -58,24 +45,13 @@ stages:
     displayName: 'Maven Build and Test'
     steps:
       - checkout: self
-        displayName: 'Git Checkout'
 
-      # Sanitize the branch name by replacing slashes with hyphens
-      - script: |
-          echo "Sanitizing branch name for cache key..."
-          BRANCH_NAME=$(Build.SourceBranchName | tr '/' '-')
-          echo "##vso[task.setvariable variable=CACHE_BRANCH_NAME]$BRANCH_NAME"
-        displayName: 'Sanitize Branch Name for Cache Key'
-
-      # Cache Maven dependencies based on sanitized branch name and OS
       - task: Cache@2
         inputs:
-          key: 'maven-cache-$(Agent.OS)-$(CACHE_BRANCH_NAME)'
-          restoreKeys: |
-            maven-cache-$(Agent.OS)-$(CACHE_BRANCH_NAME)
-            maven-cache-$(Agent.OS)
-          path: ~/.m2/repository
-        displayName: 'Cache Maven Dependencies'
+          key: 'maven-cache-$(Agent.OS)-$(Build.SourceBranchName)-$(MD5(pom.xml))'
+          path: $(Agent.ToolsDirectory)/cache/.m2/repository
+        displayName: 'Restore Maven Cache'
+        condition: succeededOrFailed()
 
       - task: JavaToolInstaller@0
         inputs:
@@ -83,11 +59,6 @@ stages:
           jdkArchitectureOption: 'x64'
           jdkSourceOption: 'PreInstalled'
         displayName: 'Install Java 17'
-
-      - task: MavenAuthenticate@0
-        inputs:
-          mavenAuthenticate: true
-        displayName: 'Maven Authentication'
 
       - task: Maven@3
         inputs:
@@ -98,6 +69,9 @@ stages:
           testResultsFiles: '**/target/surefire-reports/*.xml'
         displayName: 'Maven Build and Run Tests'
 
-      - script: |
-          echo "Publishing TestNG results..."
-        displayName: 'Publish TestNG Results'
+      - task: Cache@2
+        inputs:
+          key: 'maven-cache-$(Agent.OS)-$(Build.SourceBranchName)-$(MD5(pom.xml))'
+          path: $(Agent.ToolsDirectory)/cache/.m2/repository
+        displayName: 'Save Maven Cache'
+        condition: succeededOrFailed()
