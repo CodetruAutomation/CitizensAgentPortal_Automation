@@ -7,7 +7,7 @@
 
 	<test name="CITIZENS SANITY TEST APPLICATION MODULE WITH MULTIPLE STATES 1">
 		<parameter name="BROWSER" value="chrome" />
-		<parameter name="ROW_NUMBER" value="1" />
+		<parameter name="ROW_NUMBER" value="15" />
 		<classes>
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step1_Test_NV" />
@@ -27,7 +27,7 @@
 	
 	<test name="CITIZENS SANITY TEST APPLICATION MODULE WITH MULTIPLE STATES 2">
 		<parameter name="BROWSER" value="chrome" />
-		<parameter name="ROW_NUMBER" value="2" />
+		<parameter name="ROW_NUMBER" value="14" />
 		<classes>
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step1_Test_NV" />
@@ -47,7 +47,7 @@
 	
 	<test name="CITIZENS SANITY TEST APPLICATION MODULE WITH MULTIPLE STATES 3">
 		<parameter name="BROWSER" value="chrome" />
-		<parameter name="ROW_NUMBER" value="3" />
+		<parameter name="ROW_NUMBER" value="13" />
 		<classes>
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step1_Test_NV" />
@@ -67,7 +67,7 @@
 	
 	<test name="CITIZENS SANITY TEST APPLICATION MODULE WITH MULTIPLE STATES 4">
 		<parameter name="BROWSER" value="chrome" />
-		<parameter name="ROW_NUMBER" value="4" />
+		<parameter name="ROW_NUMBER" value="16" />
 		<classes>
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step1_Test_NV" />
@@ -87,7 +87,7 @@
 	
 	<test name="CITIZENS SANITY TEST APPLICATION MODULE WITH MULTIPLE STATES 5">
 		<parameter name="BROWSER" value="chrome" />
-		<parameter name="ROW_NUMBER" value="5" />
+		<parameter name="ROW_NUMBER" value="1" />
 		<classes>
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step1_Test_NV" />
@@ -127,7 +127,7 @@
 	
 	<test name="CITIZENS SANITY TEST APPLICATION MODULE WITH MULTIPLE STATES 7">
 		<parameter name="BROWSER" value="chrome" />
-		<parameter name="ROW_NUMBER" value="7" />
+		<parameter name="ROW_NUMBER" value="11" />
 		<classes>
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step1_Test_NV" />
@@ -147,7 +147,7 @@
 	
 	<test name="CITIZENS SANITY TEST APPLICATION MODULE WITH MULTIPLE STATES 8">
 		<parameter name="BROWSER" value="chrome" />
-		<parameter name="ROW_NUMBER" value="8" />
+		<parameter name="ROW_NUMBER" value="10" />
 		<classes>
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step1_Test_NV" />

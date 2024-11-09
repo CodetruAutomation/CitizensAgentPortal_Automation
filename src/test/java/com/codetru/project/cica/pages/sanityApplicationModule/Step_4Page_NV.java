@@ -97,7 +97,7 @@ public class Step_4Page_NV extends CommonPageCICA {
 		
 		String randomBeneficiaryDOB = DataGenerateUtils.randomDateOfBirthDDMMYYYY();
 		WebUI.clearAndFillText(BeneficiaryDOB,randomBeneficiaryDOB);
-		WebUI.sleep(0.5);
+		WebUI.sleep(1.2);
 		
 		
 		WebUI.clearAndFillText(BeneficiaryPercent, "100");
