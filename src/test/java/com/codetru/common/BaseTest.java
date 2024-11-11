@@ -6,6 +6,7 @@ import com.codetru.helpers.PropertiesHelpers;
 import com.codetru.listeners.AllureListener;
 import com.codetru.listeners.TestListener;
 import com.codetru.project.cica.CommonPageCICA;
+import com.codetru.project.cica.utils.ProjectUtilities;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ThreadGuard;
@@ -24,6 +25,7 @@ public class BaseTest extends CommonPageCICA {
 
     @AfterTest(alwaysRun = true)
     public void closeDriver() {
+    	ProjectUtilities.deleteExportDataImages();
         DriverManager.quit();
     }
 

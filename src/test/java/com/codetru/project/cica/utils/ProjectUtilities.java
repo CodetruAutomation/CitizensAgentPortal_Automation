@@ -1,5 +1,6 @@
 package com.codetru.project.cica.utils;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +12,9 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 
+import com.codetru.constants.FrameworkConstants;
 import com.codetru.driver.DriverManager;
+import com.codetru.helpers.Helpers;
 import com.codetru.keywords.WebUI;
 import com.codetru.utils.LogUtils;
 
@@ -403,4 +406,17 @@ public class ProjectUtilities {
 
 		return splitList;
 	}
+	public static void deleteExportDataImages() {
+        String path = Helpers.getCurrentDir() + FrameworkConstants.EXPORT_CAPTURE_PATH;
+
+		 File folder = new File(path);
+		    File[] files = folder.listFiles((dir, name) -> name.endsWith(".png") || name.endsWith(".jpg") || name.endsWith(".jpeg"));
+		    if (files != null) {
+		        for (File file : files) {
+		            file.delete();
+		        }
+		    }
+		
+	}
+	   
 }
