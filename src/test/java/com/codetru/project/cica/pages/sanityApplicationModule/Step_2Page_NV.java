@@ -45,7 +45,7 @@ public class Step_2Page_NV extends CommonPageCICA {
 		WebUI.clickElement(TableOfContent);
 		WebUI.sleep(1);
 		WebUI.clickElementWithJs(step_1);
-		WebUI.sleep(1.5);
+		WebUI.sleep(2);
 		// For Notice Popup
 		try {
 			DriverManager.getDriver().findElement(impNotice_Popup).isDisplayed();
@@ -55,7 +55,15 @@ public class Step_2Page_NV extends CommonPageCICA {
 		} catch (Exception ex) {
 			System.out.println("Notice Popup Did Not Appear. " + ex.getMessage());
 		}
+		WebUI.sleep(1);
+		try {
+			DriverManager.getDriver().findElement(impNotice_Popup).isDisplayed();
+			WebUI.sleep(0.5);
+			WebUI.clickElement(impNotice_Popup);
 
+		} catch (Exception ex) {
+			System.out.println("Notice Popup Did Not Appear. " + ex.getMessage());
+		}
 		WebUI.sleep(0.5);
 		WebUI.scrollToElementAtBottom(calculate);
 		WebUI.sleep(0.2);
@@ -63,7 +71,7 @@ public class Step_2Page_NV extends CommonPageCICA {
 		WebUI.sleep(0.2);
 
 		WebUI.scrollToElementAtBottom(step_1_NextB);
-		WebUI.sleep(0.2);
+		WebUI.sleep(1);
 		WebUI.moveToElement(step_1_NextB);
 		WebUI.clickElement(step_1_NextB);
 		WebUI.sleep(3);
