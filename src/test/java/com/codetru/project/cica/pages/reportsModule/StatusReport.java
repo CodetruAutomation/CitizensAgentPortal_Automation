@@ -157,9 +157,11 @@ public class StatusReport extends CommonPageCICA {
 		WebUI.clickElement(agentCaret_btn);
 		WebUI.clickElement(HighestLevel);
 		WebUI.sleep(5);
+		ProjectUtilities.spinnerWaitWithTime(pleaseWaitSpinner,30);
+
 		WebUI.clickElement(dateFilter);
 		WebUI.clickElement(selectMnth);
-		ProjectUtilities.spinnerWait(pleaseWaitSpinner);
+		ProjectUtilities.spinnerWaitWithTime(pleaseWaitSpinner,30);
 		WebUI.clickElement(agentTypeDropdown);
 		WebUI.verifyElementVisible(agencyOption);
 		WebUI.verifyElementVisible(independentConsultantOption);
