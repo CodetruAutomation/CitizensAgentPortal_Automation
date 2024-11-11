@@ -45,6 +45,7 @@ stages:
   jobs:
   - job: Clean
     displayName: 'Clean Workspace Directory'
+    timeoutInMinutes: 360  # Set timeout to 6 hours
     steps:
       - script: |
           echo "Cleaning workspace..."
@@ -56,6 +57,7 @@ stages:
   jobs:
   - job: MavenBuild
     displayName: 'Maven Build and Test'
+    timeoutInMinutes: 360  # Set timeout to 6 hours
     steps:
       - checkout: self  # Check out the source code
         displayName: 'Git Checkout'
