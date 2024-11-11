@@ -59,7 +59,7 @@ public class Step_7PageHIPAA_NV extends CommonPageCICA{
               }
               
       } catch (Exception ex) {
-          System.out.println("");
+          System.out.println("Processing Pop-up cleared");
       }
 		
 		WebUI.sleep(1);

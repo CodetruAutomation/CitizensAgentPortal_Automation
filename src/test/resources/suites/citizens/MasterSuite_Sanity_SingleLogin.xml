@@ -7,7 +7,7 @@
 
 	<test name="CITIZENS SANITY TEST APPLICATION MODULE WITH MULTIPLE STATES">
 		<parameter name="BROWSER" value="chrome" />
-		<parameter name="ROW_NUMBER" value="2" />
+		<parameter name="ROW_NUMBER" value="14" />
 		<classes>
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.HomePageTest_NV" />
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step1_Test_NV" />
