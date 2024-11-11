@@ -55,6 +55,7 @@ public class ProjectUtilities {
 //		} catch (Exception ex) {
 //			System.out.println("");
 //		}
+		WebUI.sleep(4);
 		spinnerWaitWithTime(Licenses_Appointment_Data_Popup, 30);
 
 		WebUI.sleep(1);
