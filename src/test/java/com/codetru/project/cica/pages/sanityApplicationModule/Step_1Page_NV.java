@@ -90,7 +90,7 @@ public class Step_1Page_NV extends CommonPageCICA{
 		WebUI.clickElement(state);
 		WebUI.clickElementWithJs(state);	
 		WebUI.verifyContains(getAttributeElement(StateDropdown,"value"), getAttributeElement(StateDropdown,"value"));
-		WebUI.sleep(1);
+		WebUI.sleep(1.5);
 		WebUI.selectOptionByText(genderDropdown, PropertiesHelpers.getValue("gender"));
 		
 		String randomDOB = DataGenerateUtils.generateRandomDOB();
@@ -205,9 +205,9 @@ public class Step_1Page_NV extends CommonPageCICA{
 		WebUI.clickElementWithJs(state);
 		WebUI.sleep(1);
 		WebUI.verifyContains(getAttributeElement(StateDropdown,"value"), getAttributeElement(StateDropdown,"value"));
-
+		WebUI.sleep(1.5);
 		WebUI.selectOptionByText(genderDropdown, PropertiesHelpers.getValue("gender"));
-
+		WebUI.sleep(1);
 //		WebUI.setText(DateOfBirth, PropertiesHelpers.getValue("date_Of_Birth"));
 		String randomDOB = DataGenerateUtils.generateRandomDOB();
 		int Gen_age = DataGenerateUtils.calculateAge(randomDOB);
@@ -295,12 +295,12 @@ public class Step_1Page_NV extends CommonPageCICA{
 			
 			WebUI.verifyElementClickable(Yes);
 			WebUI.clickElement(Yes);
-			WebUI.sleep(0.2);
+			WebUI.sleep(0.5);
 			WebUI.verifyElementClickable(No);
 			WebUI.clickElement(No);
-			WebUI.sleep(0.2);
+			WebUI.sleep(0.5);
 			WebUI.clickElement(calculate);
-			WebUI.sleep(0.2);
+			WebUI.sleep(0.5);
 			WebUI.moveToElement(Nextstep_1);
 			WebUI.clickElement(Nextstep_1);
 			WebUI.waitForPageLoaded();
@@ -319,7 +319,7 @@ public class Step_1Page_NV extends CommonPageCICA{
 						WebUI.clickElement(appointmentAcknowledgement);
 						WebUI.sleep(0.5);
 						WebUI.clickElement(agentLicense);
-						WebUI.sleep(0.2);
+						WebUI.sleep(0.5);
 						WebUI.clickElement(TableOfContent_BackButton);
 					}
 					catch(Exception ex2)
