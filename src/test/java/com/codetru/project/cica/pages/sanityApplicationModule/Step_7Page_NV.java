@@ -13,7 +13,7 @@ public class Step_7Page_NV extends CommonPageCICA{
 	public void Remarks() {
 
 		WebUI.waitForPageLoaded();
-		WebUI.sleep(1);
+		WebUI.sleep(2.5);
 		WebUI.waitForElementVisible(nextstep7);
 		WebUI.moveToElement(nextstep7);
 		WebUI.sleep(0.5);

@@ -17,7 +17,7 @@ public class Step_3Page_NV extends CommonPageCICA {
 
 	public void Policy_Owner_Information() {
 
-		WebUI.sleep(1.5);
+		WebUI.sleep(2.5);
 		WebUI.clickElement(step3_No);
 		WebUI.sleep(0.5);
 

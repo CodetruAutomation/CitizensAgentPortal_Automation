@@ -12,7 +12,7 @@ public class Step_5Page_NV extends CommonPageCICA {
 
 	public void Existing_Insurance() {
 
-		WebUI.sleep(1);
+		WebUI.sleep(2.5);
 		WebUI.clickElement(ExitingInsurance_Question_1);
 		WebUI.clickElement(NextStep5);
 		WebUI.waitForPageLoaded();

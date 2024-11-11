@@ -30,7 +30,7 @@ public class Step_7PageHIPAA_NV extends CommonPageCICA{
 	public void HIPAA_Voice_Authorization() {
 		
 		WebUI.waitForPageLoaded();
-		WebUI.sleep(1);
+		WebUI.sleep(2);
 		WebUI.clickElementWithJs(ownerSignature);
 		WebUI.sleep(2);
 		ProjectUtilities.signature2();

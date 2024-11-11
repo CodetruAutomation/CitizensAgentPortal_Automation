@@ -35,7 +35,7 @@ public class Step_4Page_NV extends CommonPageCICA {
 	public void Beneficiary_Information() {
 		
 		WebUI.waitForPageLoaded();
-		WebUI.sleep(2);
+		WebUI.sleep(3);
 		WebUI.waitForElementVisible(BeneficiaryFirstName);
 		String randomBeneficiaryFirstName = DataGenerateUtils.randomFirstName();
 		WebUI.clearAndFillText(BeneficiaryFirstName,randomBeneficiaryFirstName);

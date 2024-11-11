@@ -26,7 +26,7 @@ public class Step_7PageHIPAA_NV2 extends CommonPageCICA {
 		 excel.setExcelFile(FrameworkConstants.EXCEL_CICA_LOGIN, "Login");
         
         WebUI.waitForPageLoaded();
-        WebUI.sleep(1);
+        WebUI.sleep(2);
         WebUI.clickElementWithJs(ownerSignature);
         WebUI.sleep(2);
         ProjectUtilities.signature2();

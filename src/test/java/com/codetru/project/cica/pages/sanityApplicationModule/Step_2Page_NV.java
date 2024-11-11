@@ -33,6 +33,7 @@ public class Step_2Page_NV extends CommonPageCICA {
 	public void Proposed_Insured_Information() {
 
 		WebUI.waitForPageLoaded();
+		WebUI.sleep(1.5);
 		WebUI.clickElement(step_2);
 		WebUI.sleep(0.5);
 
