@@ -96,7 +96,8 @@ public class Step_4Page_NV extends CommonPageCICA {
 		WebUI.verifyContains(getAttributeElement(BeneficiarySSN,"value"),randomBeneficiarySSN);
 		
 		String randomBeneficiaryDOB = DataGenerateUtils.randomDateOfBirthDDMMYYYY();
-		WebUI.clearAndFillText(BeneficiaryDOB,randomBeneficiaryDOB);
+	//	WebUI.clearAndFillText(BeneficiaryDOB,randomBeneficiaryDOB);
+		WebUI.clearAndFillText(BeneficiaryDOB,"13121990");
 		WebUI.sleep(1.2);
 		
 		
