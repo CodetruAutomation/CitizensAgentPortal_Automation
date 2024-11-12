@@ -72,13 +72,9 @@ public class Step_2Page_NV extends CommonPageCICA {
 		WebUI.scrollToElementAtBottom(calculate);
 		WebUI.sleep(0.2);
 		WebUI.clickElement(calculate);
-		WebUI.sleep(0.2);
+		WebUI.sleep(0.5);
 
-		WebUI.scrollToElementAtBottom(step_1_NextB);
-		WebUI.sleep(1);
-		WebUI.moveToElement(step_1_NextB);
-		WebUI.clickElement(step_1_NextB);
-		WebUI.sleep(2);
+		
 		try {
 			DriverManager.getDriver().findElement(agentLicense_Popup).isDisplayed();
 			WebUI.sleep(0.5);
@@ -101,6 +97,11 @@ public class Step_2Page_NV extends CommonPageCICA {
 			}catch(Exception ex)
 		{
 				LogUtils.info("Returened to step_1 and clicked on Next correctly.");
+				WebUI.scrollToElementAtBottom(step_1_NextB);
+				WebUI.sleep(1);
+				WebUI.moveToElement(step_1_NextB);
+				WebUI.clickElement(step_1_NextB);
+				WebUI.sleep(2);
 		}
 		WebUI.sleep(3);
 //		==================================================================================================================================================
