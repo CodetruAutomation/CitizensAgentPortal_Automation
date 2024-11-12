@@ -5,13 +5,25 @@
 
 package com.codetru.utils;
 
-import com.codetru.constants.FrameworkConstants;
-import com.codetru.mail.EmailAttachmentsSender;
+import static com.codetru.constants.FrameworkConstants.REPORT_TITLE;
+import static com.codetru.mail.EmailConfig.FROM;
+import static com.codetru.mail.EmailConfig.PASSWORD;
+import static com.codetru.mail.EmailConfig.PORT;
+import static com.codetru.mail.EmailConfig.SERVER;
+import static com.codetru.mail.EmailConfig.SUBJECT;
+import static com.codetru.mail.EmailConfig.TO;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.mail.MessagingException;
 
-import static com.codetru.constants.FrameworkConstants.REPORT_TITLE;
-import static com.codetru.mail.EmailConfig.*;
+import com.codetru.constants.FrameworkConstants;
+import com.codetru.mail.EmailAttachmentsSender;
 
 public class EmailSendUtils {
 
@@ -28,16 +40,28 @@ public class EmailSendUtils {
 
             System.out.println("File name: " + FrameworkConstants.getExtentReportFilePath());
 
-            String messageBody = getTestCasesCountInFormat(count_totalTCs, count_passedTCs, count_failedTCs,
-                    count_skippedTCs);
-            //System.out.println(messageBody);
+            String messageBody = getTestCasesCountInFormat(count_totalTCs, count_passedTCs, count_failedTCs, count_skippedTCs);
+            String originalFile = FrameworkConstants.getExtentReportFilePath();
+            String compressedFile = originalFile.replace(".html", ".zip");
 
-            String attachmentFile_ExtentReport = FrameworkConstants.getExtentReportFilePath();
+            // Compress the file
+            try {
+                compressFile(originalFile, compressedFile);
+            } catch (IOException e) {
+                System.err.println("Error compressing the file: " + e.getMessage());
+                e.printStackTrace();
+                return;
+            }
+
+            // Check the compressed file size and proceed if within 15 MB
+            File file = new File(compressedFile);
+            if (file.length() > 15 * 1024 * 1024) { // 15 MB in bytes
+                System.out.println("Compressed file is larger than 15 MB. Not attaching.");
+                return;
+            }
 
             try {
-                EmailAttachmentsSender.sendEmailWithAttachments(SERVER, PORT, FROM, PASSWORD, TO, SUBJECT, messageBody,
-                        attachmentFile_ExtentReport);
-
+                EmailAttachmentsSender.sendEmailWithAttachments(SERVER, PORT, FROM, PASSWORD, TO, SUBJECT, messageBody, compressedFile);
                 System.out.println("****************************************");
                 System.out.println("Email sent successfully.");
                 System.out.println("Send Email - END");
@@ -45,11 +69,26 @@ public class EmailSendUtils {
             } catch (MessagingException e) {
                 e.printStackTrace();
             }
-
         }
-
     }
 
+    private static void compressFile(String filePath, String zipFilePath) throws IOException {
+        try (FileInputStream fis = new FileInputStream(filePath);
+             FileOutputStream fos = new FileOutputStream(zipFilePath);
+             ZipOutputStream zos = new ZipOutputStream(fos)) {
+            
+            ZipEntry zipEntry = new ZipEntry(new File(filePath).getName());
+            zos.putNextEntry(zipEntry);
+
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = fis.read(buffer)) >= 0) {
+                zos.write(buffer, 0, length);
+            }
+
+            zos.closeEntry();
+        }
+    }
     private static String getTestCasesCountInFormat(int count_totalTCs, int count_passedTCs, int count_failedTCs,
                                                     int count_skippedTCs) {
         System.out.println("count_totalTCs: " + count_totalTCs);
