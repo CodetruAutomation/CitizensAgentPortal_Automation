@@ -75,34 +75,58 @@ public class Step_2Page_NV extends CommonPageCICA {
 		WebUI.sleep(0.5);
 
 		
+//		try {
+//			DriverManager.getDriver().findElement(agentLicense_Popup).isDisplayed();
+//			WebUI.sleep(0.5);
+//			WebUI.clickElement(agentLicense_Popup);
+//			WebUI.scrollToElementAtTop(DateOfBirth);
+//			WebUI.sleep(0.5);
+//			WebUI.clearAndFillText(DateOfBirth,String.valueOf(Step_1Page_NV.Gen_age));
+//			WebUI.sleep(0.5);
+//			WebUI.scrollToElementAtBottom(calculate);
+//			WebUI.sleep(0.2);
+//			WebUI.clickElement(calculate);
+//			WebUI.sleep(0.2);
+//
+//			WebUI.scrollToElementAtBottom(step_1_NextB);
+//			WebUI.sleep(1);
+//			WebUI.moveToElement(step_1_NextB);
+//			WebUI.clickElement(step_1_NextB);
+//			WebUI.sleep(1);
+//			WebUI.logInfoMessage("Reentered the DOB");
+//			}catch(Exception ex)
+//		{
+//				LogUtils.info("Returened to step_1 and clicked on Next correctly.");
+//				WebUI.scrollToElementAtBottom(step_1_NextB);
+//				WebUI.sleep(1);
+//				WebUI.moveToElement(step_1_NextB);
+//				WebUI.clickElement(step_1_NextB);
+//				WebUI.sleep(2);
+//		}
 		try {
 			DriverManager.getDriver().findElement(agentLicense_Popup).isDisplayed();
 			WebUI.sleep(0.5);
 			WebUI.clickElement(agentLicense_Popup);
-			WebUI.scrollToElementAtTop(DateOfBirth);
 			WebUI.sleep(0.5);
-			WebUI.clearAndFillText(DateOfBirth,String.valueOf(Step_1Page_NV.Gen_age));
-			WebUI.sleep(0.5);
-			WebUI.scrollToElementAtBottom(calculate);
-			WebUI.sleep(0.2);
-			WebUI.clickElement(calculate);
-			WebUI.sleep(0.2);
-
-			WebUI.scrollToElementAtBottom(step_1_NextB);
-			WebUI.sleep(1);
-			WebUI.moveToElement(step_1_NextB);
-			WebUI.clickElement(step_1_NextB);
-			WebUI.sleep(1);
-			WebUI.logInfoMessage("Reentered the DOB");
-			}catch(Exception ex)
+		}catch(Exception exe)
 		{
-				LogUtils.info("Returened to step_1 and clicked on Next correctly.");
-				WebUI.scrollToElementAtBottom(step_1_NextB);
-				WebUI.sleep(1);
-				WebUI.moveToElement(step_1_NextB);
-				WebUI.clickElement(step_1_NextB);
-				WebUI.sleep(2);
+			System.out.println("Move to Step-1 page failed. "+exe.getMessage());
 		}
+		try {
+			DriverManager.getDriver().findElement(calculate).isDisplayed();
+			WebUI.scrollToElementAtBottom(calculate);
+			WebUI.sleep(0.4);
+			WebUI.clickElementWithJs(calculate);
+			WebUI.sleep(0.4);
+		} catch (Exception exe) {
+			System.out.println("Calculate button not clicked. " + exe.getMessage());
+		}
+		
+		WebUI.scrollToElementAtBottom(step_1_NextB);
+		WebUI.sleep(0.5);
+		WebUI.moveToElement(step_1_NextB);
+		WebUI.clickElement(step_1_NextB);
+		//WebUI.sleep(2.5);
 		WebUI.sleep(3);
 //		==================================================================================================================================================
 
