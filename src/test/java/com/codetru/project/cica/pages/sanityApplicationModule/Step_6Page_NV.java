@@ -32,7 +32,7 @@ public class Step_6Page_NV extends CommonPageCICA {
 		WebUI.sleep(0.2);
 		WebUI.verifyElementVisible(NextStep6);
 		WebUI.clickElement(no_physician);
-		WebUI.sleep(0.2);
+		WebUI.sleep(0.5);
 
 		WebUI.scrollToElementAtBottom(NextStep6);
 		WebUI.clickElement(NextStep6);
