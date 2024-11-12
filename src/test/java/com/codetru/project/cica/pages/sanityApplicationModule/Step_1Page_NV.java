@@ -55,7 +55,8 @@ public class Step_1Page_NV extends CommonPageCICA{
 	
 	private By insuredInfoElement = By.xpath("//h3[.='Proposed Insured Info']");
 	private By impNotice_Popup = By.xpath("//ion-backdrop/following-sibling::div/div/following-sibling::div/button");
-	
+	private By GenderMale = By.xpath("//select[@formcontrolname='ProposedGender']/option[text()='Male']");
+
 	public static String Randomfirstname;
 	public static int Gen_age=0;
 
@@ -92,8 +93,11 @@ public class Step_1Page_NV extends CommonPageCICA{
 		WebUI.clickElementWithJs(state);	
 		WebUI.verifyContains(getAttributeElement(StateDropdown,"value"), getAttributeElement(StateDropdown,"value"));
 		WebUI.sleep(1.5);
-		WebUI.selectOptionByIndex(genderDropdown,1);
-		
+		//WebUI.selectOptionByIndex(genderDropdown,1);
+		WebUI.clickElement(genderDropdown);
+		WebUI.sleep(0.5);
+		WebUI.clickElement(GenderMale);
+		WebUI.sleep(0.5);
 		String randomDOB = DataGenerateUtils.generateRandomDOB();
 		Gen_age = DataGenerateUtils.calculateAge(randomDOB);
 		WebUI.clearAndFillText(DateOfBirth,String.valueOf(randomDOB));
