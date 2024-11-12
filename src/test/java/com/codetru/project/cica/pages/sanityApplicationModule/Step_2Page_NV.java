@@ -32,6 +32,7 @@ public class Step_2Page_NV extends CommonPageCICA {
 	private By impNotice_Popup = By.xpath("//ion-backdrop/following-sibling::div/div/following-sibling::div/button");
 	private By agentLicense_Popup = By.xpath("//span[text()='OK']/parent::button");
 	private By DateOfBirth = By.xpath("//input[@formcontrolname='ProposedBirthDate']");
+	private By genderDropdown = By.xpath("//select[@formcontrolname='ProposedGender']");
 
 
 	public void Proposed_Insured_Information() {
@@ -55,24 +56,25 @@ public class Step_2Page_NV extends CommonPageCICA {
 			DriverManager.getDriver().findElement(impNotice_Popup).isDisplayed();
 			WebUI.sleep(0.5);
 			WebUI.clickElement(impNotice_Popup);
+			WebUI.sleep(1.5);
+			WebUI.selectOptionByText(genderDropdown, PropertiesHelpers.getValue("gender"));
+			WebUI.sleep(1);
+			WebUI.scrollToElementAtBottom(calculate);
+			WebUI.sleep(0.5);
+			WebUI.clickElement(calculate);
+			WebUI.sleep(0.5);
+			WebUI.scrollToElementAtBottom(step_1_NextB);
+			WebUI.sleep(1);
+			WebUI.moveToElement(step_1_NextB);
+			WebUI.clickElement(step_1_NextB);
+			WebUI.sleep(1);
 
 		} catch (Exception ex) {
 			System.out.println("Notice Popup Did Not Appear. " + ex.getMessage());
 		}
 		WebUI.sleep(1);
-		try {
-			DriverManager.getDriver().findElement(impNotice_Popup).isDisplayed();
-			WebUI.sleep(0.5);
-			WebUI.clickElement(impNotice_Popup);
 
-		} catch (Exception ex) {
-			System.out.println("Notice Popup Did Not Appear. " + ex.getMessage());
-		}
-		WebUI.sleep(0.5);
-		WebUI.scrollToElementAtBottom(calculate);
-		WebUI.sleep(0.2);
-		WebUI.clickElement(calculate);
-		WebUI.sleep(0.5);
+		
 
 		
 //		try {
@@ -103,30 +105,30 @@ public class Step_2Page_NV extends CommonPageCICA {
 //				WebUI.clickElement(step_1_NextB);
 //				WebUI.sleep(2);
 //		}
-		try {
-			DriverManager.getDriver().findElement(agentLicense_Popup).isDisplayed();
-			WebUI.sleep(0.5);
-			WebUI.clickElement(agentLicense_Popup);
-			WebUI.sleep(0.5);
-		}catch(Exception exe)
-		{
-			System.out.println("Move to Step-1 page failed. "+exe.getMessage());
-		}
-		try {
-			DriverManager.getDriver().findElement(calculate).isDisplayed();
-			WebUI.scrollToElementAtBottom(calculate);
-			WebUI.sleep(0.4);
-			WebUI.clickElementWithJs(calculate);
-			WebUI.sleep(0.4);
-		} catch (Exception exe) {
-			System.out.println("Calculate button not clicked. " + exe.getMessage());
-		}
-		
-		WebUI.scrollToElementAtBottom(step_1_NextB);
-		WebUI.sleep(0.5);
-		WebUI.moveToElement(step_1_NextB);
-		WebUI.clickElement(step_1_NextB);
-		//WebUI.sleep(2.5);
+//		try {
+//			DriverManager.getDriver().findElement(agentLicense_Popup).isDisplayed();
+//			WebUI.sleep(0.5);
+//			WebUI.clickElement(agentLicense_Popup);
+//			WebUI.sleep(0.5);
+//		}catch(Exception exe)
+//		{
+//			System.out.println("Move to Step-1 page failed. "+exe.getMessage());
+//		}
+//		try {
+//			DriverManager.getDriver().findElement(calculate).isDisplayed();
+//			WebUI.scrollToElementAtBottom(calculate);
+//			WebUI.sleep(0.4);
+//			WebUI.clickElementWithJs(calculate);
+//			WebUI.sleep(0.4);
+//		} catch (Exception exe) {
+//			System.out.println("Calculate button not clicked. " + exe.getMessage());
+//		}
+//		
+//		WebUI.scrollToElementAtBottom(step_1_NextB);
+//		WebUI.sleep(0.5);
+//		WebUI.moveToElement(step_1_NextB);
+//		WebUI.clickElement(step_1_NextB);
+//		//WebUI.sleep(2.5);
 		WebUI.sleep(3);
 //		==================================================================================================================================================
 
