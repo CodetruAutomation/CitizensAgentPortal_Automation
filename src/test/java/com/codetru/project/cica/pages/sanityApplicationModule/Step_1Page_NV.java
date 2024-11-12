@@ -92,7 +92,7 @@ public class Step_1Page_NV extends CommonPageCICA{
 		WebUI.clickElementWithJs(state);	
 		WebUI.verifyContains(getAttributeElement(StateDropdown,"value"), getAttributeElement(StateDropdown,"value"));
 		WebUI.sleep(1.5);
-		WebUI.selectOptionByText(genderDropdown, PropertiesHelpers.getValue("gender"));
+		WebUI.selectOptionByIndex(genderDropdown,1);
 		
 		String randomDOB = DataGenerateUtils.generateRandomDOB();
 		Gen_age = DataGenerateUtils.calculateAge(randomDOB);
