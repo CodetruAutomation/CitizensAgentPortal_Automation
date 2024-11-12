@@ -86,7 +86,8 @@ public class Step_1Page_NV extends CommonPageCICA{
 		WebUI.verifyContains(getAttributeElement(LastName,"value"),randomlastname);
 
 		WebUI.verifyElementClickable(StateDropdown);
-		WebUI.clickElement(StateDropdown);
+	//	WebUI.clickElement(StateDropdown);
+		WebUI.sleep(0.5);
 		WebUI.clickElementWithJs(StateDropdown);	
 		WebUI.sleep(1);
 		WebUI.clickElement(state);
@@ -203,7 +204,8 @@ public class Step_1Page_NV extends CommonPageCICA{
 		WebUI.verifyContains(getAttributeElement(LastName,"value"),randomlastname);
 
 		WebUI.verifyElementClickable(StateDropdown);
-		WebUI.clickElement(StateDropdown);
+		//WebUI.clickElement(StateDropdown);
+		WebUI.sleep(0.5);
 		WebUI.clickElementWithJs(StateDropdown);	
 		WebUI.sleep(1);
 		WebUI.clickElement(state);
