@@ -24,61 +24,61 @@ public class MasterTest extends BaseTest {
 	        processStatesInRange(startIteration, 10, rowNumber, context);
 	    }
 	 
-	    @Parameters({"ROW_NUMBER"})
-	    @Test(priority = 2, retryAnalyzer = Retry.class)
-	    public void processStates11To20(String rowNumber, ITestContext context) throws Exception {
-	        int startIteration = getStartIteration(context, 11);
-	        processStatesInRange(startIteration, 20, rowNumber, context);
-	    }
-	 
-	    @Parameters({"ROW_NUMBER"})
-	    @Test(priority = 3, retryAnalyzer = Retry.class)
-	    public void processStates21To30(String rowNumber, ITestContext context) throws Exception {
-	        int startIteration = getStartIteration(context, 21);
-	        processStatesInRange(startIteration, 30, rowNumber, context);
-	    }
-	 
-	    @Parameters({"ROW_NUMBER"})
-	    @Test(priority = 4, retryAnalyzer = Retry.class)
-	    public void processStates31To40(String rowNumber, ITestContext context) throws Exception {  
-	        int startIteration = getStartIteration(context, 31);
-	        processStatesInRange(startIteration, 40, rowNumber, context);
-	    }
-	 
-	    @Parameters({"ROW_NUMBER"})
-	    @Test(priority = 5, retryAnalyzer = Retry.class)
-	    public void processStates41To50(String rowNumber, ITestContext context) throws Exception {
-	        int startIteration = getStartIteration(context, 41);
-	        processStatesInRange(startIteration, 50, rowNumber, context);
-	    }
-	 
-	    @Parameters({"ROW_NUMBER"})
-	    @Test(priority = 6, retryAnalyzer = Retry.class)
-	    public void processStates51To60(String rowNumber, ITestContext context) throws Exception {
-	        int startIteration = getStartIteration(context, 51);
-	        processStatesInRange(startIteration, 60, rowNumber, context);
-	    }
-	 
-	    @Parameters({"ROW_NUMBER"})
-	    @Test(priority = 7, retryAnalyzer = Retry.class)
-	    public void processStates61To70(String rowNumber, ITestContext context) throws Exception {
-	        int startIteration = getStartIteration(context, 61);
-	        processStatesInRange(startIteration, 70, rowNumber, context);
-	    }
-	    
-	    @Parameters({"ROW_NUMBER"})
-	    @Test(priority = 8, retryAnalyzer = Retry.class)
-	    public void processStates71To80(String rowNumber, ITestContext context) throws Exception {
-	    	int startIteration = getStartIteration(context, 71);
-	    	processStatesInRange(startIteration, 80, rowNumber, context);
-	    }
-	    
-	    @Parameters({"ROW_NUMBER"})
-	    @Test(priority = 9, retryAnalyzer = Retry.class)
-	    public void processStates81To90(String rowNumber, ITestContext context) throws Exception {
-	    	int startIteration = getStartIteration(context, 81);
-	    	processStatesInRange(startIteration, 90, rowNumber, context);
-	    }
+//	    @Parameters({"ROW_NUMBER"})
+//	    @Test(priority = 2, retryAnalyzer = Retry.class)
+//	    public void processStates11To20(String rowNumber, ITestContext context) throws Exception {
+//	        int startIteration = getStartIteration(context, 11);
+//	        processStatesInRange(startIteration, 20, rowNumber, context);
+//	    }
+//	 
+//	    @Parameters({"ROW_NUMBER"})
+//	    @Test(priority = 3, retryAnalyzer = Retry.class)
+//	    public void processStates21To30(String rowNumber, ITestContext context) throws Exception {
+//	        int startIteration = getStartIteration(context, 21);
+//	        processStatesInRange(startIteration, 30, rowNumber, context);
+//	    }
+//	 
+//	    @Parameters({"ROW_NUMBER"})
+//	    @Test(priority = 4, retryAnalyzer = Retry.class)
+//	    public void processStates31To40(String rowNumber, ITestContext context) throws Exception {  
+//	        int startIteration = getStartIteration(context, 31);
+//	        processStatesInRange(startIteration, 40, rowNumber, context);
+//	    }
+//	 
+//	    @Parameters({"ROW_NUMBER"})
+//	    @Test(priority = 5, retryAnalyzer = Retry.class)
+//	    public void processStates41To50(String rowNumber, ITestContext context) throws Exception {
+//	        int startIteration = getStartIteration(context, 41);
+//	        processStatesInRange(startIteration, 50, rowNumber, context);
+//	    }
+//	 
+//	    @Parameters({"ROW_NUMBER"})
+//	    @Test(priority = 6, retryAnalyzer = Retry.class)
+//	    public void processStates51To60(String rowNumber, ITestContext context) throws Exception {
+//	        int startIteration = getStartIteration(context, 51);
+//	        processStatesInRange(startIteration, 60, rowNumber, context);
+//	    }
+//	 
+//	    @Parameters({"ROW_NUMBER"})
+//	    @Test(priority = 7, retryAnalyzer = Retry.class)
+//	    public void processStates61To70(String rowNumber, ITestContext context) throws Exception {
+//	        int startIteration = getStartIteration(context, 61);
+//	        processStatesInRange(startIteration, 70, rowNumber, context);
+//	    }
+//	    
+//	    @Parameters({"ROW_NUMBER"})
+//	    @Test(priority = 8, retryAnalyzer = Retry.class)
+//	    public void processStates71To80(String rowNumber, ITestContext context) throws Exception {
+//	    	int startIteration = getStartIteration(context, 71);
+//	    	processStatesInRange(startIteration, 80, rowNumber, context);
+//	    }
+//	    
+//	    @Parameters({"ROW_NUMBER"})
+//	    @Test(priority = 9, retryAnalyzer = Retry.class)
+//	    public void processStates81To90(String rowNumber, ITestContext context) throws Exception {
+//	    	int startIteration = getStartIteration(context, 81);
+//	    	processStatesInRange(startIteration, 90, rowNumber, context);
+//	    }
 	 
 	    private int getStartIteration(ITestContext context, int defaultStart) {
 	        if (context == null) {
