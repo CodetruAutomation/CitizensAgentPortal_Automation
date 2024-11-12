@@ -29,6 +29,9 @@ public class Step_2Page_NV extends CommonPageCICA {
 	private By step_1_NextB = By.xpath("//p[.='Is Automatic Premium Loan Desired?']/parent::div/parent::ion-col/parent::ion-row/following::ion-row/ion-col[@size='24' and @size-md='6']/ion-button");
 	private By TableOfContent = By.xpath("//h3[.='Contact Information']/parent::div/following-sibling::ion-row[@style='padding-left: 50px;']/ion-col[@size-md='18']/ion-button[.='Table of Contents']");
 	private By impNotice_Popup = By.xpath("//ion-backdrop/following-sibling::div/div/following-sibling::div/button");
+	private By agentLicense_Popup = By.xpath("//span[text()='OK']/parent::button");
+	private By DateOfBirth = By.xpath("//input[@formcontrolname='ProposedBirthDate']");
+
 
 	public void Proposed_Insured_Information() {
 
@@ -74,6 +77,30 @@ public class Step_2Page_NV extends CommonPageCICA {
 		WebUI.sleep(1);
 		WebUI.moveToElement(step_1_NextB);
 		WebUI.clickElement(step_1_NextB);
+		WebUI.sleep(1);
+		try {
+			DriverManager.getDriver().findElement(agentLicense_Popup).isDisplayed();
+			WebUI.sleep(0.5);
+			WebUI.clickElement(agentLicense_Popup);
+			WebUI.scrollToElementAtTop(DateOfBirth);
+			WebUI.sleep(0.5);
+			WebUI.clearAndFillText(DateOfBirth,String.valueOf(Step_1Page_NV.Gen_age));
+			WebUI.sleep(0.5);
+			WebUI.scrollToElementAtBottom(calculate);
+			WebUI.sleep(0.2);
+			WebUI.clickElement(calculate);
+			WebUI.sleep(0.2);
+
+			WebUI.scrollToElementAtBottom(step_1_NextB);
+			WebUI.sleep(1);
+			WebUI.moveToElement(step_1_NextB);
+			WebUI.clickElement(step_1_NextB);
+			WebUI.sleep(1);
+			WebUI.logInfoMessage("Reentered the DOB");
+			}catch(Exception ex)
+		{
+				WebUI.logInfoMessage("Returened to step_1 and clicked on Next correctly.");
+		}
 		WebUI.sleep(3);
 //		==================================================================================================================================================
 

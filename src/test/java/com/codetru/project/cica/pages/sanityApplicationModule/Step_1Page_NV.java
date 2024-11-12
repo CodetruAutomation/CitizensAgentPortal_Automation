@@ -57,6 +57,7 @@ public class Step_1Page_NV extends CommonPageCICA{
 	private By impNotice_Popup = By.xpath("//ion-backdrop/following-sibling::div/div/following-sibling::div/button");
 	
 	public static String Randomfirstname;
+	public static int Gen_age=0;
 
 
 	public void Product_Information(String statex) {
@@ -94,7 +95,7 @@ public class Step_1Page_NV extends CommonPageCICA{
 		WebUI.selectOptionByText(genderDropdown, PropertiesHelpers.getValue("gender"));
 		
 		String randomDOB = DataGenerateUtils.generateRandomDOB();
-		int Gen_age = DataGenerateUtils.calculateAge(randomDOB);
+		Gen_age = DataGenerateUtils.calculateAge(randomDOB);
 		WebUI.clearAndFillText(DateOfBirth,String.valueOf(randomDOB));
 		WebUI.sleep(0.5);
 		System.out.println(randomDOB);
