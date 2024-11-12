@@ -35,38 +35,38 @@ public class Step_2Page_NV extends CommonPageCICA {
  
 		WebUI.waitForPageLoaded();
 		WebUI.clickElement(step_2);
-		WebUI.sleep(0.5);
+		WebUI.sleep(1);
  
 //		===========================================Go to Step-1==============================================================================================
-		WebUI.sleep(1);
-		WebUI.scrollToElementAtBottom(TableOfContent);
-		WebUI.sleep(0.5);
-		WebUI.moveToElement(TableOfContent);
-		WebUI.clickElement(TableOfContent);
-		WebUI.sleep(1);
-		WebUI.clickElementWithJs(step_1);
-		WebUI.sleep(1.5);
-		// For Notice Popup
-		try {
-			DriverManager.getDriver().findElement(impNotice_Popup).isDisplayed();
-			WebUI.sleep(0.5);
-			WebUI.clickElement(impNotice_Popup);
- 
-		} catch (Exception ex) {
-			System.out.println("Notice Popup Did Not Appear. " + ex.getMessage());
-		}
- 
-		WebUI.sleep(0.5);
-		WebUI.scrollToElementAtBottom(calculate);
-		WebUI.sleep(0.2);
-		WebUI.clickElement(calculate);
-		WebUI.sleep(0.2);
- 
-		WebUI.scrollToElementAtBottom(step_1_NextB);
-		WebUI.sleep(0.2);
-		WebUI.moveToElement(step_1_NextB);
-		WebUI.clickElement(step_1_NextB);
-		WebUI.sleep(3);
+//		WebUI.sleep(1);
+//		WebUI.scrollToElementAtBottom(TableOfContent);
+//		WebUI.sleep(0.5);
+//		WebUI.moveToElement(TableOfContent);
+//		WebUI.clickElement(TableOfContent);
+//		WebUI.sleep(1);
+//		WebUI.clickElementWithJs(step_1);
+//		WebUI.sleep(1.5);
+//		// For Notice Popup
+//		try {
+//			DriverManager.getDriver().findElement(impNotice_Popup).isDisplayed();
+//			WebUI.sleep(0.5);
+//			WebUI.clickElement(impNotice_Popup);
+// 
+//		} catch (Exception ex) {
+//			System.out.println("Notice Popup Did Not Appear. " + ex.getMessage());
+//		}
+// 
+//		WebUI.sleep(0.5);
+//		WebUI.scrollToElementAtBottom(calculate);
+//		WebUI.sleep(0.2);
+//		WebUI.clickElement(calculate);
+//		WebUI.sleep(0.2);
+// 
+//		WebUI.scrollToElementAtBottom(step_1_NextB);
+//		WebUI.sleep(0.2);
+//		WebUI.moveToElement(step_1_NextB);
+//		WebUI.clickElement(step_1_NextB);
+//		WebUI.sleep(3);
 //		==================================================================================================================================================
  
 		WebUI.clickElement(SSN_Number);
