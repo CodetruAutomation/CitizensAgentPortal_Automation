@@ -9,6 +9,7 @@ import com.codetru.helpers.PropertiesHelpers;
 import com.codetru.keywords.WebUI;
 import com.codetru.project.cica.CommonPageCICA;
 import com.codetru.utils.DataGenerateUtils;
+import com.codetru.utils.LogUtils;
 
 public class Step_2Page_NV extends CommonPageCICA {
 
@@ -77,7 +78,7 @@ public class Step_2Page_NV extends CommonPageCICA {
 		WebUI.sleep(1);
 		WebUI.moveToElement(step_1_NextB);
 		WebUI.clickElement(step_1_NextB);
-		WebUI.sleep(1);
+		WebUI.sleep(2);
 		try {
 			DriverManager.getDriver().findElement(agentLicense_Popup).isDisplayed();
 			WebUI.sleep(0.5);
@@ -99,7 +100,7 @@ public class Step_2Page_NV extends CommonPageCICA {
 			WebUI.logInfoMessage("Reentered the DOB");
 			}catch(Exception ex)
 		{
-				WebUI.logInfoMessage("Returened to step_1 and clicked on Next correctly.");
+				LogUtils.info("Returened to step_1 and clicked on Next correctly.");
 		}
 		WebUI.sleep(3);
 //		==================================================================================================================================================
