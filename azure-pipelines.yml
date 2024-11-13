@@ -73,7 +73,7 @@ stages:
           inputs:
             mavenPomFile: 'pom.xml'
             goals: 'clean test'
-            options: '-DsuiteXmlFile=$(Build.SourcesDirectory)/src/test/resources/suites/${{ parameters.suiteName }}'  # Path to the selected suite file
+            options: '-DsuiteXmlFile=$(Build.SourcesDirectory)/src/test/resources/suites/citizens/${{ parameters.suiteName }}'  # Path to the selected suite file
             publishJUnitResults: true
             testResultsFiles: '**/surefire-reports/TEST-*.xml'
             javaHomeOption: 'Path'
@@ -98,7 +98,7 @@ stages:
           inputs:
             mavenPomFile: 'pom.xml'
             goals: 'clean test'
-            options: '-DsuiteXmlFile=$(Build.SourcesDirectory)\\src\\test\\resources\\suites\\${{ parameters.suiteName }}'  # Path to the selected suite file with backslashes for Windows
+            options: '-DsuiteXmlFile=$(Build.SourcesDirectory)/src/test/resources/suites/citizens/${{ parameters.suiteName }}'  # Path to the selected suite file
             publishJUnitResults: true
             testResultsFiles: '**/surefire-reports/TEST-*.xml'
             javaHomeOption: 'Path'
