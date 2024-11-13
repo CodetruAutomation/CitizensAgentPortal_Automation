@@ -1,8 +1,5 @@
 trigger: none  # Disable automatic triggers on push
 
-pool:
-  vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
-
 parameters:
 - name: SUITE_FILE
   displayName: 'Select the suite file to run'
@@ -39,12 +36,22 @@ parameters:
     - 'Regression_PolicyPayment.xml'
     - 'Regression_ProfileModule.xml'
 
+- name: POOL_SELECTION
+  displayName: 'Select the pool to run on'
+  type: string
+  default: 'ubuntu-latest'
+  values:
+    - 'ubuntu-latest'
+    - 'SH1'
+
 stages:
 - stage: CleanWorkspace
   displayName: 'Clean Workspace'
   jobs:
   - job: Clean
     displayName: 'Clean Workspace Directory'
+    pool:
+      vmImage: ${{ parameters.POOL_SELECTION }}
     timeoutInMinutes: 360  # Set timeout to 6 hours
     steps:
       - script: |
@@ -57,6 +64,8 @@ stages:
   jobs:
   - job: MavenBuild
     displayName: 'Maven Build and Test'
+    pool:
+      vmImage: ${{ parameters.POOL_SELECTION }}
     timeoutInMinutes: 360  # Set timeout to 6 hours
     steps:
       - checkout: self  # Check out the source code
