@@ -1,3 +1,6 @@
+pool:
+  vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
+
 parameters:
 - name: SUITE_FILE
   displayName: 'Select the suite file to run'
@@ -40,21 +43,17 @@ stages:
   jobs:
   - job: Clean
     displayName: 'Clean Workspace Directory'
-    pool:
-      name: SH1  # Use SH1 pool for this job
     steps:
       - script: |
           echo "Cleaning workspace..."
           rm -rf $(Build.SourcesDirectory)/*
         displayName: 'Clean Workspace'
 
-- stage: BuildAndTest
+- stage: Build
   displayName: 'Build and Test'
   jobs:
   - job: MavenBuild
     displayName: 'Maven Build and Test'
-    pool:
-      name: SH1  # Use SH1 self-hosted pool for this job
     steps:
       - checkout: self  # Check out the source code
         displayName: 'Git Checkout'
@@ -71,19 +70,13 @@ stages:
           mavenAuthenticate: true
         displayName: 'Maven Authentication'
 
-      - task: Maven@4
+      - task: Maven@3
         inputs:
           mavenPomFile: 'pom.xml'  # Path to your pom.xml
           goals: 'clean test'  # Matching Jenkins goals with "test"
           options: '-DsuiteXmlFile=src/test/resources/suites/citizens/${{ parameters.SUITE_FILE }}'  # Use parameter for suite file
           publishJUnitResults: true  # Publish test results to Azure DevOps
-          testResultsFiles: '**/surefire-reports/TEST-*.xml'  # Path to the test results
-          javaHomeOption: 'Path'
-          jdkDirectory: 'C:\Program Files\Java\jdk-20'  # Path to JDK 20 for SH1 self-hosted agent
-          mavenVersionOption: 'Default'
-          mavenAuthenticateFeed: false
-          effectivePomSkip: false
-          sonarQubeRunAnalysis: false
+          testResultsFiles: '**/target/surefire-reports/*.xml'  # Path to the test results
         displayName: 'Maven Build and Run Tests'
 
       - script: |
