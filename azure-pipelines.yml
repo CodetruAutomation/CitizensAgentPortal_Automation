@@ -1,53 +1,85 @@
+trigger: none
 pool:
-  name: SH1
+  vmImage: 'ubuntu-latest'  # Use the latest Ubuntu image
 
 parameters:
-  - name: SUITE_FILE
-    displayName: 'Select the suite file to run'
-    type: string
-    default: 'Sanity_ApplicationModule.xml'
-    values:
-      - 'MasterSuite_Regression_Application_SingleLogin.xml'
-      - 'MasterSuite_Sanity_GuaranteedIssue_MulLogins.xml'
-      - 'MasterSuite_Sanity_GuaranteedIssue_QuadRun.xml'
-      - 'MasterSuite_Sanity_GuaranteedIssue_SingleLogin.xml'
-      - 'MasterSuite_Sanity_MulLogins.xml'
-      - 'MasterSuite_Sanity_QuadRun.xml'
-      - 'MasterSuite_Sanity_SingleLogin.xml'
-      - 'Regression_AccountBalanceHistory.xml'
-      - 'Regression_AccountBalanceReport.xml'
-      - 'Regression_ActivityReports.xml'
-      - 'Regression_AllModules.xml'
-      - 'Regression_ApplicationModule.xml'
-      - 'Regression_ApplicationPaymentStatusReport.xml'
-      - 'Regression_CheckReport.xml'
-      - 'Regression_CheckReportHistory.xml'
-      - 'Regression_GuaranteedIssue.xml'
-      - 'Regression_OtherModules.xml'
-      - 'Regression_PaymentRefusedReport.xml'
-      - 'Regression_RenewalPremiumReports.xml'
-      - 'Regression_ReportModules.xml'
-      - 'Regression_StandardToGuaranteed.xml'
-      - 'Regression_StatusReport.xml'
-      - 'Sanity_ApplicationModule.xml'
-      - 'Sanity_GuaranteedIssue.xml'
-      - 'Sanity_StandardToGuaranteed.xml'
-      - 'Regression_DashboardModule.xml'
-      - 'Regression_CustomerModule.xml'
-      - 'Regression_PolicyPayment.xml'
-      - 'Regression_ProfileModule.xml'
+- name: SUITE_FILE
+  displayName: 'Select the suite file to run'
+  type: string
+  default: 'Sanity_ApplicationModule.xml'
+  values:
+    - 'MasterSuite_Regression_Application_SingleLogin.xml'
+    - 'MasterSuite_Sanity_GuaranteedIssue_MulLogins.xml'
+    - 'MasterSuite_Sanity_GuaranteedIssue_QuadRun.xml'
+    - 'MasterSuite_Sanity_GuaranteedIssue_SingleLogin.xml'
+    - 'MasterSuite_Sanity_MulLogins.xml'
+    - 'MasterSuite_Sanity_QuadRun.xml'
+    - 'MasterSuite_Sanity_SingleLogin.xml'
+    - 'Regression_AccountBalanceHistory.xml'
+    - 'Regression_AccountBalanceReport.xml'
+    - 'Regression_ActivityReports.xml'
+    - 'Regression_AllModules.xml'
+    - 'Regression_ApplicationModule.xml'
+    - 'Regression_ApplicationPaymentStatusReport.xml'
+    - 'Regression_CheckReport.xml'
+    - 'Regression_CheckReportHistory.xml'
+    - 'Regression_GuaranteedIssue.xml'
+    - 'Regression_OtherModules.xml'
+    - 'Regression_PaymentRefusedReport.xml'
+    - 'Regression_RenewalPremiumReports.xml'
+    - 'Regression_ReportModules.xml'
+    - 'Regression_StandardToGuaranteed.xml'
+    - 'Regression_StatusReport.xml'
+    - 'Sanity_ApplicationModule.xml'
+    - 'Sanity_GuaranteedIssue.xml'
+    - 'Sanity_StandardToGuaranteed.xml'
+    - 'Regression_DashboardModule.xml'
+    - 'Regression_CustomerModule.xml'
+    - 'Regression_PolicyPayment.xml'
+    - 'Regression_ProfileModule.xml'
 
-steps:
-  - task: Maven@4
-    inputs:
-      mavenPomFile: 'pom.xml'                              # Path to your pom.xml
-      goals: 'clean test'                                  # Goals for Maven
-      options: '-DsuiteXmlFile=src/test/resources/suites/citizens/${{ parameters.SUITE_FILE }}' # Parameterized suite file
-      publishJUnitResults: true                            # Publish test results to Azure DevOps
-      testResultsFiles: '**/target/surefire-reports/*.xml' # Path to the test results
-      javaHomeOption: 'Path'
-      jdkDirectory: 'C:\\Program Files\\Java\\jdk-20'      # JDK path on Windows server
-      mavenVersionOption: 'Default'
-      mavenAuthenticateFeed: false
-      effectivePomSkip: false
-      sonarQubeRunAnalysis: false
+stages:
+- stage: CleanWorkspace
+  displayName: 'Clean Workspace'
+  jobs:
+  - job: Clean
+    displayName: 'Clean Workspace Directory'
+    steps:
+      - script: |
+          echo "Cleaning workspace..."
+          rm -rf $(Build.SourcesDirectory)/*
+        displayName: 'Clean Workspace'
+
+- stage: Build
+  displayName: 'Build and Test'
+  jobs:
+  - job: MavenBuild
+    displayName: 'Maven Build and Test'
+    steps:
+      - checkout: self  # Check out the source code
+        displayName: 'Git Checkout'
+
+      - task: JavaToolInstaller@0  # Install Java
+        inputs:
+          versionSpec: '17'  # Specify Java version
+          jdkArchitectureOption: 'x64'
+          jdkSourceOption: 'PreInstalled'
+        displayName: 'Install Java 17'
+
+      - task: MavenAuthenticate@0  # Optional: Authenticate if using private Maven repositories
+        inputs:
+          mavenAuthenticate: true
+        displayName: 'Maven Authentication'
+
+      - task: Maven@3
+        inputs:
+          mavenPomFile: 'pom.xml'  # Path to your pom.xml
+          goals: 'clean test'  # Matching Jenkins goals with "test"
+          options: '-DsuiteXmlFile=src/test/resources/suites/citizens/${{ parameters.SUITE_FILE }}'  # Use parameter for suite file
+          publishJUnitResults: true  # Publish test results to Azure DevOps
+          testResultsFiles: '**/target/surefire-reports/*.xml'  # Path to the test results
+        displayName: 'Maven Build and Run Tests'
+
+      - script: |
+          echo "Publishing TestNG results..."
+        displayName: 'Publish TestNG Results'
