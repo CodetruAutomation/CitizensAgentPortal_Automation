@@ -58,7 +58,7 @@ public class Step_1Page_NV extends CommonPageCICA{
 	private By GenderMale = By.xpath("//select[@formcontrolname='ProposedGender']/option[text()='Male']");
 
 	public static String Randomfirstname;
-	public static int Gen_age=0;
+	//public static int Gen_age=0;
 
 
 	public void Product_Information(String statex) {
@@ -100,7 +100,7 @@ public class Step_1Page_NV extends CommonPageCICA{
 		WebUI.clickElement(GenderMale);
 		WebUI.sleep(0.5);
 		String randomDOB = DataGenerateUtils.generateRandomDOB();
-		Gen_age = DataGenerateUtils.calculateAge(randomDOB);
+	int	Gen_age = DataGenerateUtils.calculateAge(randomDOB);
 		WebUI.clearAndFillText(DateOfBirth,String.valueOf(randomDOB));
 		WebUI.sleep(0.5);
 		System.out.println(randomDOB);
