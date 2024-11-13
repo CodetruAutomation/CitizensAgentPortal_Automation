@@ -34,7 +34,7 @@ public class Step_8Page_NV extends CommonPageCICA {
 	public void Disclosure_and_Signature() {
 
 		WebUI.sleep(2);
-		WebUI.scrollToElementAtTop(HIPAA_Privacy_Auth_Sec);
+		WebUI.scrollToElementAtTop(signedCity);
 		WebUI.sleep(0.5);
 
 		try {
