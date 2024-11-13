@@ -1,91 +1,116 @@
 parameters:
-- name: SUITE_FILE
-  displayName: 'Select the suite file to run'
-  type: string
-  default: 'Sanity_ApplicationModule.xml'
-  values:
-    - 'MasterSuite_Regression_Application_SingleLogin.xml'
-    - 'MasterSuite_Sanity_GuaranteedIssue_MulLogins.xml'
-    - 'MasterSuite_Sanity_GuaranteedIssue_QuadRun.xml'
-    - 'MasterSuite_Sanity_GuaranteedIssue_SingleLogin.xml'
-    - 'MasterSuite_Sanity_MulLogins.xml'
-    - 'MasterSuite_Sanity_QuadRun.xml'
-    - 'MasterSuite_Sanity_SingleLogin.xml'
-    - 'Regression_AccountBalanceHistory.xml'
-    - 'Regression_AccountBalanceReport.xml'
-    - 'Regression_ActivityReports.xml'
-    - 'Regression_AllModules.xml'
-    - 'Regression_ApplicationModule.xml'
-    - 'Regression_ApplicationPaymentStatusReport.xml'
-    - 'Regression_CheckReport.xml'
-    - 'Regression_CheckReportHistory.xml'
-    - 'Regression_GuaranteedIssue.xml'
-    - 'Regression_OtherModules.xml'
-    - 'Regression_PaymentRefusedReport.xml'
-    - 'Regression_RenewalPremiumReports.xml'
-    - 'Regression_ReportModules.xml'
-    - 'Regression_StandardToGuaranteed.xml'
-    - 'Regression_StatusReport.xml'
-    - 'Sanity_ApplicationModule.xml'
-    - 'Sanity_GuaranteedIssue.xml'
-    - 'Sanity_StandardToGuaranteed.xml'
-    - 'Regression_DashboardModule.xml'
-    - 'Regression_CustomerModule.xml'
-    - 'Regression_PolicyPayment.xml'
-    - 'Regression_ProfileModule.xml'
+  - name: server
+    displayName: 'Select the server to run on'
+    type: string
+    default: 'ubuntu-latest'
+    values:
+      - 'ubuntu-latest'
+      - 'SH1'
+
+  - name: suite_file
+    displayName: 'Select the suite file to run'
+    type: string
+    default: 'Sanity_ApplicationModule.xml'
+    values:
+      - 'MasterSuite_Regression_Application_SingleLogin.xml'
+      - 'MasterSuite_Sanity_GuaranteedIssue_MulLogins.xml'
+      - 'MasterSuite_Sanity_GuaranteedIssue_QuadRun.xml'
+      - 'MasterSuite_Sanity_GuaranteedIssue_SingleLogin.xml'
+      - 'MasterSuite_Sanity_MulLogins.xml'
+      - 'MasterSuite_Sanity_QuadRun.xml'
+      - 'MasterSuite_Sanity_SingleLogin.xml'
+      - 'Regression_AccountBalanceHistory.xml'
+      - 'Regression_AccountBalanceReport.xml'
+      - 'Regression_ActivityReports.xml'
+      - 'Regression_AllModules.xml'
+      - 'Regression_ApplicationModule.xml'
+      - 'Regression_ApplicationPaymentStatusReport.xml'
+      - 'Regression_CheckReport.xml'
+      - 'Regression_CheckReportHistory.xml'
+      - 'Regression_GuaranteedIssue.xml'
+      - 'Regression_OtherModules.xml'
+      - 'Regression_PaymentRefusedReport.xml'
+      - 'Regression_RenewalPremiumReports.xml'
+      - 'Regression_ReportModules.xml'
+      - 'Regression_StandardToGuaranteed.xml'
+      - 'Regression_StatusReport.xml'
+      - 'Sanity_ApplicationModule.xml'
+      - 'Sanity_GuaranteedIssue.xml'
+      - 'Sanity_StandardToGuaranteed.xml'
+      - 'Regression_DashboardModule.xml'
+      - 'Regression_CustomerModule.xml'
+      - 'Regression_PolicyPayment.xml'
+      - 'Regression_ProfileModule.xml'
 
 stages:
-- stage: CleanWorkspace
-  displayName: 'Clean Workspace'
-  jobs:
-  - job: Clean
-    displayName: 'Clean Workspace Directory'
-    pool:
-      name: SH1  # Use SH1 pool for this job
-    steps:
-      - script: |
-          echo "Cleaning workspace..."
-          rm -rf $(Build.SourcesDirectory)/*
-        displayName: 'Clean Workspace'
+  - stage: CleanWorkspace
+    displayName: 'Clean Workspace'
+    jobs:
+      - job: Clean
+        displayName: 'Clean Workspace Directory'
+        pool:
+          ${{ if eq(parameters.server, 'ubuntu-latest') }}:
+            vmImage: 'ubuntu-latest'
+          ${{ if eq(parameters.server, 'SH1') }}:
+            name: 'SH1'
+        steps:
+          - script: |
+              echo "Cleaning workspace..."
+              rm -rf $(Build.SourcesDirectory)/*
+            displayName: 'Clean Workspace'
 
-- stage: BuildAndTest
-  displayName: 'Build and Test'
-  jobs:
-  - job: MavenBuild
-    displayName: 'Maven Build and Test'
-    pool:
-      name: SH1  # Use SH1 self-hosted pool for this job
-    steps:
-      - checkout: self  # Check out the source code
-        displayName: 'Git Checkout'
+  - stage: BuildAndTest
+    displayName: 'Build and Test'
+    jobs:
+      # Ubuntu job
+      - job: MavenBuild_Ubuntu
+        displayName: 'Maven Build and Test on Ubuntu'
+        pool:
+          ${{ if eq(parameters.server, 'ubuntu-latest') }}:
+            vmImage: 'ubuntu-latest'
+        condition: eq('${{ parameters.server }}', 'ubuntu-latest')
+        steps:
+          - checkout: self
+            displayName: 'Git Checkout'
 
-      - task: JavaToolInstaller@0  # Install Java
-        inputs:
-          versionSpec: '17'  # Specify Java version
-          jdkArchitectureOption: 'x64'
-          jdkSourceOption: 'PreInstalled'
-        displayName: 'Install Java 17'
+          - task: JavaToolInstaller@0
+            inputs:
+              versionSpec: '17'
+              jdkArchitectureOption: 'x64'
+              jdkSourceOption: 'PreInstalled'
+            displayName: 'Install Java 17'
 
-      - task: MavenAuthenticate@0  # Optional: Authenticate if using private Maven repositories
-        inputs:
-          mavenAuthenticate: true
-        displayName: 'Maven Authentication'
+          - task: MavenAuthenticate@0
+            inputs:
+              mavenAuthenticate: true
+            displayName: 'Maven Authentication'
 
-      - task: Maven@4
-        inputs:
-          mavenPomFile: 'pom.xml'  # Path to your pom.xml
-          goals: 'clean test'  # Matching Jenkins goals with "test"
-          options: '-DsuiteXmlFile=src/test/resources/suites/citizens/${{ parameters.SUITE_FILE }}'  # Use parameter for suite file
-          publishJUnitResults: true  # Publish test results to Azure DevOps
-          testResultsFiles: '**/surefire-reports/TEST-*.xml'  # Path to the test results
-          javaHomeOption: 'Path'
-          jdkDirectory: 'C:\Program Files\Java\jdk-20'  # Path to JDK 20 for SH1 self-hosted agent
-          mavenVersionOption: 'Default'
-          mavenAuthenticateFeed: false
-          effectivePomSkip: false
-          sonarQubeRunAnalysis: false
-        displayName: 'Maven Build and Run Tests'
+          - task: Maven@3
+            inputs:
+              mavenPomFile: 'pom.xml'
+              goals: 'clean test'
+              options: '-DsuiteXmlFile=src/test/resources/suites/citizens/${{ parameters.suite_file }}'
+              publishJUnitResults: true
+              testResultsFiles: '**/target/surefire-reports/*.xml'
+            displayName: 'Maven Build and Run Tests'
 
-      - script: |
-          echo "Publishing TestNG results..."
-        displayName: 'Publish TestNG Results'
+      # Windows job for SH1
+      - job: MavenBuild_Windows
+        displayName: 'Maven Build and Test on Windows Server'
+        pool:
+          ${{ if eq(parameters.server, 'SH1') }}:
+            name: 'SH1'
+        condition: eq('${{ parameters.server }}', 'SH1')
+        steps:
+          - task: Maven@4
+            inputs:
+              mavenPomFile: 'pom.xml'
+              publishJUnitResults: true
+              testResultsFiles: '**/surefire-reports/TEST-*.xml'
+              javaHomeOption: 'Path'
+              jdkDirectory: 'C:\\Program Files\\Java\\jdk-20'
+              mavenVersionOption: 'Default'
+              mavenAuthenticateFeed: false
+              effectivePomSkip: false
+              sonarQubeRunAnalysis: false
+            displayName: 'Maven Build and Run Tests on Windows'
