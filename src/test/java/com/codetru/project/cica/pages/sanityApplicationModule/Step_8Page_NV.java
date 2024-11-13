@@ -33,10 +33,12 @@ public class Step_8Page_NV extends CommonPageCICA {
 
 	public void Disclosure_and_Signature() {
 
-		WebUI.sleep(2);
-		WebUI.scrollToElementAtTop(signedCity);
-		WebUI.sleep(0.5);
-
+		WebUI.sleep(2.5);
+		WebUI.scrollToElementAtTop(HIPAA_Privacy_Auth_Sec);
+		WebUI.sleep(0.5);	
+		WebUI.moveToElement(HIPAA_Privacy_Auth_Sec);
+	//	WebUI.sleep(0.5);
+		WebUI.clickElement(HIPAA_Privacy_Auth_Sec);
 		try {
 			DriverManager.getDriver().findElement(licensedAgent_ContinueButton).isDisplayed();
 			WebUI.clickElement(licensedAgent_ContinueButton);
