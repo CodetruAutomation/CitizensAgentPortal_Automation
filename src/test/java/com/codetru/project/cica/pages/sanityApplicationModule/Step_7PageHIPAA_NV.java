@@ -39,7 +39,7 @@ public class Step_7PageHIPAA_NV extends CommonPageCICA{
 		
 		
 		WebUI.scrollToElementAtBottom(nextStepHIPAA);
-		WebUI.sleep(1);
+		WebUI.sleep(1.5);
 		WebUI.moveToElement(nextStepHIPAA);
 		WebUI.clickElementWithJs(nextStepHIPAA);
 		WebUI.sleep(1.5);
