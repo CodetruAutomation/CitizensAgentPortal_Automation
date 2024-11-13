@@ -47,7 +47,7 @@ parameters:
 jobs:
 - job: RunOnUbuntu
   displayName: 'Run Tests on Ubuntu'
-  condition: eq(variables['parameters.poolSelection'], 'ubuntu-latest')
+  condition: eq('${{ parameters.poolSelection }}', 'ubuntu-latest')  # Using correct syntax to access parameter
   pool:
     vmImage: 'ubuntu-latest'
   steps:
@@ -70,7 +70,7 @@ jobs:
 
 - job: RunOnWindows
   displayName: 'Run Tests on Windows'
-  condition: eq(variables['parameters.poolSelection'], 'SH1')
+  condition: eq('${{ parameters.poolSelection }}', 'SH1')  # Using correct syntax to access parameter
   pool:
     name: SH1
   steps:
