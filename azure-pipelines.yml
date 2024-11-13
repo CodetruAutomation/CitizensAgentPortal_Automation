@@ -73,7 +73,7 @@ stages:
           inputs:
             mavenPomFile: 'pom.xml'
             goals: 'clean test'
-            options: '-DsuiteXmlFile=src/test/resources/suites/${{ parameters.suiteName }}'  # Path to the selected suite file
+            options: '-DsuiteXmlFile=$(Build.SourcesDirectory)/src/test/resources/suites/${{ parameters.suiteName }}'  # Path to the selected suite file
             publishJUnitResults: true
             testResultsFiles: '**/surefire-reports/TEST-*.xml'
             javaHomeOption: 'Path'
@@ -98,7 +98,7 @@ stages:
           inputs:
             mavenPomFile: 'pom.xml'
             goals: 'clean test'
-            options: '-DsuiteXmlFile=src/test/resources/suites/${{ parameters.suiteName }}'  # Path to the selected suite file
+            options: '-DsuiteXmlFile=$(Build.SourcesDirectory)\\src\\test\\resources\\suites\\${{ parameters.suiteName }}'  # Path to the selected suite file with backslashes for Windows
             publishJUnitResults: true
             testResultsFiles: '**/surefire-reports/TEST-*.xml'
             javaHomeOption: 'Path'
@@ -110,5 +110,5 @@ stages:
 
         - script: |
             echo "Running Test Suite: $(suiteName)"
-            ./run-tests.bat --suite $(suiteName)
+            .\\run-tests.bat --suite $(suiteName)
           displayName: 'Run Selected Test Suite on Windows'
