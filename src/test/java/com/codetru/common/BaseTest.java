@@ -23,11 +23,11 @@ public class BaseTest extends CommonPageCICA {
         driver.manage().window().maximize();
     }
 
-    @AfterTest(alwaysRun = true)
-    public void closeDriver() {
-    	ProjectUtilities.deleteExportDataImages();
-        DriverManager.quit();
-    }
+//    @AfterTest(alwaysRun = true)
+//    public void closeDriver() {
+//    	ProjectUtilities.deleteExportDataImages();
+//        DriverManager.quit();
+//    }
 
     public WebDriver createBrowser(@Optional("chrome") String browser) {
         PropertiesHelpers.loadAllFiles();

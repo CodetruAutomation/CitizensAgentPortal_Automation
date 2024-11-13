@@ -14,7 +14,7 @@ public class Step_7PageHIPAA extends CommonPageCICA{
 
 
 
-	private By nextStepHIPAA	=	By.xpath("//h3[.='HIPAA Privacy Authorization']/parent::div/following-sibling::ion-row/ion-col[@size='24' and @size-md='6']/ion-button");	
+	private By nextStepHIPAA	=	By.xpath("//h3[.='HIPAA Privacy Authorization']/parent::div/parent::div/following-sibling::ion-row/ion-col[@size='24' and @size-md='6']/ion-button[text()='Next Step']");	
 	private By ownerSignature = By.xpath("//h3[.='Authorization/Consent']/following-sibling::ion-row/ion-col/div/ion-button");	
 	private By signPadDone = By.xpath("(//ion-col[@style='padding-right: 20px;']/ion-button)[1]");
 	private By SignClear = By.xpath("//ion-col[@style='padding-left: 20px;']/ion-button");

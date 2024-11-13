@@ -8,7 +8,7 @@ import com.codetru.project.cica.CommonPageCICA;
 
 public class Step_7Page_NV extends CommonPageCICA{
 
-	private By nextstep7 = By.xpath("//h3[.='Provide Any Additional Information']/parent::div/following-sibling::ion-row/ion-col[@size='24' and @size-md='6']/ion-button");	
+	private By nextstep7 = By.xpath("//h3[.='HIPAA Privacy Authorization']/parent::div/parent::div/following-sibling::ion-row/ion-col[@size='24' and @size-md='6']/ion-button[text()='Next Step']");	
 
 	public void Remarks() {
 
