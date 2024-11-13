@@ -1,92 +1,114 @@
-trigger: none
+trigger: none  # Disable automatic triggers on push
+
+pool:
+  vmImage: 'ubuntu-latest'  # Default pool (can be overridden with parameters)
 
 parameters:
-  - name: poolSelection
-    displayName: 'Select the agent pool'
-    type: string
-    default: 'ubuntu-latest'
-    values:
-      - 'ubuntu-latest'
-      - 'SH1'
+- name: suiteName
+  displayName: 'Select the Test Suite to Run'
+  type: string
+  default: 'Sanity_ApplicationModule.xml'
+  values:
+    - 'MasterSuite_Regression_Application_SingleLogin.xml'
+    - 'MasterSuite_Sanity_GuaranteedIssue_MulLogins.xml'
+    - 'MasterSuite_Sanity_GuaranteedIssue_QuadRun.xml'
+    - 'MasterSuite_Sanity_GuaranteedIssue_SingleLogin.xml'
+    - 'MasterSuite_Sanity_MulLogins.xml'
+    - 'MasterSuite_Sanity_QuadRun.xml'
+    - 'MasterSuite_Sanity_SingleLogin.xml'
+    - 'Regression_AccountBalanceHistory.xml'
+    - 'Regression_AccountBalanceReport.xml'
+    - 'Regression_ActivityReports.xml'
+    - 'Regression_AllModules.xml'
+    - 'Regression_ApplicationModule.xml'
+    - 'Regression_ApplicationPaymentStatusReport.xml'
+    - 'Regression_CheckReport.xml'
+    - 'Regression_CheckReportHistory.xml'
+    - 'Regression_GuaranteedIssue.xml'
+    - 'Regression_OtherModules.xml'
+    - 'Regression_PaymentRefusedReport.xml'
+    - 'Regression_RenewalPremiumReports.xml'
+    - 'Regression_ReportModules.xml'
+    - 'Regression_StandardToGuaranteed.xml'
+    - 'Regression_StatusReport.xml'
+    - 'Sanity_ApplicationModule.xml'
+    - 'Sanity_GuaranteedIssue.xml'
+    - 'Sanity_StandardToGuaranteed.xml'
+    - 'Regression_DashboardModule.xml'
+    - 'Regression_CustomerModule.xml'
+    - 'Regression_PolicyPayment.xml'
+    - 'Regression_ProfileModule.xml'
 
-  - name: suiteName
-    displayName: 'Test Suite'
-    type: string
-    default: 'MasterSuite_Regression_Application_SingleLogin.xml'
-    values:
-      - 'MasterSuite_Regression_Application_SingleLogin.xml'
-      - 'MasterSuite_Sanity_GuaranteedIssue_MulLogins.xml'
-      - 'MasterSuite_Sanity_GuaranteedIssue_QuadRun.xml'
-      - 'MasterSuite_Sanity_GuaranteedIssue_SingleLogin.xml'
-      - 'MasterSuite_Sanity_MulLogins.xml'
-      - 'MasterSuite_Sanity_QuadRun.xml'
-      - 'MasterSuite_Sanity_SingleLogin.xml'
-      - 'Regression_AccountBalanceHistory.xml'
-      - 'Regression_AccountBalanceReport.xml'
-      - 'Regression_ActivityReports.xml'
-      - 'Regression_AllModules.xml'
-      - 'Regression_ApplicationModule.xml'
-      - 'Regression_ApplicationPaymentStatusReport.xml'
-      - 'Regression_CheckReport.xml'
-      - 'Regression_CheckReportHistory.xml'
-      - 'Regression_GuaranteedIssue.xml'
-      - 'Regression_OtherModules.xml'
-      - 'Regression_PaymentRefusedReport.xml'
-      - 'Regression_RenewalPremiumReports.xml'
-      - 'Regression_ReportModules.xml'
-      - 'Regression_StandardToGuaranteed.xml'
-      - 'Regression_StatusReport.xml'
-      - 'Sanity_ApplicationModule.xml'
-      - 'Sanity_GuaranteedIssue.xml'
-      - 'Sanity_StandardToGuaranteed.xml'
-      - 'Regression_DashboardModule.xml'
-      - 'Regression_CustomerModule.xml'
-      - 'Regression_PolicyPayment.xml'
-      - 'Regression_ProfileModule.xml'
+- name: poolSelection
+  displayName: 'Select the Pool to Run'
+  type: string
+  default: 'ubuntu-latest'
+  values:
+    - 'ubuntu-latest'
+    - 'SH1'
 
-jobs:
-- job: RunOnUbuntu
-  displayName: 'Run Tests on Ubuntu'
-  condition: eq('${{ parameters.poolSelection }}', 'ubuntu-latest')  # Using correct syntax to access parameter
-  pool:
-    vmImage: 'ubuntu-latest'
-  steps:
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml'
-        publishJUnitResults: true
-        testResultsFiles: '**/surefire-reports/TEST-*.xml'
-        javaHomeOption: 'Path'
-        jdkDirectory: '/usr/lib/jvm/java-11-openjdk-amd64'
-        mavenVersionOption: 'Default'
-        mavenAuthenticateFeed: false
-        effectivePomSkip: false
-        sonarQubeRunAnalysis: false
+stages:
+- stage: CleanWorkspace
+  displayName: 'Clean Workspace'
+  jobs:
+    - job: Clean
+      displayName: 'Clean Workspace Directory'
+      timeoutInMinutes: 360  # Set timeout to 6 hours
+      steps:
+        - script: |
+            echo "Cleaning workspace..."
+            rm -rf $(Build.SourcesDirectory)/*
+          displayName: 'Clean Workspace'
 
-    - script: |
-        echo "Running Test Suite: $(suiteName)"
-        ./run-tests.sh --suite $(suiteName)
-      displayName: 'Run Selected Test Suite'
+- stage: BuildAndTest
+  displayName: 'Build and Test'
+  jobs:
+    - job: RunTestsOnUbuntu
+      displayName: 'Run Tests on Ubuntu'
+      condition: eq('${{ parameters.poolSelection }}', 'ubuntu-latest')
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+        - task: Maven@4
+          inputs:
+            mavenPomFile: 'pom.xml'
+            goals: 'clean test'
+            options: '-DsuiteXmlFile=src/test/resources/suites/${{ parameters.suiteName }}'  # Path to the selected suite file
+            publishJUnitResults: true
+            testResultsFiles: '**/surefire-reports/TEST-*.xml'
+            javaHomeOption: 'Path'
+            jdkDirectory: '/usr/lib/jvm/java-11-openjdk-amd64'
+            mavenVersionOption: 'Default'
+            mavenAuthenticateFeed: false
+            effectivePomSkip: false
+            sonarQubeRunAnalysis: false
 
-- job: RunOnWindows
-  displayName: 'Run Tests on Windows'
-  condition: eq('${{ parameters.poolSelection }}', 'SH1')  # Using correct syntax to access parameter
-  pool:
-    name: SH1
-  steps:
-    - task: Maven@4
-      inputs:
-        mavenPomFile: 'pom.xml'
-        publishJUnitResults: true
-        testResultsFiles: '**/surefire-reports/TEST-*.xml'
-        javaHomeOption: 'Path'
-        jdkDirectory: 'C:\Program Files\Java\jdk-20'
-        mavenVersionOption: 'Default'
-        mavenAuthenticateFeed: false
-        effectivePomSkip: false
-        sonarQubeRunAnalysis: false
+        - script: |
+            echo "Running Test Suite: $(suiteName)"
+            ./run-tests.sh --suite $(suiteName)
+          displayName: 'Run Selected Test Suite'
 
-    - script: |
-        echo "Running Test Suite: $(suiteName)"
-        ./run-tests.bat --suite $(suiteName)
-      displayName: 'Run Selected Test Suite on Windows'
+    - job: RunTestsOnWindows
+      displayName: 'Run Tests on Windows'
+      condition: eq('${{ parameters.poolSelection }}', 'SH1')
+      pool:
+        name: SH1  # Use self-hosted Windows pool
+      steps:
+        - task: Maven@4
+          inputs:
+            mavenPomFile: 'pom.xml'
+            goals: 'clean test'
+            options: '-DsuiteXmlFile=src/test/resources/suites/${{ parameters.suiteName }}'  # Path to the selected suite file
+            publishJUnitResults: true
+            testResultsFiles: '**/surefire-reports/TEST-*.xml'
+            javaHomeOption: 'Path'
+            jdkDirectory: 'C:\Program Files\Java\jdk-20'
+            mavenVersionOption: 'Default'
+            mavenAuthenticateFeed: false
+            effectivePomSkip: false
+            sonarQubeRunAnalysis: false
+
+        - script: |
+            echo "Running Test Suite: $(suiteName)"
+            ./run-tests.bat --suite $(suiteName)
+          displayName: 'Run Selected Test Suite on Windows'
