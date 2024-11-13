@@ -1,11 +1,11 @@
 trigger: none  # Disable automatic triggers on push
 
 pool:
-  vmImage: 'ubuntu-latest'  # Default pool (can be overridden with parameters)
+  vmImage: 'ubuntu-latest'  # Default to use the latest Ubuntu image
 
 parameters:
-- name: suiteName
-  displayName: 'Select the Test Suite to Run'
+- name: SUITE_FILE
+  displayName: 'Select the suite file to run'
   type: string
   default: 'Sanity_ApplicationModule.xml'
   values:
@@ -39,76 +39,86 @@ parameters:
     - 'Regression_PolicyPayment.xml'
     - 'Regression_ProfileModule.xml'
 
-- name: poolSelection
-  displayName: 'Select the Pool to Run'
-  type: string
-  default: 'ubuntu-latest'
-  values:
-    - 'ubuntu-latest'
-    - 'SH1'
-
 stages:
 - stage: CleanWorkspace
   displayName: 'Clean Workspace'
   jobs:
     - job: Clean
       displayName: 'Clean Workspace Directory'
-      timeoutInMinutes: 360  # Set timeout to 6 hours
       steps:
         - script: |
             echo "Cleaning workspace..."
             rm -rf $(Build.SourcesDirectory)/*
           displayName: 'Clean Workspace'
 
-- stage: BuildAndTest
-  displayName: 'Build and Test'
+- stage: BuildAndTestOnUbuntu
+  displayName: 'Build and Test on Ubuntu'
   jobs:
-    - job: RunTestsOnUbuntu
-      displayName: 'Run Tests on Ubuntu'
-      condition: eq('${{ parameters.poolSelection }}', 'ubuntu-latest')
+    - job: MavenBuildOnUbuntu
+      displayName: 'Maven Build and Test on Ubuntu'
       pool:
-        vmImage: 'ubuntu-latest'
+        vmImage: 'ubuntu-latest'  # Use Ubuntu pool for Ubuntu specific steps
       steps:
-        - task: Maven@4
+        - checkout: self  # Check out the source code
+          displayName: 'Git Checkout'
+
+        - task: JavaToolInstaller@0  # Install Java
           inputs:
-            mavenPomFile: 'pom.xml'
-            goals: 'clean test'
-            options: '-DsuiteXmlFile=$(Build.SourcesDirectory)/src/test/resources/suites/citizens/${{ parameters.suiteName }}'  # Path to the selected suite file
-            publishJUnitResults: true
-            testResultsFiles: '**/surefire-reports/TEST-*.xml'
-            javaHomeOption: 'Path'
-            jdkDirectory: '/usr/lib/jvm/java-11-openjdk-amd64'
-            mavenVersionOption: 'Default'
-            mavenAuthenticateFeed: false
-            effectivePomSkip: false
-            sonarQubeRunAnalysis: false
+            versionSpec: '17'  # Specify Java version
+            jdkArchitectureOption: 'x64'
+            jdkSourceOption: 'PreInstalled'
+          displayName: 'Install Java 17'
+
+        - task: MavenAuthenticate@0  # Optional: Authenticate if using private Maven repositories
+          inputs:
+            mavenAuthenticate: true
+          displayName: 'Maven Authentication'
+
+        - task: Maven@3
+          inputs:
+            mavenPomFile: 'pom.xml'  # Path to your pom.xml
+            goals: 'clean test'  # Matching Jenkins goals with "test"
+            options: '-DsuiteXmlFile=src/test/resources/suites/citizens/${{ parameters.SUITE_FILE }}'  # Use parameter for suite file
+            publishJUnitResults: true  # Publish test results to Azure DevOps
+            testResultsFiles: '**/target/surefire-reports/*.xml'  # Path to the test results
+          displayName: 'Maven Build and Run Tests on Ubuntu'
 
         - script: |
-            echo "Running Test Suite: $(suiteName)"
-            ./run-tests.sh --suite $(suiteName)
-          displayName: 'Run Selected Test Suite'
+            echo "Publishing TestNG results..."
+          displayName: 'Publish TestNG Results on Ubuntu'
 
-    - job: RunTestsOnWindows
-      displayName: 'Run Tests on Windows'
-      condition: eq('${{ parameters.poolSelection }}', 'SH1')
+- stage: BuildAndTestOnWindows
+  displayName: 'Build and Test on Windows (SH1 Pool)'
+  jobs:
+    - job: MavenBuildOnWindows
+      displayName: 'Maven Build and Test on Windows'
       pool:
         name: SH1  # Use self-hosted Windows pool
       steps:
-        - task: Maven@4
+        - checkout: self  # Check out the source code
+          displayName: 'Git Checkout'
+
+        - task: JavaToolInstaller@0  # Install Java
           inputs:
-            mavenPomFile: 'pom.xml'
-            goals: 'clean test'
-            options: '-DsuiteXmlFile=$(Build.SourcesDirectory)/src/test/resources/suites/citizens/${{ parameters.suiteName }}'  # Path to the selected suite file
-            publishJUnitResults: true
-            testResultsFiles: '**/surefire-reports/TEST-*.xml'
-            javaHomeOption: 'Path'
-            jdkDirectory: 'C:\Program Files\Java\jdk-20'
-            mavenVersionOption: 'Default'
-            mavenAuthenticateFeed: false
-            effectivePomSkip: false
-            sonarQubeRunAnalysis: false
+            versionSpec: '17'  # Specify Java version
+            jdkArchitectureOption: 'x64'
+            jdkSourceOption: 'PreInstalled'
+          displayName: 'Install Java 17'
+
+        - task: MavenAuthenticate@0  # Optional: Authenticate if using private Maven repositories
+          inputs:
+            mavenAuthenticate: true
+          displayName: 'Maven Authentication'
+
+        - task: Maven@3
+          inputs:
+            mavenPomFile: 'pom.xml'  # Path to your pom.xml
+            goals: 'clean test'  # Matching Jenkins goals with "test"
+            options: '-DsuiteXmlFile=src/test/resources/suites/citizens/${{ parameters.SUITE_FILE }}'  # Use parameter for suite file
+            publishJUnitResults: true  # Publish test results to Azure DevOps
+            testResultsFiles: '**/target/surefire-reports/*.xml'  # Path to the test results
+          displayName: 'Maven Build and Run Tests on Windows (SH1)'
 
         - script: |
-            echo "Running Test Suite: $(suiteName)"
-            .\\run-tests.bat --suite $(suiteName)
-          displayName: 'Run Selected Test Suite on Windows'
+            echo "Publishing TestNG results..."
+          displayName: 'Publish TestNG Results on Windows (SH1)'
