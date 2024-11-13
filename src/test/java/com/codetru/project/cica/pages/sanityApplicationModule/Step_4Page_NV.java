@@ -118,7 +118,7 @@ public class Step_4Page_NV extends CommonPageCICA {
 
 		WebUI.scrollToElementAtBottom(NextStep4);
 		WebUI.moveToElement(NextStep4);
-		WebUI.sleep(0.5);
+		WebUI.sleep(1.2);
 		WebUI.clickElement(NextStep4);
 		WebUI.waitForPageLoaded();
 		

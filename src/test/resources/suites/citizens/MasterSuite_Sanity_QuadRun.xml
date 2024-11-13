@@ -25,7 +25,7 @@
 		</classes>
 	</test>
 	
-<!--	<test name="CITIZENS SANITY TEST APPLICATION MODULE WITH MULTIPLE STATES 2">
+	<test name="CITIZENS SANITY TEST APPLICATION MODULE WITH MULTIPLE STATES 2">
 		<parameter name="BROWSER" value="chrome" />
 		<parameter name="ROW_NUMBER" value="2" />
 		<classes>
@@ -63,7 +63,7 @@
 			<class name="com.codetru.project.cica.testcases.sanityApplicationModule.Step10_Test_NV" />
 			<class name="com.codetru.project.cica.testcases.regressionApplicationModule.MasterTest" />
 		</classes>
-	</test>-->
+	</test>
 	
 	<test name="CITIZENS SANITY TEST APPLICATION MODULE WITH MULTIPLE STATES 4">
 		<parameter name="BROWSER" value="chrome" />
