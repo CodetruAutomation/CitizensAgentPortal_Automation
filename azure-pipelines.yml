@@ -1,97 +1,89 @@
-trigger: none  # Disable automatic triggers on push
+trigger: none
 
 parameters:
-- name: SUITE_FILE
-  displayName: 'Select the suite file to run'
-  type: string
-  default: 'Sanity_ApplicationModule.xml'
-  values:
-    - 'MasterSuite_Regression_Application_SingleLogin.xml'
-    - 'MasterSuite_Sanity_GuaranteedIssue_MulLogins.xml'
-    - 'MasterSuite_Sanity_GuaranteedIssue_QuadRun.xml'
-    - 'MasterSuite_Sanity_GuaranteedIssue_SingleLogin.xml'
-    - 'MasterSuite_Sanity_MulLogins.xml'
-    - 'MasterSuite_Sanity_QuadRun.xml'
-    - 'MasterSuite_Sanity_SingleLogin.xml'
-    - 'Regression_AccountBalanceHistory.xml'
-    - 'Regression_AccountBalanceReport.xml'
-    - 'Regression_ActivityReports.xml'
-    - 'Regression_AllModules.xml'
-    - 'Regression_ApplicationModule.xml'
-    - 'Regression_ApplicationPaymentStatusReport.xml'
-    - 'Regression_CheckReport.xml'
-    - 'Regression_CheckReportHistory.xml'
-    - 'Regression_GuaranteedIssue.xml'
-    - 'Regression_OtherModules.xml'
-    - 'Regression_PaymentRefusedReport.xml'
-    - 'Regression_RenewalPremiumReports.xml'
-    - 'Regression_ReportModules.xml'
-    - 'Regression_StandardToGuaranteed.xml'
-    - 'Regression_StatusReport.xml'
-    - 'Sanity_ApplicationModule.xml'
-    - 'Sanity_GuaranteedIssue.xml'
-    - 'Sanity_StandardToGuaranteed.xml'
-    - 'Regression_DashboardModule.xml'
-    - 'Regression_CustomerModule.xml'
-    - 'Regression_PolicyPayment.xml'
-    - 'Regression_ProfileModule.xml'
+  - name: poolSelection
+    displayName: 'Select the agent pool'
+    type: string
+    default: 'ubuntu-latest'
+    values:
+      - 'ubuntu-latest'
+      - 'SH1'
 
-- name: POOL_SELECTION
-  displayName: 'Select the pool to run on'
-  type: string
-  default: 'ubuntu-latest'
-  values:
-    - 'ubuntu-latest'
-    - 'SH1'
+  - name: suiteName
+    displayName: 'Test Suite'
+    type: string
+    default: 'CICA_Suite_MulStates_FL.xml'
+    values:
+      - 'CICA_Suite_MulStates_FL.xml'
+      - 'CICA_SuiteAll.xml'
+      - 'MasterSuite_Excel.xml'
+      - 'MasterSuite_NV_FL_Parallel_Retry.xml'
+      - 'MasterSuite_NV_FL.xml'
+      - 'MasterSuite_NV_Mul.xml'
+      - 'MasterSuite_NV_MulLoginsParallel.xml'
+      - 'MasterSuite_NV.xml'
+      - 'MasterSuiteHealth.xml'
+      - 'PolicyPaymentSuite.xml'
+      - 'Signin-parallel-methods.xml'
+      - 'States_Counties_Pall.xml'
+      - 'Suite_ActivityReportsModule.xml'
+      - 'Suite_CustomerModule.xml'
+      - 'Suite_DashboardModule.xml'
+      - 'Suite_GuaranteedIssue.xml'
+      - 'Suite_NLife_PaymentsModule1.xml'
+      - 'Suite_NV_2FLs.xml'
+      - 'Suite_NV_MulStates_FL.xml'
+      - 'Suite_PaymentsModule2.xml'
+      - 'Suite_PolicyPaymentsModule.xml'
+      - 'Suite_ProfileModule.xml'
+      - 'Suite_RenewalPremiumReports.xml'
+      - 'Suite_ReportModules.xml'
+      - 'Suite_ReportModules2.xml'
+      - 'Suite_Validation.xml'
 
-stages:
-- stage: CleanWorkspace
-  displayName: 'Clean Workspace'
-  jobs:
-  - job: Clean
-    displayName: 'Clean Workspace Directory'
-    pool:
-      vmImage: ${{ parameters.POOL_SELECTION }}
-    timeoutInMinutes: 360  # Set timeout to 6 hours
-    steps:
-      - script: |
-          echo "Cleaning workspace..."
-          rm -rf $(Build.SourcesDirectory)/*
-        displayName: 'Clean Workspace'
+jobs:
+- job: RunOnUbuntu
+  displayName: 'Run Tests on Ubuntu'
+  condition: eq(variables['parameters.poolSelection'], 'ubuntu-latest')
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'Path'
+        jdkDirectory: '/usr/lib/jvm/java-11-openjdk-amd64'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
 
-- stage: Build
-  displayName: 'Build and Test'
-  jobs:
-  - job: MavenBuild
-    displayName: 'Maven Build and Test'
-    pool:
-      vmImage: ${{ parameters.POOL_SELECTION }}
-    timeoutInMinutes: 360  # Set timeout to 6 hours
-    steps:
-      - checkout: self  # Check out the source code
-        displayName: 'Git Checkout'
+    - script: |
+        echo "Running Test Suite: $(suiteName)"
+        ./run-tests.sh --suite $(suiteName)
+      displayName: 'Run Selected Test Suite'
 
-      - task: JavaToolInstaller@0  # Install Java
-        inputs:
-          versionSpec: '17'  # Specify Java version
-          jdkArchitectureOption: 'x64'
-          jdkSourceOption: 'PreInstalled'
-        displayName: 'Install Java 17'
+- job: RunOnWindows
+  displayName: 'Run Tests on Windows'
+  condition: eq(variables['parameters.poolSelection'], 'SH1')
+  pool:
+    name: SH1
+  steps:
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'Path'
+        jdkDirectory: 'C:\Program Files\Java\jdk-20'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
 
-      - task: MavenAuthenticate@0  # Optional: Authenticate if using private Maven repositories
-        inputs:
-          mavenAuthenticate: true
-        displayName: 'Maven Authentication'
-
-      - task: Maven@3
-        inputs:
-          mavenPomFile: 'pom.xml'  # Path to your pom.xml
-          goals: 'clean test'  # Matching Jenkins goals with "test"
-          options: '-DsuiteXmlFile=src/test/resources/suites/citizens/${{ parameters.SUITE_FILE }}'  # Use parameter for suite file
-          publishJUnitResults: true  # Publish test results to Azure DevOps
-          testResultsFiles: '**/target/surefire-reports/*.xml'  # Path to the test results
-        displayName: 'Maven Build and Run Tests'
-
-      - script: |
-          echo "Publishing TestNG results..."
-        displayName: 'Publish TestNG Results'
+    - script: |
+        echo "Running Test Suite: $(suiteName)"
+        ./run-tests.bat --suite $(suiteName)
+      displayName: 'Run Selected Test Suite on Windows'
